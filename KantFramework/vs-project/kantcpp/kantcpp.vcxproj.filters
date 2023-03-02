@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{ae03bd20-975e-48a2-88bc-7dc1262cbb6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\include">
+      <UniqueIdentifier>{5f0a2df3-11ea-41db-be23-38eac66fa5dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\src">
+      <UniqueIdentifier>{11cebfde-f438-4e51-af93-c2cb791994da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\include\util">
+      <UniqueIdentifier>{1856ba6c-0261-4316-a1df-3a5322865422}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_platform.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

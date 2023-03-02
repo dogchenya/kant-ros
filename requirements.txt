@@ -1,0 +1,3 @@
+catkin==0.7.29
+catkin-pkg==0.4.23
+catkin-tools==0.7.1

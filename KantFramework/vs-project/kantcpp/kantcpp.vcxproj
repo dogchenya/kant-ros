@@ -19,11 +19,37 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_cas_queue.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_common.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_coroutine.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_file.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_lock.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_logger.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_monitor.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_platform.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_port.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_spin_lock.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_strptime.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_thread.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_thread_cond.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_thread_mutex.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_thread_queue.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeprovider.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_common.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_file.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_logger.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_port.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_spin_lock.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_strptime.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_thread.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_thread_cond.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_thread_mutex.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_thread_queue.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_timeprovider.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -35,7 +61,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -94,7 +120,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>

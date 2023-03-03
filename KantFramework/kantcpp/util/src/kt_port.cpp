@@ -269,8 +269,8 @@ int64_t KT_Port::forkExec(const string &sExePath, const string &sPwdPath, const 
   }
 
 #if TARGET_PLATFORM_LINUX || TARGET_PLATFORM_IOS
-  if (TC_File::isFileExistEx(sExePath) && !TC_File::canExecutable(sExePath)) {
-    TC_File::setExecutable(sExePath, true);
+  if (KT_File::isFileExistEx(sExePath) && !KT_File::canExecutable(sExePath)) {
+    KT_File::setExecutable(sExePath, true);
   }
 #endif
 
@@ -353,7 +353,7 @@ int64_t KT_Port::forkExec(const string &sExePath, const string &sPwdPath, const 
 
     // server stdcout 日志在滚动日志显示
     if (!sRollLogPath.empty()) {
-      TC_File::makeDirRecursive(TC_File::extractFilePath(sRollLogPath));
+      KT_File::makeDirRecursive(KT_File::extractFilePath(sRollLogPath));
 #if TARGET_PLATFORM_IOS
       if ((freopen(sRollLogPath.c_str(), "ab", stdout)) != NULL &&
           (freopen(sRollLogPath.c_str(), "ab", stderr)) != NULL)

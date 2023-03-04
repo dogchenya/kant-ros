@@ -16,5 +16,8 @@
     <ClCompile Include="..\..\KantNode\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\KantNode\test_coroutine.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
-#ifndef _KC_THREAD_QUEUE_H_
-#define _KC_THREAD_QUEUE_H_
+#ifndef _KT_THREAD_QUEUE_H_
+#define _KT_THREAD_QUEUE_H_
 
 #include <deque>
 #include <vector>

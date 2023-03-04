@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -23,6 +23,7 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_common.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_coroutine.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_fcontext.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_file.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_lock.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_logger.h" />
@@ -39,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_common.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_coroutine.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_file.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_logger.cpp" />
@@ -50,6 +52,218 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_thread_mutex.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_thread_queue.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_timeprovider.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\kantcpp\util\src\asm\Jamfile.v2">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_arm64_aapcs_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_arm64_aapcs_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_arm_aapcs_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_arm_aapcs_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_arm_aapcs_pe_armasm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_combined_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_i386_ms_pe_gas.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_i386_ms_pe_masm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_i386_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_i386_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_i386_x86_64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_mips32_o32_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_ppc32_ppc64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_ppc32_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_ppc32_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_ppc32_sysv_xcoff_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_ppc64_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_ppc64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_ppc64_sysv_xcoff_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_x86_64_ms_pe_gas.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_x86_64_ms_pe_masm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_x86_64_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\jump_x86_64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_arm64_aapcs_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_arm64_aapcs_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_arm_aapcs_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_arm_aapcs_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_arm_aapcs_pe_armasm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_combined_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_i386_ms_pe_gas.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_i386_ms_pe_masm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_i386_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_i386_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_i386_x86_64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_mips32_o32_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_ppc32_ppc64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_ppc32_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_ppc32_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_ppc32_sysv_xcoff_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_ppc64_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_ppc64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_ppc64_sysv_xcoff_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_x86_64_ms_pe_gas.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_x86_64_ms_pe_masm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_x86_64_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\make_x86_64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_arm64_aapcs_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_arm64_aapcs_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_arm_aapcs_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_arm_aapcs_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_arm_aapcs_pe_armasm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_combined_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_i386_ms_pe_gas.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_i386_ms_pe_masm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_i386_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_i386_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_i386_x86_64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_mips32_o32_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_ppc32_ppc64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_ppc32_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_ppc32_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_ppc32_sysv_xcoff_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_ppc64_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_ppc64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_ppc64_sysv_xcoff_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_x86_64_ms_pe_gas.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_x86_64_ms_pe_masm.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_x86_64_sysv_elf_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\kantcpp\util\src\asm\ontop_x86_64_sysv_macho_gas.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

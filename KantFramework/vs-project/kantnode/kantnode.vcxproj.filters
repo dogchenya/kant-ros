@@ -20,4 +20,9 @@
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\KantNode\CMakeLists.txt">
+      <Filter>src</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

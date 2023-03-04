@@ -147,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="..\..\KantNode\test_coroutine.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\KantNode\CMakeLists.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

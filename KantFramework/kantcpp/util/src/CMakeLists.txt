@@ -7,7 +7,7 @@ ENDIF()
 
 aux_source_directory(. DIR_SRCS)
 
-#parse_asm(JUMP_SRC MAKE_SRC)
+parse_asm(JUMP_SRC MAKE_SRC)
 
 message("----------------------------------------------------")
 message("CMAKE_SYSTEM_NAME:         ${CMAKE_SYSTEM_NAME}")
@@ -21,8 +21,8 @@ message("MAKE_SRC:                  ${MAKE_SRC}")
 message("CMAKE_C_SIZEOF_DATA_PTR:   ${CMAKE_C_SIZEOF_DATA_PTR}")
 message("----------------------------------------------------")
 
-# list(APPEND DIR_SRCS ${JUMP_SRC})
-# list(APPEND DIR_SRCS ${MAKE_SRC})
+list(APPEND DIR_SRCS ${JUMP_SRC})
+list(APPEND DIR_SRCS ${MAKE_SRC})
 
 add_library(kantutil ${DIR_SRCS})
 add_dependencies(kantutil thirdparty)

@@ -13,7 +13,7 @@ include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/Common.cmake")
 
 include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/Thirdparty.cmake")
 
-#include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/ParseAsm.cmake")
+include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/ParseAsm.cmake")
 
 add_subdirectory(kantcpp)
 

@@ -330,4 +330,13 @@
       <Filter>util\include\util\asm</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\kantcpp\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\util\CMakeLists.txt">
+      <Filter>util</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\util\src\CMakeLists.txt">
+      <Filter>util\src</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

@@ -265,6 +265,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\kantcpp\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\util\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\util\src\CMakeLists.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

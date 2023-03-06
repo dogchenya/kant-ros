@@ -182,9 +182,6 @@
     <None Include="..\..\kantcpp\util\src\asm\jump_x86_64_ms_pe_gas.asm">
       <Filter>util\include\util\asm</Filter>
     </None>
-    <None Include="..\..\kantcpp\util\src\asm\jump_x86_64_ms_pe_masm.asm">
-      <Filter>util\include\util\asm</Filter>
-    </None>
     <None Include="..\..\kantcpp\util\src\asm\jump_x86_64_sysv_elf_gas.S">
       <Filter>util\include\util\asm</Filter>
     </None>
@@ -249,9 +246,6 @@
       <Filter>util\include\util\asm</Filter>
     </None>
     <None Include="..\..\kantcpp\util\src\asm\make_x86_64_ms_pe_gas.asm">
-      <Filter>util\include\util\asm</Filter>
-    </None>
-    <None Include="..\..\kantcpp\util\src\asm\make_x86_64_ms_pe_masm.asm">
       <Filter>util\include\util\asm</Filter>
     </None>
     <None Include="..\..\kantcpp\util\src\asm\make_x86_64_sysv_elf_gas.S">
@@ -338,5 +332,13 @@
     <Text Include="..\..\kantcpp\util\src\CMakeLists.txt">
       <Filter>util\src</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\..\kantcpp\util\src\asm\jump_x86_64_ms_pe_masm.asm">
+      <Filter>util\include\util\asm</Filter>
+    </MASM>
+    <MASM Include="..\..\kantcpp\util\src\asm\make_x86_64_ms_pe_masm.asm">
+      <Filter>util\include\util\asm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

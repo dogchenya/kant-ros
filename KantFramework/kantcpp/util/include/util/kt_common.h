@@ -42,14 +42,16 @@ using namespace std;
 namespace kant {
 /////////////////////////////////////////////////
 /**
- * @file kt_common.h
- * @brief  帮助类,都是静态函数,提供一些常用的函数 .
- * @brief  Helper Class. There're all static functions in this which provides
- * some commonly used functions
- *
+ *  @file    kt_common.h
+ *  @author  dogchen
+ *  @brief  帮助类,都是静态函数,提供一些常用的函数 .
+ *  @brief  Helper Class. There're all static functions in this which provides
+ *  @version 1.0.0
+ *  @date    2022.10.14
+ *  @note    注解:略
+ *  @since
  */
 /////////////////////////////////////////////////
-
 /**
  * @brief  基础工具类，提供了一些非常基本的函数使用.
  * @brief  Basic Utility Class. Some basic functions are provided.

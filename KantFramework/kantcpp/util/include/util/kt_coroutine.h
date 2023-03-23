@@ -16,6 +16,41 @@
 
 using namespace std;
 namespace kant {
+/////////////////////////////////////////////////
+/**
+ * @file  kt_coroutine.h
+ * @brief  协程操作封装类
+ * @brief  coroutine encapsulation class
+ *
+ * 设计说明:
+ * - 每个线程可以有多个协程, 协程底层使用的boost的几个主要的宏来实现协程间的跳转
+ * - 协程需要使用的栈, 提前就要分配好, 通常启动协程的时候需要设置
+ * - 协程调度运行是通过epoller来实现的, 这样可以完美的和网络IO关联到一起, 在网络IO过程中方便的完成协程的切换, 这个是当前携程调度的核心
+ *
+ * 主要类说明如下:
+ * - KT_CoroutineInfo, 协程信息类, 每个协程都对应一个KT_CoroutineInfo对象, 协程切换本质就是切换KT_CoroutineInfo对象, 正常情况下业务不需要感知该对象
+ * - KT_CoroutineScheduler, 协程调度器类, 负责管理和调度协程, 本质上就是管理和调度KT_CoroutineInfo
+ * - KT_Coroutine, 协程类, 继承于线程类(KT_Thread), 用来给业务快速使用协程
+ *
+ * KT_CoroutineScheduler详细说明:
+ * - 该类是协程调度的核心, 业务使用上, 框架需要和这个类打交道, 业务上除非自己来实现协程管理逻辑, 否则通常可以不深入了解该类的实现
+ * - 注意每个协程都是需要使用栈空间的, 因此KT_CoroutineScheduler有init来初始化: <总共内存大小,栈大小>, 栈大小通常使用128k, 两者相除就是该调度协程器, 最大调度的协程个数
+ * - 该类对象使用线程私有变量保存, 可以通过静态函数来创建/获取/设置
+ * - 每个线程都有自己的调度器对象, 调度器对象只能调度自身线程的协程, 调度过程(运行run)本质上就是阻塞在线程的过程(run不会退出, 直到有terminate调用)
+ * - 调度过程简单的理解就是: 检查是否有需要执行的协程, 有则执行之, 没有则等待在epoll对象上, 直到有唤醒或者超时
+ * - 调度器底层使用tc_epoller来完成协程的切换, 等待和阻塞等操作, 可以和网络IO无缝粘合, 因此可以通过KT_CoroutineScheduler对象拿到KT_Epoller指针, 并用于网络IO上
+ * - 由于网络IO也是用相同的epoller对象, 因此可以做到当有数据发送/接受时, 唤醒epoll对象, 从而完成协程的切换
+ * - 协程启动通过: go 函数来完成
+ * - 协程在运行中, 主要使用三个函数来完成, 调度控制: yield/sleep/put
+ *
+ * KT_Coroutine详细说明:
+ * - 使用线程模拟协程组, 即多个协程同时被创建出来
+ * - 业务可以直接继承这个类, 使用时, 首先要调用setCoroInfo方法设置协程的基本信息
+ * - 实现这个类的: handle 方法, 然后类似启动线程一样(start)方法即可, 会同时有多个协程执行handle方法
+ * - 调用start函数, 启动线程, 同时会创建(iNum, iMaxNum)个协程
+ * - terminate结束
+ */
+/////////////////////////////////////////////////
 
 //协程异常类
 struct KT_CoroutineException : public KT_Exception {

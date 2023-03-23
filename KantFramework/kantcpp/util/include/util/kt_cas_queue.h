@@ -12,13 +12,15 @@ using namespace std;
 namespace kant {
 /////////////////////////////////////////////////
 /**
- * @file kt_cas_queue.h
- * @brief Lock-Free Thread
- * @brief 线程无锁
- *  
- * @author ruanshudong@qq.com
+ *  @file    kt_cas_queue.h
+ *  @author  dogchen
+ *  @brief   Lock-Free Thread
+ *  @brief   线程无锁
+ *  @version 1.0.0
+ *  @date    2022.10.14
+ *  @note    注解:使用std::atomic_flag原子、以及免锁的特性构造的线程安全队列
+ *  @since
  */
-
 /////////////////////////////////////////////////
 /**
  * @brief Thread Safe Queue

@@ -1,4 +1,4 @@
-#include "util/kt_ex.h"
+﻿#include "util/kt_ex.h"
 
 #include "util/kt_platform.h"
 #if TARGET_PLATFORM_LINUX
@@ -46,8 +46,7 @@ void KT_Exception::getBacktrace() {
 static std::string Unicode2ANSI(LPCWSTR lpszSrc) {
   std::string sResult;
   if (lpszSrc != NULL) {
-    int nANSILen =
-        WideCharToMultiByte(CP_ACP, 0, lpszSrc, -1, NULL, 0, NULL, NULL);
+    int nANSILen = WideCharToMultiByte(CP_ACP, 0, lpszSrc, -1, NULL, 0, NULL, NULL);
     char* pANSI = new char[nANSILen + 1];
     if (pANSI != NULL) {
       ZeroMemory(pANSI, nANSILen + 1);
@@ -69,10 +68,8 @@ string KT_Exception::parseError(int err) {
   // LPTSTR lpMsgBuf;
   LPSTR lpMsgBuf;
 
-  FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM |
-                     FORMAT_MESSAGE_IGNORE_INSERTS,
-                 NULL, err, MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US),
-                 (LPSTR)&lpMsgBuf, 0, NULL);
+  FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, err,
+                 MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US), (LPSTR)&lpMsgBuf, 0, NULL);
 
   // errMsg = Unicode2ANSI((LPCWSTR)lpMsgBuf);
   if (lpMsgBuf != NULL) {

@@ -1,4 +1,4 @@
-#include "util/kt_coroutine.h"
+ï»¿#include "util/kt_coroutine.h"
 #include "util/kt_platform.h"
 #include "util/kt_logger.h"
 
@@ -189,7 +189,7 @@ void KT_CoroutineInfo::registerFunc(const std::function<void()> &callback) {
 
   transfer_t tf = jump_fcontext(ctx, this);
 
-  //Êµ¼ÊµÄctx
+  //å®é™…çš„ctx
   this->setCtx(tf.fctx);
 }
 
@@ -201,10 +201,10 @@ void KT_CoroutineInfo::corotineEntry(transfer_t tf) {
 
   transfer_t t = jump_fcontext(tf.fctx, NULL);
 
-  //ÄÃµ½×Ô¼ºµÄĞ­³Ì¶ÑÕ», µ±Ç°Ğ­³Ì½áÊøÒÔºó, ºÃÌø×ªµ½main
+  //æ‹¿åˆ°è‡ªå·±çš„åç¨‹å †æ ˆ, å½“å‰åç¨‹ç»“æŸä»¥å, å¥½è·³è½¬åˆ°main
   coro->_scheduler->setMainCtx(t.fctx);
 
-  //ÔÙÌø×ªµ½¾ßÌåº¯Êı
+  //å†è·³è½¬åˆ°å…·ä½“å‡½æ•°
   func(args, t);
 }
 
@@ -212,7 +212,7 @@ void KT_CoroutineInfo::corotineProc(void *args, transfer_t t) {
   KT_CoroutineInfo *coro = (KT_CoroutineInfo *)args;
 
   try {
-    //Ö´ĞĞ¾ßÌåÒµÎñ´úÂë
+    //æ‰§è¡Œå…·ä½“ä¸šåŠ¡ä»£ç 
     coro->_callback();
   } catch (std::exception &ex) {
     cerr << "KT_CoroutineInfo::corotineProc exception:" << ex.what() << endl;
@@ -224,7 +224,7 @@ void KT_CoroutineInfo::corotineProc(void *args, transfer_t t) {
   scheduler->decUsedSize();
   scheduler->moveToFreeList(coro);
 
-  //µ±Ç°ÒµÎñÖ´ĞĞÍê, »áÌøµ½main
+  //å½“å‰ä¸šåŠ¡æ‰§è¡Œå®Œ, ä¼šè·³åˆ°main
   scheduler->switchCoro(&(scheduler->getMainCoroutine()));
 }
 
@@ -268,7 +268,7 @@ void KT_CoroutineScheduler::createCoroutineInfo(size_t poolSize) {
 
   _all_coro = new KT_CoroutineInfo *[_poolSize + 1];
   for (size_t i = 0; i <= _poolSize; ++i) {
-    //id=0²»Ê¹ÓÃ, ¸ømainCoroÀ´Ê¹ÓÃ!
+    //id=0ä¸ä½¿ç”¨, ç»™mainCoroæ¥ä½¿ç”¨!
     _all_coro[i] = NULL;
   }
 }
@@ -299,7 +299,7 @@ void KT_CoroutineScheduler::init() {
   int iSucc = 0;
 
   for (size_t i = 0; i < _currentSize; ++i) {
-    //iId=0²»Ê¹ÓÃ, ¸ømainCoroÊ¹ÓÃ!!!!
+    //iId=0ä¸ä½¿ç”¨, ç»™mainCoroä½¿ç”¨!!!!
     uint32_t iId = generateId();
 
     assert(iId != 0);
@@ -399,18 +399,18 @@ void KT_CoroutineScheduler::run() {
       //_epoller->done(1000);
     }
 
-    //»½ĞÑĞèÒª¼¤»îµÄĞ­³Ì
+    //å”¤é†’éœ€è¦æ¿€æ´»çš„åç¨‹
     wakeup();
 
-    //»½ĞÑsleepµÄĞ­³Ì
+    //å”¤é†’sleepçš„åç¨‹
     wakeupbytimeout();
 
-    //»½ĞÑyieldµÄĞ­³Ì
+    //å”¤é†’yieldçš„åç¨‹
     wakeupbyself();
 
     int iLoop = 100;
 
-    //Ö´ĞĞactiveĞ­³Ì, Ã¿´ÎÖ´ĞĞ100¸ö, ±ÜÃâÕ¼Âúcpu
+    //æ‰§è¡Œactiveåç¨‹, æ¯æ¬¡æ‰§è¡Œ100ä¸ª, é¿å…å æ»¡cpu
     while (iLoop > 0 && !KT_CoroutineInfo::CoroutineHeadEmpty(&_active)) {
       KT_CoroutineInfo *coro = _active._next;
 
@@ -421,7 +421,7 @@ void KT_CoroutineScheduler::run() {
       --iLoop;
     }
 
-    //¼ì²éyieldµÄÏß³Ì, Ö´ĞĞ
+    //æ£€æŸ¥yieldçš„çº¿ç¨‹, æ‰§è¡Œ
     if (!KT_CoroutineInfo::CoroutineHeadEmpty(&_avail)) {
       KT_CoroutineInfo *coro = _avail._next;
 
@@ -430,7 +430,7 @@ void KT_CoroutineScheduler::run() {
       switchCoro(coro);
     }
 
-    //Ã»ÓĞÈÎºÎ¿ÉÖ´ĞĞµÄĞ´³ÉÁË, Ö±½ÓÍË³ö!
+    //æ²¡æœ‰ä»»ä½•å¯æ‰§è¡Œçš„å†™æˆäº†, ç›´æ¥é€€å‡º!
     if (_usedSize == 0 && _noCoroutineCallback) {
       _noCoroutineCallback(this);
     }
@@ -442,7 +442,7 @@ void KT_CoroutineScheduler::run() {
 }
 
 void KT_CoroutineScheduler::yield(bool bFlag) {
-  //Ö÷Ğ­³Ì²»ÔÊĞíyield
+  //ä¸»åç¨‹ä¸å…è®¸yield
   if (_currentCoro->getUid() == 0) {
     return;
   }
@@ -456,7 +456,7 @@ void KT_CoroutineScheduler::yield(bool bFlag) {
 }
 
 void KT_CoroutineScheduler::sleep(int iSleepTime) {
-  //Ö÷Ğ­³Ì²»ÔÊĞísleep
+  //ä¸»åç¨‹ä¸å…è®¸sleep
   if (_currentCoro->getUid() == 0) return;
 
   int64_t iNow = TNOWMS;
@@ -557,12 +557,12 @@ uint32_t KT_CoroutineScheduler::generateId() {
 }
 
 void KT_CoroutineScheduler::switchCoro(KT_CoroutineInfo *to) {
-  //Ìø×ªµ½toĞ­³Ì
+  //è·³è½¬åˆ°toåç¨‹
   _currentCoro = to;
 
   transfer_t t = jump_fcontext(to->getCtx(), NULL);
 
-  //²¢±£´æĞ­³Ì¶ÑÕ»
+  //å¹¶ä¿å­˜åç¨‹å †æ ˆ
   to->setCtx(t.fctx);
 }
 
@@ -618,7 +618,7 @@ void KT_CoroutineScheduler::moveToFreeList(KT_CoroutineInfo *coro) {
 
 void KT_CoroutineScheduler::destroy() {
   if (_all_coro) {
-    //id=0ÊÇ±£Áô²»ÓÃµÄ, ¸ømainCoro×÷ÎªidÓÃ
+    //id=0æ˜¯ä¿ç•™ä¸ç”¨çš„, ç»™mainCoroä½œä¸ºidç”¨
     assert(_all_coro[0] == NULL);
 
     for (size_t i = 1; i <= _poolSize; i++) {
@@ -671,7 +671,7 @@ void KT_Coroutine::handleCoro() {
 
   _coroSched->setNoCoroutineCallback([&](KT_CoroutineScheduler *scheduler) { scheduler->terminate(); });
 
-  //°ÑĞ­³Ì´´½¨³öÀ´
+  //æŠŠåç¨‹åˆ›å»ºå‡ºæ¥
   for (uint32_t i = 0; i < _num; ++i) {
     _coroSched->go(std::bind(&KT_Coroutine::coroEntry, this));
   }

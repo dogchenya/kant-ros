@@ -1,4 +1,4 @@
-#include "util/kt_platform.h"
+﻿#include "util/kt_platform.h"
 #include "util/kt_strptime.h"
 
 #ifdef TARGET_PLATFORM_WINDOWS

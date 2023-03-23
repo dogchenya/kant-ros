@@ -1,14 +1,14 @@
-#pragma once
+﻿#pragma once
 
 #if defined _WIN32 || defined _WIN64
 #define TARGET_PLATFORM_WINDOWS 1
 
 #elif __APPLE__
-#define TARGET_PLATFORM_IOS  1
+#define TARGET_PLATFORM_IOS 1
 
 #elif defined ANDROID
 #define TARGET_PLATFORM_ANDROID 1
-#define TARGET_PLATFORM_LINUX   1
+#define TARGET_PLATFORM_LINUX 1
 
 #elif __linux__
 #define TARGET_PLATFORM_LINUX 1

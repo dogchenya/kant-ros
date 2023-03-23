@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Tencent is pleased to support the open source community by making Tars
  * available.
  *
@@ -105,7 +105,7 @@ int KT_Port::strncasecmp(const char *s1, const char *s2, size_t n) {
 }
 
 void KT_Port::localtime_r(const time_t *clock, struct tm *result) {
-  //´øÊ±ÇøÊ±¼ä
+  //å¸¦æ—¶åŒºæ—¶é—´
 #if TARGET_PLATFORM_WINDOWS
   ::localtime_s(result, clock);
 #else
@@ -151,7 +151,7 @@ int KT_Port::gettimeofday(struct timeval &tv) {
 }
 
 int KT_Port::chmod(const char *path, mode_t mode) {
-  //´øÊ±ÇøÊ±¼ä
+  //å¸¦æ—¶åŒºæ—¶é—´
 #if TARGET_PLATFORM_WINDOWS
   return ::_chmod(path, mode);
 #else
@@ -301,19 +301,19 @@ int64_t KT_Port::forkExec(const string &sExePath, const string &sPwdPath, const 
   PROCESS_INFORMATION pi;
   memset(&pi, 0, sizeof(pi));
   si.dwFlags = STARTF_USESHOWWINDOW;
-  si.wShowWindow = SW_HIDE;  // TRUE±íÊ¾ÏÔÊ¾´´½¨µÄ½ø³ÌµÄ´°¿Ú
+  si.wShowWindow = SW_HIDE;  // TRUEè¡¨ç¤ºæ˜¾ç¤ºåˆ›å»ºçš„è¿›ç¨‹çš„çª—å£
 
-  if (!CreateProcess(NULL,  //  Ö¸ÏòÒ»¸öNULL½áÎ²µÄ¡¢ÓÃÀ´Ö¸¶¨¿ÉÖ´ĞĞÄ£¿éµÄ¿í×Ö½Ú×Ö·û´®
-                     p,     // ÃüÁîĞĞ×Ö·û´®
-                     NULL,  //    Ö¸ÏòÒ»¸öSECURITY_ATTRIBUTES½á¹¹Ìå£¬Õâ¸ö½á¹¹Ìå¾ö¶¨ÊÇ·ñ·µ»ØµÄ¾ä±ú¿ÉÒÔ±»×Ó½ø³Ì¼Ì³Ğ¡£
-                     NULL,  //    Èç¹ûlpProcessAttributes²ÎÊıÎª¿Õ£¨NULL£©£¬ÄÇÃ´¾ä±ú²»ÄÜ±»¼Ì³Ğ¡£<Í¬ÉÏ>
-                     false,  //    Ö¸Ê¾ĞÂ½ø³ÌÊÇ·ñ´Óµ÷ÓÃ½ø³Ì´¦¼Ì³ĞÁË¾ä±ú¡£
+  if (!CreateProcess(NULL,  //  æŒ‡å‘ä¸€ä¸ªNULLç»“å°¾çš„ã€ç”¨æ¥æŒ‡å®šå¯æ‰§è¡Œæ¨¡å—çš„å®½å­—èŠ‚å­—ç¬¦ä¸²
+                     p,     // å‘½ä»¤è¡Œå­—ç¬¦ä¸²
+                     NULL,  //    æŒ‡å‘ä¸€ä¸ªSECURITY_ATTRIBUTESç»“æ„ä½“ï¼Œè¿™ä¸ªç»“æ„ä½“å†³å®šæ˜¯å¦è¿”å›çš„å¥æŸ„å¯ä»¥è¢«å­è¿›ç¨‹ç»§æ‰¿ã€‚
+                     NULL,  //    å¦‚æœlpProcessAttributeså‚æ•°ä¸ºç©ºï¼ˆNULLï¼‰ï¼Œé‚£ä¹ˆå¥æŸ„ä¸èƒ½è¢«ç»§æ‰¿ã€‚<åŒä¸Š>
+                     false,  //    æŒ‡ç¤ºæ–°è¿›ç¨‹æ˜¯å¦ä»è°ƒç”¨è¿›ç¨‹å¤„ç»§æ‰¿äº†å¥æŸ„ã€‚
                      CREATE_NEW_CONSOLE | CREATE_DEFAULT_ERROR_MODE | NORMAL_PRIORITY_CLASS |
-                       CREATE_NO_WINDOW,  //  Ö¸¶¨¸½¼ÓµÄ¡¢ÓÃÀ´¿ØÖÆÓÅÏÈÀàºÍ½ø³ÌµÄ´´½¨µÄ±ê
-                     NULL,  //    Ö¸ÏòÒ»¸öĞÂ½ø³ÌµÄ»·¾³¿é¡£Èç¹û´Ë²ÎÊıÎª¿Õ£¬ĞÂ½ø³ÌÊ¹ÓÃµ÷ÓÃ½ø³ÌµÄ»·¾³
-                     (LPCWSTR)pwdCStr,  //    Ö¸¶¨×Ó½ø³ÌµÄ¹¤×÷Â·¾¶
-                     &si,               // ¾ö¶¨ĞÂ½ø³ÌµÄÖ÷´°ÌåÈçºÎÏÔÊ¾µÄSTARTUPINFO½á¹¹Ìå
-                     &pi                // ½ÓÊÕĞÂ½ø³ÌµÄÊ¶±ğĞÅÏ¢µÄPROCESS_INFORMATION½á¹¹Ìå
+                       CREATE_NO_WINDOW,  //  æŒ‡å®šé™„åŠ çš„ã€ç”¨æ¥æ§åˆ¶ä¼˜å…ˆç±»å’Œè¿›ç¨‹çš„åˆ›å»ºçš„æ ‡
+                     NULL,  //    æŒ‡å‘ä¸€ä¸ªæ–°è¿›ç¨‹çš„ç¯å¢ƒå—ã€‚å¦‚æœæ­¤å‚æ•°ä¸ºç©ºï¼Œæ–°è¿›ç¨‹ä½¿ç”¨è°ƒç”¨è¿›ç¨‹çš„ç¯å¢ƒ
+                     (LPCWSTR)pwdCStr,  //    æŒ‡å®šå­è¿›ç¨‹çš„å·¥ä½œè·¯å¾„
+                     &si,               // å†³å®šæ–°è¿›ç¨‹çš„ä¸»çª—ä½“å¦‚ä½•æ˜¾ç¤ºçš„STARTUPINFOç»“æ„ä½“
+                     &pi                // æ¥æ”¶æ–°è¿›ç¨‹çš„è¯†åˆ«ä¿¡æ¯çš„PROCESS_INFORMATIONç»“æ„ä½“
                      )) {
     string err = KT_Exception::parseError(KT_Exception::getSystemCode());
 
@@ -351,7 +351,7 @@ int64_t KT_Port::forkExec(const string &sExePath, const string &sPwdPath, const 
       close(fd);
     }
 
-    // server stdcout ÈÕÖ¾ÔÚ¹ö¶¯ÈÕÖ¾ÏÔÊ¾
+    // server stdcout æ—¥å¿—åœ¨æ»šåŠ¨æ—¥å¿—æ˜¾ç¤º
     if (!sRollLogPath.empty()) {
       KT_File::makeDirRecursive(KT_File::extractFilePath(sRollLogPath));
 #if TARGET_PLATFORM_IOS
@@ -364,7 +364,7 @@ int64_t KT_Port::forkExec(const string &sExePath, const string &sPwdPath, const 
       {
         cout << argv[0] << " redirect stdout and stderr  to " << sRollLogPath << endl;
       } else {
-        //ÖØ¶¨ÏòÊ§°Ü Ö±½ÓÍË³ö
+        //é‡å®šå‘å¤±è´¥ ç›´æ¥é€€å‡º
         exit(0);
       }
     } else {
@@ -404,7 +404,7 @@ size_t KT_Port::registerSig(int sig, std::function<void()> callback) {
   auto it = _sigInfo->_callbacks.find(sig);
 
   if (it == _sigInfo->_callbacks.end()) {
-    //Ã»ÓĞ×¢²á¹ı, ²Å×¢²á
+    //æ²¡æœ‰æ³¨å†Œè¿‡, æ‰æ³¨å†Œ
     registerSig(sig);
   }
 
@@ -416,7 +416,7 @@ size_t KT_Port::registerSig(int sig, std::function<void()> callback) {
 }
 
 void KT_Port::unregisterSig(int sig, size_t id) {
-  //×¢Òâ_sigInfoÊÇÈ«¾Ö¾²Ì¬µÄ, ÓĞ¿ÉÄÜÒÑ¾­Îö¹¹ÁË, ĞèÒªÌØÊâÅĞ¶ÏÒ»ÏÂ!
+  //æ³¨æ„_sigInfoæ˜¯å…¨å±€é™æ€çš„, æœ‰å¯èƒ½å·²ç»ææ„äº†, éœ€è¦ç‰¹æ®Šåˆ¤æ–­ä¸€ä¸‹!
   if (_sigInfo && _sigInfo.use_count() > 0) {
     std::lock_guard<std::mutex> lock(_sigInfo->_mutex);
     auto it = _sigInfo->_callbacks.find(sig);

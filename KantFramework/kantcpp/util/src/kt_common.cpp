@@ -1,4 +1,4 @@
-#include "util/kt_common.h"
+ï»¿#include "util/kt_common.h"
 
 #include <chrono>
 #include <thread>
@@ -161,17 +161,17 @@ string KT_Common::tostr<unsigned long>(const unsigned long &t) {
 
 template <>
 string KT_Common::tostr<float>(const float &t) {
-  // C++11 to_string£¬Ä¬ÈÏ±£ÁôºóÃæ6Î»Ğ¡Êı
+  // C++11 to_stringï¼Œé»˜è®¤ä¿ç•™åé¢6ä½å°æ•°
   string s = std::to_string(t);
 
-  //È¥µôÎŞĞ§0, eg. 1.0300 -> 1.03;1.00 -> 1
+  //å»æ‰æ— æ•ˆ0, eg. 1.0300 -> 1.03;1.00 -> 1
   bool bFlag = false;
   int pos = int(s.size() - 1);
   for (; pos > 0; --pos) {
     if (s[pos] == '0') {
       bFlag = true;
       if (s[pos - 1] == '.') {
-        //-2ÎªÁËÈ¥µô"."ºÅ
+        //-2ä¸ºäº†å»æ‰"."å·
         pos -= 2;
         break;
       }
@@ -187,16 +187,16 @@ string KT_Common::tostr<float>(const float &t) {
 
 template <>
 string KT_Common::tostr<double>(const double &t) {
-  // C++11 to_string£¬Ä¬ÈÏ±£ÁôºóÃæ6Î»Ğ¡Êı
+  // C++11 to_stringï¼Œé»˜è®¤ä¿ç•™åé¢6ä½å°æ•°
   string s = std::to_string(t);
-  //È¥µôÎŞĞ§0, eg. 1.0300 -> 1.03;1.00 -> 1
+  //å»æ‰æ— æ•ˆ0, eg. 1.0300 -> 1.03;1.00 -> 1
   bool bFlag = false;
   int pos = int(s.size() - 1);
   for (; pos > 0; --pos) {
     if (s[pos] == '0') {
       bFlag = true;
       if (s[pos - 1] == '.') {
-        //-2ÎªÁËÈ¥µô"."ºÅ
+        //-2ä¸ºäº†å»æ‰"."å·
         pos -= 2;
         break;
       }
@@ -216,14 +216,14 @@ string KT_Common::tostr<long double>(const long double &t) {
   snprintf(buf, 32, "%Lf", t);
   string s(buf);
 
-  //È¥µôÎŞĞ§0, eg. 1.0300 -> 1.03;1.00 -> 1
+  //å»æ‰æ— æ•ˆ0, eg. 1.0300 -> 1.03;1.00 -> 1
   bool bFlag = false;
   int pos = int(s.size() - 1);
   for (; pos > 0; --pos) {
     if (s[pos] == '0') {
       bFlag = true;
       if (s[pos - 1] == '.') {
-        //-2ÎªÁËÈ¥µô"."ºÅ
+        //-2ä¸ºäº†å»æ‰"."å·
         pos -= 2;
         break;
       }
@@ -248,7 +248,7 @@ string KT_Common::trim(const string &sStr, const string &s, bool bChar) {
   }
 
   /**
-   * ½«ÍêÈ«ÓësÏàÍ¬µÄ×Ö·û´®È¥µô
+   * å°†å®Œå…¨ä¸sç›¸åŒçš„å­—ç¬¦ä¸²å»æ‰
    */
   if (!bChar) {
     return trimright(trimleft(sStr, s, false), s, false);
@@ -263,7 +263,7 @@ string KT_Common::trimleft(const string &sStr, const string &s, bool bChar) {
   }
 
   /**
-   * È¥µôsStr×ó±ßµÄ×Ö·û´®s
+   * å»æ‰sStrå·¦è¾¹çš„å­—ç¬¦ä¸²s
    */
   if (!bChar) {
     if (sStr.length() < s.length()) {
@@ -278,7 +278,7 @@ string KT_Common::trimleft(const string &sStr, const string &s, bool bChar) {
   }
 
   /**
-   * È¥µôsStr×ó±ßµÄ ×Ö·û´®sÖĞµÄ×Ö·û
+   * å»æ‰sStrå·¦è¾¹çš„ å­—ç¬¦ä¸²sä¸­çš„å­—ç¬¦
    */
   string::size_type pos = 0;
   while (pos < sStr.length()) {
@@ -300,7 +300,7 @@ string KT_Common::trimright(const string &sStr, const string &s, bool bChar) {
   }
 
   /**
-   * È¥µôsStrÓÒ±ßµÄ×Ö·û´®s
+   * å»æ‰sStrå³è¾¹çš„å­—ç¬¦ä¸²s
    */
   if (!bChar) {
     if (sStr.length() < s.length()) {
@@ -315,7 +315,7 @@ string KT_Common::trimright(const string &sStr, const string &s, bool bChar) {
   }
 
   /**
-   * È¥µôsStrÓÒ±ßµÄ ×Ö·û´®sÖĞµÄ×Ö·û
+   * å»æ‰sStrå³è¾¹çš„ å­—ç¬¦ä¸²sä¸­çš„å­—ç¬¦
    */
   string::size_type pos = sStr.length();
   while (pos != 0) {
@@ -366,24 +366,24 @@ bool KT_Common::isdigit(const string &sInput) {
   return true;
 }
 
-//ÓÃÓÚ¼ÆËãÊ±Çø²îÒì!
+//ç”¨äºè®¡ç®—æ—¶åŒºå·®å¼‚!
 class TimezoneHelper {
  public:
   TimezoneHelper() {
     struct tm timeinfo;
     time_t secs, local_secs, gmt_secs;
 
-    // UTCÊ±¼ä´Á
+    // UTCæ—¶é—´æˆ³
     time(&secs);
 
-    //´øÊ±ÇøÊ±¼ä
+    //å¸¦æ—¶åŒºæ—¶é—´
     KT_Port::localtime_r(&secs, &timeinfo);
     local_secs = ::mktime(&timeinfo);
 #if !TARGET_PLATFORM_WINDOWS
     timezone_local = string(timeinfo.tm_zone);
 #endif
 
-    //²»´øÊ±ÇøÊ±¼ä
+    //ä¸å¸¦æ—¶åŒºæ—¶é—´
     KT_Port::gmtime_r(&secs, &timeinfo);
 
     gmt_secs = ::mktime(&timeinfo);
@@ -411,7 +411,7 @@ int KT_Common::str2tm(const string &sString, const string &sFormat, struct tm &s
 time_t KT_Common::str2time(const string &sString, const string &sFormat) {
   struct tm stTm;
   if (0 == str2tm(sString, sFormat, stTm)) {
-    //×¢ÒâÕâÀïÃ»ÓĞÖ±½ÓÓÃmktime, mktime»á·ÃÎÊÊ±ÇøÎÄ¼ş, »á¾ŞÂı!
+    //æ³¨æ„è¿™é‡Œæ²¡æœ‰ç›´æ¥ç”¨mktime, mktimeä¼šè®¿é—®æ—¶åŒºæ–‡ä»¶, ä¼šå·¨æ…¢!
     static TimezoneHelper helper;
     return KT_Port::timegm(&stTm) - TimezoneHelper::timezone_diff_secs;
   }
@@ -433,7 +433,7 @@ string KT_Common::tm2str(const struct tm &stTm, const string &sFormat) {
 int KT_Common::gettimeofday(struct timeval &tv) { return KT_Port::gettimeofday(tv); }
 
 void KT_Common::tm2time(const time_t &t, struct tm &tt) {
-  //¼Ó¿ìËÙ¶È, ·ñÔò»á±È½ÏÂı, ²»ÓÃlocaltime_r(»á·ÃÎÊÊ±ÇøÎÄ¼ş, ½ÏÂı)
+  //åŠ å¿«é€Ÿåº¦, å¦åˆ™ä¼šæ¯”è¾ƒæ…¢, ä¸ç”¨localtime_r(ä¼šè®¿é—®æ—¶åŒºæ–‡ä»¶, è¾ƒæ…¢)
   static TimezoneHelper helper;
   time_t localt = t + TimezoneHelper::timezone_diff_secs;
 
@@ -536,7 +536,7 @@ int64_t KT_Common::now2us() {
   return tv.tv_sec * (int64_t)1000000 + tv.tv_usec;
 }
 
-//²ÎÕÕphorixµÄÓÅ»¯
+//å‚ç…§phorixçš„ä¼˜åŒ–
 static char c_b2s[256][4] = {
   "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0a", "0b", "0c", "0d", "0e", "0f", "10", "11", "12",
   "13", "14", "15", "16", "17", "18", "19", "1a", "1b", "1c", "1d", "1e", "1f", "20", "21", "22", "23", "24", "25",
@@ -566,7 +566,7 @@ string KT_Common::bin2str(const void *buf, size_t len, const string &sSep, size_
     sOut += c_b2s[*p][1];
     sOut += sSep;
 
-    //»»ĞĞ
+    //æ¢è¡Œ
     if ((lines != 0) && ((i + 1) % lines == 0)) {
       sOut += "\n";
     }
@@ -597,10 +597,10 @@ string KT_Common::str2bin(const string &sString, const string &sSep, size_t line
   for (size_t i = 0; i < iAsciiLength; i++) {
     sBinData += x2c(psAsciiData + i);
     i++;
-    i += sSep.length();  //¹ıÂËµô·Ö¸ô·û
+    i += sSep.length();  //è¿‡æ»¤æ‰åˆ†éš”ç¬¦
 
     if (lines != 0 && sBinData.length() % lines == 0) {
-      i++;  //¹ıÂËµô»Ø³µ
+      i++;  //è¿‡æ»¤æ‰å›è½¦
     }
   }
 
@@ -727,7 +727,7 @@ void KT_Common::daemon() {
   ignorePipe();
 
   if ((pid = fork()) != 0) {
-    //¸¸½ø³Ì½áÊø,±ä³Édaemon
+    //çˆ¶è¿›ç¨‹ç»“æŸ,å˜æˆdaemon
     exit(0);
   }
 
@@ -766,7 +766,7 @@ size_t KT_Common::toSize(const string &s, size_t iDefaultSize) {
 
   char c = s[s.length() - 1];
   if (c != 'K' && c != 'M' && c != 'G' && KT_Common::trim(s) == KT_Common::tostr(KT_Common::strto<size_t>(s))) {
-    //Ã»ÓĞºó×º, ÇÒ×ª»»ÊÇÕıÈ·µÄ
+    //æ²¡æœ‰åç¼€, ä¸”è½¬æ¢æ˜¯æ­£ç¡®çš„
     return (size_t)(KT_Common::strto<size_t>(s));
   } else if (c == 'K' || c == 'M' || c == 'G') {
     if (s.length() == 1) {
@@ -800,7 +800,7 @@ string KT_Common::getHostName() {
   if (0 == ret) {
     hostName = string(buff);
   } else {
-    // »ñÈ¡²»µ½host£¬ ÔòÖ±½Ó´«¿Õ´®¡£
+    // è·å–ä¸åˆ°hostï¼Œ åˆ™ç›´æ¥ä¼ ç©ºä¸²ã€‚
   }
   return hostName;
 }
@@ -915,7 +915,7 @@ int KT_Common::secondsToDateInt(time_t seconds) {
 string KT_Common::secondsToDateString(time_t seconds) { return KT_Common::tostr(secondsToDateInt(seconds)); }
 
 string KT_Common::secondsToMondayString(time_t seconds) {
-  //»»µ½ÖÜÒ»
+  //æ¢åˆ°å‘¨ä¸€
   int week = KT_Common::strto<int>(KT_Common::tm2str(seconds, "%w"));
   seconds -= (week - 1) * 86400;
 
@@ -993,7 +993,7 @@ string KT_Common::getTimeFromMs(int64_t ms) {
 int KT_Common::msToNowSeconds(int64_t ms) {
   int64_t sec = ms / 1000;
 
-  //»»³Éµ±ÌìµÄÃë
+  //æ¢æˆå½“å¤©çš„ç§’
   int64_t now = KT_Common::str2time(KT_Common::tm2str(sec, "%Y%m%d") + "000000", "%Y%m%d%H%M%S");
 
   return (sec - now);
@@ -1004,7 +1004,7 @@ int KT_Common::nowDaySeconds() { return KT_Common::msToNowSeconds(KT_Common::now
 int64_t KT_Common::msToNowMs(int64_t ms) {
   int64_t sec = ms / 1000;
 
-  //»»³Éµ±ÌìµÄÃë
+  //æ¢æˆå½“å¤©çš„ç§’
   int64_t now = KT_Common::str2time(KT_Common::tm2str(sec, "%Y%m%d") + "000000", "%Y%m%d%H%M%S");
 
   return now * 1000;
@@ -1022,7 +1022,7 @@ int64_t KT_Common::dateToMs(const string &sDate) {
   if (sDate.find('-') != string::npos) {
     now = KT_Common::str2time(sDate + "000000", "%Y-%m-%d%H%M%S");
   } else {
-    //»»³Éµ±ÌìµÄÃë
+    //æ¢æˆå½“å¤©çš„ç§’
     now = KT_Common::str2time(sDate + "000000", "%Y%m%d%H%M%S");
   }
 
@@ -1035,7 +1035,7 @@ int64_t KT_Common::dateToSecond(const string &sDate) {
   if (sDate.find('-') != string::npos) {
     now = KT_Common::str2time(sDate + "000000", "%Y-%m-%d%H%M%S");
   } else {
-    //»»³Éµ±ÌìµÄÃë
+    //æ¢æˆå½“å¤©çš„ç§’
     now = KT_Common::str2time(sDate + "000000", "%Y%m%d%H%M%S");
   }
 
@@ -1110,7 +1110,7 @@ int64_t KT_Common::getNextAbsClockMs(int64_t clockSec) {
   int64_t nowSec = KT_Common::msToNowSeconds(now);
   int64_t currentDateMs = KT_Common::dateToMs(KT_Common::getDateFromMs(now));
 
-  //Èç¹ûÒÑ¾­³¬¹ıÁËÍ¨ÖªÊ±¼ä,Ôò¸Äµ½µÚ¶şÌì¼ÌĞøÍ¨Öª
+  //å¦‚æœå·²ç»è¶…è¿‡äº†é€šçŸ¥æ—¶é—´,åˆ™æ”¹åˆ°ç¬¬äºŒå¤©ç»§ç»­é€šçŸ¥
   int64_t notityRealTimeMs = 0;
   if (nowSec > clockSec + 1) {
     notityRealTimeMs = currentDateMs + clockSec * 1000 + ONE_DAY_MS;
@@ -1148,7 +1148,7 @@ int KT_Common::lastDate(int iDate, const char period) {
     return iDate;
   }
   switch (period) {
-    case 'W':  // ÖÜÈÕÎªÒ»ÖÜµÄ¿ªÊ¼, ÖÜÁù½áÊø
+    case 'W':  // å‘¨æ—¥ä¸ºä¸€å‘¨çš„å¼€å§‹, å‘¨å…­ç»“æŸ
     {
       struct tm t;
       int rc = KT_Common::str2tm(KT_Common::tostr(iDate), "%Y%m%d", t);
@@ -1159,19 +1159,19 @@ int KT_Common::lastDate(int iDate, const char period) {
         return iDate;
       }
 
-      int offset = 6 - t.tm_wday;  // ÏÂÖÜÁù
+      int offset = 6 - t.tm_wday;  // ä¸‹å‘¨å…­
       return nextDate(iDate, offset);
     }
-    case 'M':  // ÏÂÔÂÒ»ºÅµÄÉÏÒ»ÌìÊÇÒ»¸öÔÂµÄ¿ªÊ¼
+    case 'M':  // ä¸‹æœˆä¸€å·çš„ä¸Šä¸€å¤©æ˜¯ä¸€ä¸ªæœˆçš„å¼€å§‹
     {
       int month = iDate / 10000;
       month = iDate - month * 10000;
       month = month / 100;
-      int monthDateStart = ((iDate / 10000)) * 10000 + (month + 1) * 100 + 1;  // ÏÂÔÂ³õ
+      int monthDateStart = ((iDate / 10000)) * 10000 + (month + 1) * 100 + 1;  // ä¸‹æœˆåˆ
       if (month == 12) {
-        monthDateStart = ((iDate / 10000) + 1) * 10000 + (0 + 1) * 100 + 1;  // ÏÂÄêÒ»ÔÂ³õ
+        monthDateStart = ((iDate / 10000) + 1) * 10000 + (0 + 1) * 100 + 1;  // ä¸‹å¹´ä¸€æœˆåˆ
       }
-      return prevDate(monthDateStart, 1);  // ÉÏÒ»Ìì: ÉÏÔÂµ×
+      return prevDate(monthDateStart, 1);  // ä¸Šä¸€å¤©: ä¸Šæœˆåº•
     }
     case 'Q':  // 331, 630, 930, 1231
     {
@@ -1202,7 +1202,7 @@ int KT_Common::lastDate(int iDate, const char period) {
   }
 }
 
-// ÅĞ¶ÏÁ½¸öÈÕÆÚÊÇ·ñÔÚÍ¬Ò»ÖÜÆÚÖĞ
+// åˆ¤æ–­ä¸¤ä¸ªæ—¥æœŸæ˜¯å¦åœ¨åŒä¸€å‘¨æœŸä¸­
 inline bool KT_Common::matchPeriod(int lastDate, int date, const std::string &period) {
   if (lastDate == 0 || date == 0) {
     return false;
@@ -1241,7 +1241,7 @@ int KT_Common::getMatchPeriodDays(const std::vector<int> &days, const std::pair<
     return -1;
   }
 
-  // °´ÖÜÆÚÇĞÆ¬
+  // æŒ‰å‘¨æœŸåˆ‡ç‰‡
   std::vector<std::vector<int>> slice;
   int lastDate = 0;
   int idx = 0;
@@ -1249,7 +1249,7 @@ int KT_Common::getMatchPeriodDays(const std::vector<int> &days, const std::pair<
     if (d <= 0) {
       continue;
     }
-    // µÚÒ»´Î±ØÈ»²»Æ¥Åä lastDate == 0
+    // ç¬¬ä¸€æ¬¡å¿…ç„¶ä¸åŒ¹é… lastDate == 0
     if (!KT_Common::matchPeriod(d, lastDate, p)) {
       lastDate = d;
       slice.emplace_back(std::vector<int>());
@@ -1258,7 +1258,7 @@ int KT_Common::getMatchPeriodDays(const std::vector<int> &days, const std::pair<
     slice[idx - 1].push_back(d);
   }
 
-  // ÔÚÖÜÆÚÇĞÆ¬ÖĞ°´ÏÂ±êÈ¡¶ÔÓ¦µÄÊı¾İ
+  // åœ¨å‘¨æœŸåˆ‡ç‰‡ä¸­æŒ‰ä¸‹æ ‡å–å¯¹åº”çš„æ•°æ®
   for (auto const &v : slice) {
     if (std::abs(period.second) > v.size()) {
       continue;

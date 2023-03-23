@@ -1,4 +1,4 @@
-#ifndef _KT_THREAD_QUEUE_H_
+ï»¿#ifndef _KT_THREAD_QUEUE_H_
 #define _KT_THREAD_QUEUE_H_
 
 #include <deque>
@@ -13,14 +13,14 @@ namespace kant {
 /////////////////////////////////////////////////
 /** 
  * @file kt_thread_queue.h
- * @brief Ïß³Ì¶ÓÁĞÀà.
+ * @brief çº¿ç¨‹é˜Ÿåˆ—ç±».
  *  
  * @author jarodruan@upchina.com
  */
 
 /////////////////////////////////////////////////
 /**
- * @brief Ïß³Ì°²È«¶ÓÁĞ
+ * @brief çº¿ç¨‹å®‰å…¨é˜Ÿåˆ—
  */
 template <typename T, typename D = deque<T>>
 class KT_ThreadQueue {
@@ -31,100 +31,100 @@ class KT_ThreadQueue {
   typedef D queue_type;
 
   /**
-	 * @brief ´ÓÍ·²¿»ñÈ¡Êı¾İ, Ã»ÓĞÊı¾İÅ×Òì³£
+	 * @brief ä»å¤´éƒ¨è·å–æ•°æ®, æ²¡æœ‰æ•°æ®æŠ›å¼‚å¸¸
 	 *
 	 * @param t
-	 * @return bool: true, »ñÈ¡ÁËÊı¾İ, false, ÎŞÊı¾İ
+	 * @return bool: true, è·å–äº†æ•°æ®, false, æ— æ•°æ®
 	 */
   T front();
 
   /**
-     * @brief ´ÓÍ·²¿»ñÈ¡Êı¾İ, Ã»ÓĞÊı¾İÔòµÈ´ı.
+     * @brief ä»å¤´éƒ¨è·å–æ•°æ®, æ²¡æœ‰æ•°æ®åˆ™ç­‰å¾….
      *
      * @param t 
-	 * @param millsecond(wait = trueÊ±²ÅÉúĞ§)  ×èÈûµÈ´ıÊ±¼ä(ms)
-	 *                    0 ±íÊ¾²»×èÈû 
-     * 					 -1 ÓÀ¾ÃµÈ´ı
-     * @param wait, ÊÇ·ñwait
-     * @return bool: true, »ñÈ¡ÁËÊı¾İ, false, ÎŞÊı¾İ
+	 * @param millsecond(wait = trueæ—¶æ‰ç”Ÿæ•ˆ)  é˜»å¡ç­‰å¾…æ—¶é—´(ms)
+	 *                    0 è¡¨ç¤ºä¸é˜»å¡ 
+     * 					 -1 æ°¸ä¹…ç­‰å¾…
+     * @param wait, æ˜¯å¦wait
+     * @return bool: true, è·å–äº†æ•°æ®, false, æ— æ•°æ®
      */
   bool pop_front(T& t, size_t millsecond = 0, bool wait = true);
 
   /**
-	 * @brief ´ÓÍ·²¿»ñÈ¡Êı¾İ.
+	 * @brief ä»å¤´éƒ¨è·å–æ•°æ®.
 	 *
-	 * @return bool: true, »ñÈ¡ÁËÊı¾İ, false, ÎŞÊı¾İ
+	 * @return bool: true, è·å–äº†æ•°æ®, false, æ— æ•°æ®
 	 */
   bool pop_front();
 
   /**
-     * @brief Í¨ÖªµÈ´ıÔÚ¶ÓÁĞÉÏÃæµÄÏß³Ì¶¼ĞÑ¹ıÀ´
+     * @brief é€šçŸ¥ç­‰å¾…åœ¨é˜Ÿåˆ—ä¸Šé¢çš„çº¿ç¨‹éƒ½é†’è¿‡æ¥
      */
   void notifyT();
 
   /**
-	 * @brief ·ÅÊı¾İµ½¶ÓÁĞºó¶Ë. 
+	 * @brief æ”¾æ•°æ®åˆ°é˜Ÿåˆ—åç«¯. 
 	 *  
      * @param t
      */
   void push_back(const T& t, bool notify = true);
 
   /**
-	 * @brief  ·ÅÊı¾İµ½¶ÓÁĞºó¶Ë. 
+	 * @brief  æ”¾æ•°æ®åˆ°é˜Ÿåˆ—åç«¯. 
 	 *  
      * @param vt
      */
   void push_back(const queue_type& qt, bool notify = true);
 
   /**
-	 * @brief  ·ÅÊı¾İµ½¶ÓÁĞÇ°¶Ë. 
+	 * @brief  æ”¾æ•°æ®åˆ°é˜Ÿåˆ—å‰ç«¯. 
 	 *  
      * @param t
      */
   void push_front(const T& t, bool notify = true);
 
   /**
-	 * @brief  ·ÅÊı¾İµ½¶ÓÁĞÇ°¶Ë. 
+	 * @brief  æ”¾æ•°æ®åˆ°é˜Ÿåˆ—å‰ç«¯. 
 	 *  
      * @param vt
      */
   void push_front(const queue_type& qt, bool notify = true);
 
   /**
-	 * @brief  ½»»»Êı¾İ
+	 * @brief  äº¤æ¢æ•°æ®
 	 *  
      * @param q
-	 * @param millsecond(wait = trueÊ±²ÅÉúĞ§)  ×èÈûµÈ´ıÊ±¼ä(ms)
-	 *                   0 ±íÊ¾²»×èÈû 
-     * 					 -1 Èç¹ûÎªÔòÓÀ¾ÃµÈ´ı
-     * @param ÊÇ·ñµÈ´ıÓĞÊı¾İ
-     * @return ÓĞÊı¾İ·µ»Øtrue, ÎŞÊı¾İ·µ»Øfalse
+	 * @param millsecond(wait = trueæ—¶æ‰ç”Ÿæ•ˆ)  é˜»å¡ç­‰å¾…æ—¶é—´(ms)
+	 *                   0 è¡¨ç¤ºä¸é˜»å¡ 
+     * 					 -1 å¦‚æœä¸ºåˆ™æ°¸ä¹…ç­‰å¾…
+     * @param æ˜¯å¦ç­‰å¾…æœ‰æ•°æ®
+     * @return æœ‰æ•°æ®è¿”å›true, æ— æ•°æ®è¿”å›false
      */
   bool swap(queue_type& q, size_t millsecond = 0, bool wait = true);
 
   /**
-     * @brief  ¶ÓÁĞ´óĞ¡.
+     * @brief  é˜Ÿåˆ—å¤§å°.
      *
-     * @return size_t ¶ÓÁĞ´óĞ¡
+     * @return size_t é˜Ÿåˆ—å¤§å°
      */
   size_t size() const;
 
   /**
-     * @brief  Çå¿Õ¶ÓÁĞ
+     * @brief  æ¸…ç©ºé˜Ÿåˆ—
      */
   void clear();
 
   /**
-     * @brief  ÊÇ·ñÊı¾İÎª¿Õ.
+     * @brief  æ˜¯å¦æ•°æ®ä¸ºç©º.
      *
-     * @return bool Îª¿Õ·µ»Øtrue£¬·ñÔò·µ»Øfalse
+     * @return bool ä¸ºç©ºè¿”å›trueï¼Œå¦åˆ™è¿”å›false
      */
   bool empty() const;
 
   /**
-     * @brief  ÎŞÊı¾İÔòµÈ´ı.
+     * @brief  æ— æ•°æ®åˆ™ç­‰å¾….
      *
-     * @return bool ·Ç¿Õ·µ»Øtrue£¬³¬Ê±·µ»Øfalse
+     * @return bool éç©ºè¿”å›trueï¼Œè¶…æ—¶è¿”å›false
      */
   bool wait(size_t millsecond);
 
@@ -138,22 +138,22 @@ class KT_ThreadQueue {
 
  protected:
   /**
-     * ¶ÓÁĞ
+     * é˜Ÿåˆ—
      */
   queue_type _queue;
 
   /**
-     * ¶ÓÁĞ³¤¶È
+     * é˜Ÿåˆ—é•¿åº¦
      */
   size_t _size;
 
-  //Ìõ¼ş±äÁ¿
+  //æ¡ä»¶å˜é‡
   std::condition_variable _cond;
 
-  //Ëø
+  //é”
   mutable std::mutex _mutex;
 
-  //lockId, ÅĞ¶ÏÇëÇóÊÇ·ñ»½ĞÑ¹ı
+  //lockId, åˆ¤æ–­è¯·æ±‚æ˜¯å¦å”¤é†’è¿‡
   size_t _lockId = 0;
 };
 
@@ -171,15 +171,15 @@ bool KT_ThreadQueue<T, D>::pop_front(T& t, size_t millsecond, bool wait) {
 
     std::unique_lock<std::mutex> lock(_mutex);
 
-    // ´Ë´¦µÈ´ıÁ½¸öÌõ¼ş£º 1.À´Êı¾İÁË; 2.ÓĞÈË»½ĞÑÁË.
-    // ÈÎÒ»Ìõ¼şÂú×ã¶¼½«´òÆÆµÈ´ıÁ¢¼´·µ»Ø
+    // æ­¤å¤„ç­‰å¾…ä¸¤ä¸ªæ¡ä»¶ï¼š 1.æ¥æ•°æ®äº†; 2.æœ‰äººå”¤é†’äº†.
+    // ä»»ä¸€æ¡ä»¶æ»¡è¶³éƒ½å°†æ‰“ç ´ç­‰å¾…ç«‹å³è¿”å›
     if (millsecond == (size_t)-1) {
       _cond.wait(lock, [&] { return !_queue.empty() || hasNotify(lockId); });
     } else if (millsecond > 0) {
       _cond.wait_for(lock, std::chrono::milliseconds(millsecond), [&] { return !_queue.empty() || hasNotify(lockId); });
     }
 
-    // ³¬Ê±ÁËÊı¾İ»¹Ã»µ½ »ò »¹Ã»³¬Ê±¾Í±»notify´òÆÆÁË, Ö±½Ó·µ»Ø
+    // è¶…æ—¶äº†æ•°æ®è¿˜æ²¡åˆ° æˆ– è¿˜æ²¡è¶…æ—¶å°±è¢«notifyæ‰“ç ´äº†, ç›´æ¥è¿”å›
     if (_queue.empty() || hasNotify(lockId)) {
       return false;
     }
@@ -321,15 +321,15 @@ bool KT_ThreadQueue<T, D>::swap(queue_type& q, size_t millsecond, bool wait) {
 
     std::unique_lock<std::mutex> lock(_mutex);
 
-    // ´Ë´¦µÈ´ıÁ½¸öÌõ¼ş£º 1.À´Êı¾İÁË; 2.notifyÀ´ÁË
-    // ÈÎÒ»Ìõ¼şÂú×ã¶¼½«´òÆÆµÈ´ıÁ¢¼´·µ»Ø
+    // æ­¤å¤„ç­‰å¾…ä¸¤ä¸ªæ¡ä»¶ï¼š 1.æ¥æ•°æ®äº†; 2.notifyæ¥äº†
+    // ä»»ä¸€æ¡ä»¶æ»¡è¶³éƒ½å°†æ‰“ç ´ç­‰å¾…ç«‹å³è¿”å›
     if (millsecond == (size_t)-1) {
       _cond.wait(lock, [&] { return !_queue.empty() || hasNotify(lockId); });
     } else if (millsecond > 0) {
       _cond.wait_for(lock, std::chrono::milliseconds(millsecond), [&] { return !_queue.empty() || hasNotify(lockId); });
     }
 
-    // ³¬Ê±ÁËÊı¾İ»¹Ã»µ½ »ò »¹Ã»³¬Ê±¾Í±»notify»½ĞÑÁË, Ö±½Ó·µ»Ø
+    // è¶…æ—¶äº†æ•°æ®è¿˜æ²¡åˆ° æˆ– è¿˜æ²¡è¶…æ—¶å°±è¢«notifyå”¤é†’äº†, ç›´æ¥è¿”å›
     if (_queue.empty() || hasNotify(lockId)) {
       return false;
     }
@@ -386,7 +386,7 @@ bool KT_ThreadQueue<T, D>::wait(size_t millsecond) {
       _cond.wait(lock, [&] { return !_queue.empty() || hasNotify(lockId); });
       //            _cond.wait(lock);
     } else {
-      //³¬Ê±ÁË
+      //è¶…æ—¶äº†
       //	        _cond.wait_for(lock, std::chrono::milliseconds(millsecond), [&] { return !_queue.empty() || hasNotify(lockId); });
 
       return _cond.wait_for(lock, std::chrono::milliseconds(millsecond),

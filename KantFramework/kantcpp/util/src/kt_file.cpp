@@ -1,4 +1,4 @@
-#include "util/kt_file.h"
+ï»¿#include "util/kt_file.h"
 #include "util/kt_port.h"
 #include <set>
 #include <string.h>
@@ -109,13 +109,13 @@ bool KT_File::canExecutable(const string &sFullFileName) {
 string KT_File::getExePath() {
   char exeFullPath[MAX_PATH];  // Full path
   LPWSTR Wstr = ConvertCharToLPWSTR(exeFullPath);
-  //º¯Êı·µ»Øµ±Ç°½ø³ÌÒÑ¼ÓÔØ¿ÉÖ´ĞĞ»òDLLÎÄ¼şµÄÍêÕûÂ·¾¶Ãû(ÒÔ'\0'ÖÕÖ¹)
+  //å‡½æ•°è¿”å›å½“å‰è¿›ç¨‹å·²åŠ è½½å¯æ‰§è¡Œæˆ–DLLæ–‡ä»¶çš„å®Œæ•´è·¯å¾„å(ä»¥'\0'ç»ˆæ­¢)
   GetModuleFileName(NULL, Wstr, MAX_PATH);
   return exeFullPath;  // Get full path of the file
 }
 LPWSTR KT_File::ConvertCharToLPWSTR(const char *szString) {
   int dwLen = strlen(szString) + 1;
-  int nwLen = MultiByteToWideChar(CP_ACP, 0, szString, dwLen, NULL, 0);  //Ëã³öºÏÊÊµÄ³¤¶È
+  int nwLen = MultiByteToWideChar(CP_ACP, 0, szString, dwLen, NULL, 0);  //ç®—å‡ºåˆé€‚çš„é•¿åº¦
   LPWSTR lpszPath = new WCHAR[dwLen];
   MultiByteToWideChar(CP_ACP, 0, szString, dwLen, lpszPath, nwLen);
   return lpszPath;

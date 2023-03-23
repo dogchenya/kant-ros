@@ -1,4 +1,4 @@
-#ifndef _KT_COROUTINES_H_
+﻿#ifndef _KT_COROUTINES_H_
 #define _KT_COROUTINES_H_
 
 #include <cstddef>
@@ -19,40 +19,40 @@ namespace kant {
 /////////////////////////////////////////////////
 /**
  * @file  kt_coroutine.h
- * @brief  Э�̲�����װ��
+ * @brief  协程操作封装类
  * @brief  coroutine encapsulation class
  *
- * ���˵��:
- * - ÿ���߳̿����ж��Э��, Э�̵ײ�ʹ�õ�boost�ļ�����Ҫ�ĺ���ʵ��Э�̼����ת
- * - Э����Ҫʹ�õ�ջ, ��ǰ��Ҫ�����, ͨ������Э�̵�ʱ����Ҫ����
- * - Э�̵���������ͨ��epoller��ʵ�ֵ�, �������������ĺ�����IO������һ��, ������IO�����з�������Э�̵��л�, ����ǵ�ǰЯ�̵��ȵĺ���
+ * 设计说明:
+ * - 每个线程可以有多个协程, 协程底层使用的boost的几个主要的宏来实现协程间的跳转
+ * - 协程需要使用的栈, 提前就要分配好, 通常启动协程的时候需要设置
+ * - 协程调度运行是通过epoller来实现的, 这样可以完美的和网络IO关联到一起, 在网络IO过程中方便的完成协程的切换, 这个是当前携程调度的核心
  *
- * ��Ҫ��˵������:
- * - KT_CoroutineInfo, Э����Ϣ��, ÿ��Э�̶���Ӧһ��KT_CoroutineInfo����, Э���л����ʾ����л�KT_CoroutineInfo����, ���������ҵ����Ҫ��֪�ö���
- * - KT_CoroutineScheduler, Э�̵�������, ��������͵���Э��, �����Ͼ��ǹ����͵���KT_CoroutineInfo
- * - KT_Coroutine, Э����, �̳����߳���(KT_Thread), ������ҵ�����ʹ��Э��
+ * 主要类说明如下:
+ * - KT_CoroutineInfo, 协程信息类, 每个协程都对应一个KT_CoroutineInfo对象, 协程切换本质就是切换KT_CoroutineInfo对象, 正常情况下业务不需要感知该对象
+ * - KT_CoroutineScheduler, 协程调度器类, 负责管理和调度协程, 本质上就是管理和调度KT_CoroutineInfo
+ * - KT_Coroutine, 协程类, 继承于线程类(KT_Thread), 用来给业务快速使用协程
  *
- * KT_CoroutineScheduler��ϸ˵��:
- * - ������Э�̵��ȵĺ���, ҵ��ʹ����, �����Ҫ�������򽻵�, ҵ���ϳ����Լ���ʵ��Э�̹����߼�, ����ͨ�����Բ������˽�����ʵ��
- * - ע��ÿ��Э�̶�����Ҫʹ��ջ�ռ��, ���KT_CoroutineScheduler��init����ʼ��: <�ܹ��ڴ��С,ջ��С>, ջ��Сͨ��ʹ��128k, ����������Ǹõ���Э����, �����ȵ�Э�̸���
- * - �������ʹ���߳�˽�б�������, ����ͨ����̬����������/��ȡ/����
- * - ÿ���̶߳����Լ��ĵ���������, ����������ֻ�ܵ��������̵߳�Э��, ���ȹ���(����run)�����Ͼ����������̵߳Ĺ���(run�����˳�, ֱ����terminate����)
- * - ���ȹ��̼򵥵��������: ����Ƿ�����Ҫִ�е�Э��, ����ִ��֮, û����ȴ���epoll������, ֱ���л��ѻ��߳�ʱ
- * - �������ײ�ʹ��tc_epoller�����Э�̵��л�, �ȴ��������Ȳ���, ���Ժ�����IO�޷�ճ��, ��˿���ͨ��KT_CoroutineScheduler�����õ�KT_Epollerָ��, ����������IO��
- * - ��������IOҲ������ͬ��epoller����, ��˿��������������ݷ���/����ʱ, ����epoll����, �Ӷ����Э�̵��л�
- * - Э������ͨ��: go ���������
- * - Э����������, ��Ҫʹ���������������, ���ȿ���: yield/sleep/put
+ * KT_CoroutineScheduler详细说明:
+ * - 该类是协程调度的核心, 业务使用上, 框架需要和这个类打交道, 业务上除非自己来实现协程管理逻辑, 否则通常可以不深入了解该类的实现
+ * - 注意每个协程都是需要使用栈空间的, 因此KT_CoroutineScheduler有init来初始化: <总共内存大小,栈大小>, 栈大小通常使用128k, 两者相除就是该调度协程器, 最大调度的协程个数
+ * - 该类对象使用线程私有变量保存, 可以通过静态函数来创建/获取/设置
+ * - 每个线程都有自己的调度器对象, 调度器对象只能调度自身线程的协程, 调度过程(运行run)本质上就是阻塞在线程的过程(run不会退出, 直到有terminate调用)
+ * - 调度过程简单的理解就是: 检查是否有需要执行的协程, 有则执行之, 没有则等待在epoll对象上, 直到有唤醒或者超时
+ * - 调度器底层使用tc_epoller来完成协程的切换, 等待和阻塞等操作, 可以和网络IO无缝粘合, 因此可以通过KT_CoroutineScheduler对象拿到KT_Epoller指针, 并用于网络IO上
+ * - 由于网络IO也是用相同的epoller对象, 因此可以做到当有数据发送/接受时, 唤醒epoll对象, 从而完成协程的切换
+ * - 协程启动通过: go 函数来完成
+ * - 协程在运行中, 主要使用三个函数来完成, 调度控制: yield/sleep/put
  *
- * KT_Coroutine��ϸ˵��:
- * - ʹ���߳�ģ��Э����, �����Э��ͬʱ����������
- * - ҵ�����ֱ�Ӽ̳������, ʹ��ʱ, ����Ҫ����setCoroInfo��������Э�̵Ļ�����Ϣ
- * - ʵ��������: handle ����, Ȼ�����������߳�һ��(start)��������, ��ͬʱ�ж��Э��ִ��handle����
- * - ����start����, �����߳�, ͬʱ�ᴴ��(iNum, iMaxNum)��Э��
- * - terminate����
+ * KT_Coroutine详细说明:
+ * - 使用线程模拟协程组, 即多个协程同时被创建出来
+ * - 业务可以直接继承这个类, 使用时, 首先要调用setCoroInfo方法设置协程的基本信息
+ * - 实现这个类的: handle 方法, 然后类似启动线程一样(start)方法即可, 会同时有多个协程执行handle方法
+ * - 调用start函数, 启动线程, 同时会创建(iNum, iMaxNum)个协程
+ * - terminate结束
  */
 /////////////////////////////////////////////////
 
-//Э���쳣��
+//协程异常类
 struct KT_CoroutineException : public KT_Exception {
   KT_CoroutineException(const string &buffer) : KT_Exception(buffer) {}
   KT_CoroutineException(const string &buffer, int err) : KT_Exception(buffer, err) {}
@@ -61,7 +61,7 @@ struct KT_CoroutineException : public KT_Exception {
 
 /////////////////////////////////////////////
 /**
- * Э��ʹ�õ�ջ������Ϣ
+ * 协程使用的栈内容信息
  */
 struct stack_context {
   std::size_t size;
@@ -72,7 +72,7 @@ struct stack_context {
 
 /////////////////////////////////////////////
 /**
- * Э��ʹ�õ�ջ������
+ * 协程使用的栈的特征
  */
 struct stack_traits {
   static bool is_unbounded();
@@ -93,13 +93,13 @@ struct stack_traits {
 class KT_CoroutineScheduler;
 ///////////////////////////////////////////
 /**
- * Э����Ϣ��
- * ������Э�̵Ļ�����Ϣ, ����Э������������ʽ��֯��һ��
+ * 协程信息类
+ * 保存了协程的基本信息, 并将协程用链表的形式组织在一起
  */
 class KT_CoroutineInfo {
  public:
   /**
-    * Э�̵�״̬��Ϣ
+    * 协程的状态信息
     */
   enum CORO_STATUS {
     CORO_FREE = 0,
@@ -111,7 +111,7 @@ class KT_CoroutineInfo {
 
   /////////////////////////////////////////////
   /*
-   * Э���ڲ�ʹ�õĺ���
+   * 协程内部使用的函数
    */
   struct CoroutineFunc {
     std::function<void(void *, transfer_t)> coroFunc;
@@ -119,7 +119,7 @@ class KT_CoroutineInfo {
   };
 
   /**
-     * ������ʼ��
+     * 链表初始化
      */
   static inline void CoroutineHeadInit(KT_CoroutineInfo *coro) {
     coro->_next = coro;
@@ -127,12 +127,12 @@ class KT_CoroutineInfo {
   }
 
   /**
-     * �����Ƿ�Ϊ��
+     * 链表是否为空
      */
   static inline bool CoroutineHeadEmpty(KT_CoroutineInfo *coro_head) { return coro_head->_next == coro_head; }
 
   /**
-     * ����
+     * 插入
      */
   static inline void __CoroutineAdd(KT_CoroutineInfo *coro, KT_CoroutineInfo *prev, KT_CoroutineInfo *next) {
     next->_prev = coro;
@@ -142,21 +142,21 @@ class KT_CoroutineInfo {
   }
 
   /**
-     * ����ͷ��
+     * 插入头部
      */
   static inline void CoroutineAdd(KT_CoroutineInfo *new_coro, KT_CoroutineInfo *coro_head) {
     __CoroutineAdd(new_coro, coro_head, coro_head->_next);
   }
 
   /**
-     * ����β��
+     * 插入尾部
      */
   static inline void CoroutineAddTail(KT_CoroutineInfo *new_coro, KT_CoroutineInfo *coro_head) {
     __CoroutineAdd(new_coro, coro_head->_prev, coro_head);
   }
 
   /**
-     * ɾ��
+     * 删除
      */
   static inline void __CoroutineDel(KT_CoroutineInfo *prev, KT_CoroutineInfo *next) {
     next->_prev = prev;
@@ -164,7 +164,7 @@ class KT_CoroutineInfo {
   }
 
   /**
-     * ɾ��
+     * 删除
      */
   static inline void CoroutineDel(KT_CoroutineInfo *coro) {
     __CoroutineDel(coro->_prev, coro->_next);
@@ -173,7 +173,7 @@ class KT_CoroutineInfo {
   }
 
   /**
-     * ��һ�������ƶ�������һ������ͷ��
+     * 从一个链表移动到另外一个链表头部
      */
   static inline void CoroutineMove(KT_CoroutineInfo *coro, KT_CoroutineInfo *coro_head) {
     CoroutineDel(coro);
@@ -181,7 +181,7 @@ class KT_CoroutineInfo {
   }
 
   /**
-     * ��һ�������ƶ�������һ������β��
+     * 从一个链表移动到另外一个链表尾部
      */
   static inline void CoroutineMoveTail(KT_CoroutineInfo *coro, KT_CoroutineInfo *coro_head) {
     CoroutineDel(coro);
@@ -189,121 +189,121 @@ class KT_CoroutineInfo {
   }
 
  protected:
-  //Э�̵���ں���
+  //协程的入口函数
   static void corotineEntry(transfer_t q);
 
-  //��Э����ִ��ʵ���߼�����ں���
+  //在协程里执行实际逻辑的入口函数
   static void corotineProc(void *args, transfer_t t);
 
  public:
   /**
-     * ���캯��
+     * 构造函数
      */
   KT_CoroutineInfo();
 
   /**
-     * ���캯��
+     * 构造函数
      */
   KT_CoroutineInfo(KT_CoroutineScheduler *scheduler, uint32_t iUid, stack_context stack_ctx);
 
   /**
-     * ��������
+     * 析构函数
      */
   ~KT_CoroutineInfo();
 
   /**
-     * ע��Э��ʵ�ʵĴ�������
+     * 注册协程实际的处理函数
      */
   void registerFunc(const std::function<void()> &callback);
 
   /**
-     * ����Э�̵��ڴ�ռ�
+     * 设置协程的内存空间
      */
   void setStackContext(stack_context stack_ctx);
 
   /**
-     * ��ȡЭ�̵��ڴ�ռ�
+     * 获取协程的内存空间
      */
   inline stack_context &getStackContext() { return _stack_ctx; }
 
   /**
-     * ��ȡЭ�������ĵ�����
+     * 获取协程所处的调度器
      */
   inline KT_CoroutineScheduler *getScheduler() { return _scheduler; }
 
   /**
-     * ��ȡЭ�̵ı�־
+     * 获取协程的标志
      */
   inline uint32_t getUid() const { return _uid; }
 
   /**
-     * ����Э�̵ı�־
+     * 设置协程的标志
      */
   inline void setUid(uint32_t iUid) { _uid = iUid; }
 
   /**
-     * ��ȡЭ�̵�״̬
+     * 获取协程的状态
      */
   inline CORO_STATUS getStatus() const { return _eStatus; }
 
   /**
-     * ����Э�̵�״̬
+     * 设置协程的状态
      */
   inline void setStatus(CORO_STATUS status) { _eStatus = status; }
 
   /**
-     * ��ȡЭ��������������
+     * 获取协程所处的上下文
      */
   inline fcontext_t getCtx() const { return _ctx; }
   inline void setCtx(fcontext_t ctx) { _ctx = ctx; }
 
  public:
   /*
-   * ˫������ָ��
+   * 双向链表指针
    */
   KT_CoroutineInfo *_prev;
   KT_CoroutineInfo *_next;
 
  private:
   /*
-     * Э�������ĵ�����
+     * 协程所属的调度器
      */
   KT_CoroutineScheduler *_scheduler;
 
   /*I
-     * Э�̵ı�ʶ
+     * 协程的标识
      */
   uint32_t _uid;
 
   /*
-     * Э�̵�״̬
+     * 协程的状态
      */
   CORO_STATUS _eStatus;
 
   /*
-     * Э�̵��ڴ�ռ�
+     * 协程的内存空间
      */
   stack_context _stack_ctx;
 
   /*
-     * ����Э�̺�Э�����ڵ�������
+     * 创建协程后，协程所在的上下文
      */
   fcontext_t _ctx = NULL;
 
   /*
-     * Э�̳�ʼ��������ں���
+     * 协程初始化函数入口函数
      */
   CoroutineFunc _init_func;
 
   /*
-     * Э�̾���ִ�к���
+     * 协程具体执行函数
      */
   std::function<void()> _callback;
 };
 
 ///////////////////////////////////////////
 /**
- * Э�̵�����
+ * 协程调度类
  */
 class KT_CoroutineScheduler {
  protected:
@@ -311,89 +311,89 @@ class KT_CoroutineScheduler {
 
  public:
   /**
-     * ���û��, �򴴽�(�߳�˽�б���, ÿ���߳���һ��)
+     * 如果没有, 则创建(线程私有变量, 每个线程有一个)
      */
   static const shared_ptr<KT_CoroutineScheduler> &create();
 
   /**
-     * ��ȡscheduler, û���򷵻�null, (�߳�˽�б���, ÿ���߳���һ��)
+     * 获取scheduler, 没有则返回null, (线程私有变量, 每个线程有一个)
      */
   static const shared_ptr<KT_CoroutineScheduler> &scheduler();
 
   /**
-     * �ͷ�Э�̵�����
+     * 释放协程调度器
      */
   static void reset();
 
   /**
-     * ���캯��(ÿ���߳������һ��)
+     * 构造函数(每个线程最多有一个)
      */
   KT_CoroutineScheduler();
 
   /**
-     * ��������
+     * 析构函数
      */
   ~KT_CoroutineScheduler();
 
   /**
-     * ��ʼ��Э�̳صĴ�С���Լ�Э�̵Ķ�ջ��С
+     * 初始化协程池的大小、以及协程的堆栈大小
      */
   void setPoolStackSize(uint32_t iPoolSize, size_t iStackSize);
 
   /**
-     * ����Э��
+     * 创建协程
      */
   uint32_t go(const std::function<void()> &callback);
 
   /**
-     * ֪ͨѭ���ѹ���
+     * 通知循环醒过来
      */
   void notify();
 
   /**
-     * ����Э�̵���(û�л�ԾЭ�̻�����, ������epoll��)
+     * 启动协程调度(没有活跃协程会阻塞, 阻塞在epoll上)
      */
   void run();
 
   /**
-	 * �Ѿ�����������
+	 * 已经在运行中了
 	 * @return
 	 */
   bool isReady() const { return _ready; }
 
   /**
-     * ��ǰЭ�̷�������ִ��
-     * @param bFlag: true, ���Զ�����(�ȵ��´�Э�̵���, �����ټ��ǰ�߳�), false: �����Զ�����, �����Լ����ȸ�Э��(����put����������)
+     * 当前协程放弃继续执行
+     * @param bFlag: true, 会自动唤醒(等到下次协程调度, 都会再激活当前线程), false: 不再自动唤醒, 除非自己调度该协程(比如put到调度器中)
      */
   void yield(bool bFlag = true);
 
   /**
-     * ��ǰЭ������iSleepTimeʱ��(��λ:����)��Ȼ��ᱻ���Ѽ���ִ��
+     * 当前协程休眠iSleepTime时间(单位:毫秒)，然后会被唤醒继续执行
      */
   void sleep(int millseconds);
 
   /**
-     * ������Ҫ���ѵ�Э��, ��Э�̷��뵽��������, ���ϻᱻ����������
+     * 放入需要唤醒的协程, 将协程放入到调度器中, 马上会被调度器调度
      */
   void put(uint32_t iCoroId);
 
   /**
-     * Э���л�
+     * 协程切换
      */
   void switchCoro(KT_CoroutineInfo *to);
 
   /**
-     * ֹͣ
+     * 停止
      */
   void terminate();
 
   /**
-     * ��Դ����
+     * 资源销毁
      */
   void destroy();
 
   /**
-     * Э�̵����Ƿ��Ѿ�����
+     * 协程调度是否已经结束
      * @return
      */
   bool isTerminate() const {
@@ -401,63 +401,63 @@ class KT_CoroutineScheduler {
   }
 
   /**
-     * Э���Ƿ�������
+     * 协程是否用完了
      * @return
      */
   bool full();
 
   /**
-     * ��ȡ����Э����Ŀ
+     * 获取最大的协程数目
      */
   inline uint32_t getPoolSize() { return _poolSize; }
 
   /**
-     * ��ȡ��ǰ�Ѿ�������Э����Ŀ
+     * 获取当前已经创建的协程数目
      */
   inline uint32_t getCurrentSize() { return _currentSize; }
 
   /**
-     * ��ȡ������Ӧ������Э����Ŀ
+     * 获取请求响应回来的协程数目
      */
   inline size_t getResponseCoroSize() { return _activeCoroQueue.size(); }
 
   /**
-     * ��ȡ�����Ͽ��е�Э����Ŀ
+     * 获取理论上空闲的协程数目
      */
   inline uint32_t getFreeSize() { return _poolSize - _usedSize; }
 
   /**
-     * ��������ʹ�õ�Э����Ŀ
+     * 减少正在使用的协程数目
      */
   inline void decUsedSize() { --_usedSize; }
 
   /**
-     * ��������ʹ�õ�Э����Ŀ
+     * 增加正在使用的协程数目
      */
   inline void incUsedSize() { ++_usedSize; }
 
   /**
-     * �Ƿ�����Э����
+     * 是否在主协程中
      */
   inline bool isMainCoroutine() { return _currentCoro->getUid() == 0; }
 
   /**
-     * �������е���Э��
+     * 调度器中的主协程
      */
   inline KT_CoroutineInfo &getMainCoroutine() { return _mainCoro; }
 
   /**
-     * ������Э��
+     * 设置主协程
      */
   inline void setMainCtx(fcontext_t ctx) { _mainCoro.setCtx(ctx); }
 
   /**
-     * ��ǰЭ�̵ı�ʶId
+     * 当前协程的标识Id
      */
   inline uint32_t getCoroutineId() { return _currentCoro->getUid(); }
 
   /**
-     * ���õ�ǰ����Э��ִ�����ʱ�Ļص�
+     * 设置当前所有协程执行完毕时的回调
      */
   inline void setNoCoroutineCallback(std::function<void(KT_CoroutineScheduler *)> noCoroutineCallback) {
     _noCoroutineCallback = noCoroutineCallback;
@@ -467,143 +467,143 @@ class KT_CoroutineScheduler {
 
  protected:
   /**
-	 * ��ʼ��
+	 * 初始化
 	 */
   void init();
 
   /**
-	 * �ͷ�����Э����Դ
+	 * 释放所有协程资源
 	 */
   void createCoroutineInfo(size_t poolSize);
 
   /**
-     * ����Э��id
+     * 产生协程id
      */
   uint32_t generateId();
 
   /**
-     * ����Э�̳صĴ�С
+     * 增加协程池的大小
      */
   int increaseCoroPoolSize();
 
   /**
-     * ������Ҫ���е�Э��
+     * 唤醒需要运行的协程
      */
   void wakeup();
 
   /**
-     * �����Լ��������е�Э��
+     * 唤醒自己放弃运行的协程
      */
   void wakeupbyself();
 
   /**
-     * �������ߵ�Э��
+     * 唤醒休眠的协程
      */
   void wakeupbytimeout();
 
   /**
-     * �ŵ�active��Э��������
+     * 放到active的协程链表中
      */
   void moveToActive(KT_CoroutineInfo *coro);
 
   /**
-     * �ŵ�avail��Э��������
+     * 放到avail的协程链表中
      */
   void moveToAvail(KT_CoroutineInfo *coro);
 
   /**
-     * �ŵ�inactive��Э��������
+     * 放到inactive的协程链表中
      */
   void moveToInactive(KT_CoroutineInfo *coro);
 
   /**
-     * �ŵ���ʱ�ȴ���Э��������
+     * 放到超时等待的协程链表中
      */
   void moveToTimeout(KT_CoroutineInfo *coro);
 
   /**
-     * �ŵ����е�Э��������
+     * 放到空闲的协程链表中
      */
   void moveToFreeList(KT_CoroutineInfo *coro);
 
  private:
   /*
-     * Э�̳صĴ�С
+     * 协程池的大小
      */
   uint32_t _poolSize = 1000;
 
   /*
-     * Э�̵�ջ�ռ��С
+     * 协程的栈空间大小
      */
   size_t _stackSize = 128 * 1024;
 
   /*
-     * ��ǰ�Ѿ�������Э����
+     * 当前已经创建的协程数
      */
   uint32_t _currentSize;
 
   /*
-     * ����ʹ�õ�Э����
+     * 正在使用的协程数
      */
   uint32_t _usedSize;
 
   /*
-     * ����Э��Id�ı���
+     * 产生协程Id的变量
      */
   uint32_t _uniqId;
 
   /*
-     * ��Э��
+     * 主协程
      */
   KT_CoroutineInfo _mainCoro;
 
   /*
-     * ��ǰ���е�Э��
+     * 当前运行的协程
      */
   KT_CoroutineInfo *_currentCoro;
 
   /*
-     * �������Э�̵�����ָ��
+     * 存放所有协程的数组指针
      */
   KT_CoroutineInfo **_all_coro = NULL;
 
   /*
-     * ��Ծ��Э������
+     * 活跃的协程链表
      */
   KT_CoroutineInfo _active;
 
   /*
-     * ���õ�Э������
+     * 可用的协程链表
      */
   KT_CoroutineInfo _avail;
 
   /*
-     * ����Ծ��Э������
+     * 不活跃的协程链表
      */
   KT_CoroutineInfo _inactive;
 
   /*
-     * ��ʱ��Э������
+     * 超时的协程链表
      */
   KT_CoroutineInfo _timeout;
 
   /*
-     * ���е�Э������
+     * 空闲的协程链表
      */
   KT_CoroutineInfo _free;
 
   /*
-     * ��Ҫ�����Э�̶��У������߳�ʹ�ã���������ȴ������Э��
+     * 需要激活的协程队列，其他线程使用，用来激活等待结果的协程
      */
   deque<uint32_t> _activeCoroQueue;
 
   /*
-	 * ��Ҫ�����Э�̶��У����߳�ʹ��
+	 * 需要激活的协程队列，本线程使用
 	 */
   list<uint32_t> _needActiveCoroId;
 
   /*
-     * ��ų�ʱ��Э��
+     * 存放超时的协程
      */
   multimap<int64_t, uint32_t> _timeoutCoroId;
 
@@ -613,111 +613,111 @@ class KT_CoroutineScheduler {
   //KT_Epoller *_epoller = NULL;
 
   /**
-     * ��Э�̶�������Ϻ�Ļص�
+     * 当协程都处理完毕后的回调
      */
   std::function<void(KT_CoroutineScheduler *)> _noCoroutineCallback;
 
   /**
-     * �Ƿ�����������
+     * 是否正在运行中
      */
   bool _ready = false;
 };
 
 /**
- * ���߳̽��а�װ��Э���࣬��Ҫ�������Լ�����߳���ʹ��Э��,
- * ʹ�÷�ʽ:
- * 1 ҵ����Լ̳������
- * 2 ʵ��handleCoroutine����(Э�̾���ִ�д���), ������������������������������Э��
- * 3 ����start����, �����߳�, ͬʱ�ᴴ��iNum��Э��, ��������������iPoolSize��Э��ͬʱ����
- * 4 terminate����
+ * 对线程进行包装的协程类，主要用于在自己起的线程中使用协程,
+ * 使用方式:
+ * 1 业务可以继承这个类
+ * 2 实现handleCoroutine函数(协程具体执行代码), 开发在这里面可以再启动更多的其他协程
+ * 3 调用start函数, 启动线程, 同时会创建iNum个协程, 调度器中最多存在iPoolSize个协程同时运行
+ * 4 terminate结束
  */
 class KT_Coroutine : public KT_Thread {
  public:
   /**
-     * ���캯��
+     * 构造函数
      */
   KT_Coroutine();
 
   /**
-     * ��������
+     * 析构函数
      */
   virtual ~KT_Coroutine();
 
   /**
-     * ��ʼ��
-     * @iNum, ��ʾͬʱ���������ٸ�Э�̣������ж��ٸ�coroFunc���е�Э��
-     * @iPoolSize����ʾ����̵߳�������������Э�̸���
-     * @iStackSize��Э�̵�ջ��С
+     * 初始化
+     * @iNum, 表示同时会启动多少个协程，即会有多少个coroFunc运行的协程
+     * @iPoolSize，表示这个线程调度器最多包含的协程个数
+     * @iStackSize，协程的栈大小
      */
   void setCoroInfo(uint32_t iNum, uint32_t iPoolSize, size_t iStackSize);
 
   /**
-     * ����Э�̣����Ѿ�������Э����ʹ��
-     * ����ֵΪЭ�̵�id������0����ʾ�ɹ�����С�ڵ���0����ʾʧ��
+     * 创建协程，在已经创建的协程中使用
+     * 返回值为协程的id，大于0，表示成功，，小于等于0，表示失败
      */
   uint32_t go(const std::function<void()> &coroFunc);
 
   /**
-     * ��ǰЭ���Լ�����ִ��,���Զ�������������
-     * ���Ѿ�������Э����ʹ��
+     * 当前协程自己放弃执行,会自动被调度器唤醒
+     * 在已经创建的协程中使用
      */
   void yield();
 
   /**
-     * ��ǰЭ������iSleepTimeʱ��(��λ:����)��ʱ�䵽�ˣ����Զ�������������
-     * ���Ѿ�������Э����ʹ��
+     * 当前协程休眠iSleepTime时间(单位:毫秒)，时间到了，会自动被调度器唤醒
+     * 在已经创建的协程中使用
      */
   void sleep(int millseconds);
 
   /**
-     * ��ȡ���õ����Э�̵���Ŀ
+     * 获取设置的最大协程的数目
      */
   uint32_t getMaxCoroNum() { return _maxNum; }
 
   /**
-     * ��ȡ����ʱ�����õ�Э�̵���Ŀ
+     * 获取启动时，设置的协程的数目
      */
   uint32_t getCoroNum() { return _num; }
 
   /**
-     * ����Э�̵�ջ��С
+     * 设置协程的栈大小
      */
   size_t getCoroStackSize() { return _stackSize; }
 
   /**
-     * ֹͣ
+     * 停止
      */
   void terminate();
 
  protected:
   /**
-     * �̴߳�������
+     * 线程处理方法
      */
   virtual void run();
 
   /**
-     *  ��̬����, Э�����. 
+     *  静态函数, 协程入口. 
      */
   static void coroEntry(KT_Coroutine *pCoro);
 
   /**
-     * Э�����еĺ���������_num����Ŀ��������_num���������
+     * 协程运行的函数，根据_num的数目，会启动_num个这个函数
      */
   virtual void handle() = 0;
 
  protected:
   /**
-     * �߳��Ѿ�����, ����Э�̴���ǰ����
+     * 线程已经启动, 进入协程处理前调用
      */
   virtual void initialize() {}
 
   /**
-     * ����Э��ֹͣ����֮���߳��˳�֮ǰʱ����
+     * 所有协程停止运行之后，线程退出之前时调用
      */
   virtual void destroy() {}
 
   /**
-     * ����Ĵ����߼�
+     * 具体的处理逻辑
      */
   virtual void handleCoro();
 

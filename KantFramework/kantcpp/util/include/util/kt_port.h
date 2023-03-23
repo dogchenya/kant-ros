@@ -1,4 +1,4 @@
-#ifndef _KT_PORT_H_
+ï»¿#ifndef _KT_PORT_H_
 #define _KT_PORT_H_
 
 #include "util/kt_ex.h"
@@ -18,8 +18,8 @@
 
 typedef unsigned short mode_t;
 
-#define S_IFREG _S_IFREG  //±íÊ¾ÎªÆÕÍ¨ÎÄ¼ş£¬ÎªÁË¿çÆ½Ì¨£¬Ò»ÂÉÊ¹ÓÃS_IFREG
-#define S_IFDIR _S_IFDIR  //±íÊ¾ÎªÄ¿Â¼£¬ÎªÁË¿çÆ½Ì¨£¬Ò»ÂÉÊ¹ÓÃS_IFDIR
+#define S_IFREG _S_IFREG  //è¡¨ç¤ºä¸ºæ™®é€šæ–‡ä»¶ï¼Œä¸ºäº†è·¨å¹³å°ï¼Œä¸€å¾‹ä½¿ç”¨S_IFREG
+#define S_IFDIR _S_IFDIR  //è¡¨ç¤ºä¸ºç›®å½•ï¼Œä¸ºäº†è·¨å¹³å°ï¼Œä¸€å¾‹ä½¿ç”¨S_IFDIR
 
 #endif
 
@@ -38,7 +38,7 @@ using namespace std;
 namespace kant {
 
 /**
- * @brief ¿çÆ½Ì¨portÒì³£Àà
+ * @brief è·¨å¹³å°portå¼‚å¸¸ç±»
  */
 struct KT_Port_Exception : public KT_Exception {
   KT_Port_Exception(const string &buffer) : KT_Exception(buffer){};
@@ -48,8 +48,8 @@ struct KT_Port_Exception : public KT_Exception {
 class KT_Port {
  public:
   /**
-   * @brief ÔÚs1µÄ³¤¶ÈnÖĞËÑË÷s2
-   * @return ËÑË÷µ½µÄÖ¸Õë, ÕÒ²»µ½·µ»ØNULL
+   * @brief åœ¨s1çš„é•¿åº¦nä¸­æœç´¢s2
+   * @return æœç´¢åˆ°çš„æŒ‡é’ˆ, æ‰¾ä¸åˆ°è¿”å›NULL
    */
   static const char *strnstr(const char *s1, const char *s2, int pos1);
 
@@ -89,71 +89,70 @@ class KT_Port {
   static int64_t getpid();
 
   /**
-   * »ñÈ¡»·¾³±äÁ¿
+   * è·å–ç¯å¢ƒå˜é‡
    * @param name
    * @return
    */
   static std::string getEnv(const std::string &name);
 
   /**
-   * ÉèÖÃ»·¾³±äÁ¿
+   * è®¾ç½®ç¯å¢ƒå˜é‡
    * @param name
    * @param value
    */
   static void setEnv(const std::string &name, const std::string &value);
 
   /**
-   * ÔËĞĞÒ»¸ö½Å±¾
+   * è¿è¡Œä¸€ä¸ªè„šæœ¬
    * @param cmd
    * @param err
-   * @return ³ÌĞòµÄ±ê×¼Êä³ö(×î´ó2kµÄÊä³ö³¤¶È)
+   * @return ç¨‹åºçš„æ ‡å‡†è¾“å‡º(æœ€å¤§2kçš„è¾“å‡ºé•¿åº¦)
    */
   static std::string exec(const char *cmd);
 
   /**
-   * ÔËĞĞÒ»¸ö½Å±¾(³ÌĞò+ÃüÁîĞĞ)
+   * è¿è¡Œä¸€ä¸ªè„šæœ¬(ç¨‹åº+å‘½ä»¤è¡Œ)
    * @param cmd
    * @param err
-   * @return: ³ÌĞòµÄ±ê×¼Êä³ö(×î´ó2kµÄÊä³ö³¤¶È)
+   * @return: ç¨‹åºçš„æ ‡å‡†è¾“å‡º(æœ€å¤§2kçš„è¾“å‡ºé•¿åº¦)
    */
   static std::string exec(const char *cmd, std::string &err);
 
   /**
-   * fork×Ó½ø³Ì²¢ÔËĞĞ³ÌĞò
-   * @param sExe: ¿ÉÖ´ĞĞ³ÌĞòÂ·¾¶
-   * @param sPwdPath: ³ÌĞòÔËĞĞµÄµ±Ç°Â·¾¶
-   * @param sRollLogPath: ¹ö¶¯ÈÕÖ¾Â·¾¶(stdout»áÖØ¶¨Ïòµ½¹ö¶¯ÈÕÖ¾), Îª¿ÕÔò²»ÖØ¶¨Ïò
-   * @param vOptions: ²ÎÊı
-   * @return ×Ó½ø³Ìid: ==0: ×Ó½ø³ÌÖĞ, >0: ¸¸½ø³ÌÖĞ(×Ó½ø³Ìpid), ÆäËûÅ×³öÒì³£
+   * forkå­è¿›ç¨‹å¹¶è¿è¡Œç¨‹åº
+   * @param sExe: å¯æ‰§è¡Œç¨‹åºè·¯å¾„
+   * @param sPwdPath: ç¨‹åºè¿è¡Œçš„å½“å‰è·¯å¾„
+   * @param sRollLogPath: æ»šåŠ¨æ—¥å¿—è·¯å¾„(stdoutä¼šé‡å®šå‘åˆ°æ»šåŠ¨æ—¥å¿—), ä¸ºç©ºåˆ™ä¸é‡å®šå‘
+   * @param vOptions: å‚æ•°
+   * @return å­è¿›ç¨‹id: ==0: å­è¿›ç¨‹ä¸­, >0: çˆ¶è¿›ç¨‹ä¸­(å­è¿›ç¨‹pid), å…¶ä»–æŠ›å‡ºå¼‚å¸¸
    * KT_Port_Exception
    */
-  static int64_t forkExec(const string &sExe, const string &sPwdPath,
-                          const string &sRollLogPath,
+  static int64_t forkExec(const string &sExe, const string &sPwdPath, const string &sRollLogPath,
                           const vector<string> &vOptions);
 
   /**
-   * ×¢²áctrl+c»Øµ÷ÊÂ¼ş(SIGINT/CTRL_C_EVENT)
+   * æ³¨å†Œctrl+cå›è°ƒäº‹ä»¶(SIGINT/CTRL_C_EVENT)
    * @param callback
-   * @return size_t, ×¢²áÊÂ¼şµÄid, È¡Ïû×¢²áÊ±ĞèÒª
+   * @return size_t, æ³¨å†Œäº‹ä»¶çš„id, å–æ¶ˆæ³¨å†Œæ—¶éœ€è¦
    */
   static size_t registerCtrlC(std::function<void()> callback);
 
   /**
-   * È¡Ïû×¢²áctrl+c»Øµ÷ÊÂ¼ş
+   * å–æ¶ˆæ³¨å†Œctrl+cå›è°ƒäº‹ä»¶
    * @param callback
    * @return
    */
   static void unregisterCtrlC(size_t id);
 
   /**
-   * ×¢²átermÊÂ¼şµÄ»Øµ÷(SIGTERM/CTRL_SHUTDOWN_EVENT)
+   * æ³¨å†Œtermäº‹ä»¶çš„å›è°ƒ(SIGTERM/CTRL_SHUTDOWN_EVENT)
    * @param callback
-   * @return size_t, ×¢²áÊÂ¼şµÄid, È¡Ïû×¢²áÊ±ĞèÒª
+   * @return size_t, æ³¨å†Œäº‹ä»¶çš„id, å–æ¶ˆæ³¨å†Œæ—¶éœ€è¦
    */
   static size_t registerTerm(std::function<void()> callback);
 
   /**
-   * È¡Ïû×¢²á
+   * å–æ¶ˆæ³¨å†Œ
    * @param id
    */
   static void unregisterTerm(size_t id);

@@ -1,4 +1,4 @@
-#ifndef _KT_STRPTIME_H_
+﻿#ifndef _KT_STRPTIME_H_
 #define _KT_STRPTIME_H_
 
 #ifdef TARGET_PLATFORM_WINDOWS

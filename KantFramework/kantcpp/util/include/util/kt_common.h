@@ -1,4 +1,4 @@
-#ifndef _KT_COMMON_H_
+ï»¿#ifndef _KT_COMMON_H_
 #define _KT_COMMON_H_
 
 #include <errno.h>
@@ -44,31 +44,31 @@ namespace kant {
 /**
  *  @file    kt_common.h
  *  @author  dogchen
- *  @brief  °ïÖúÀà,¶¼ÊÇ¾²Ì¬º¯Êı,Ìá¹©Ò»Ğ©³£ÓÃµÄº¯Êı .
+ *  @brief  å¸®åŠ©ç±»,éƒ½æ˜¯é™æ€å‡½æ•°,æä¾›ä¸€äº›å¸¸ç”¨çš„å‡½æ•° .
  *  @brief  Helper Class. There're all static functions in this which provides
  *  @version 1.0.0
  *  @date    2022.10.14
- *  @note    ×¢½â:ÂÔ
+ *  @note    æ³¨è§£:ç•¥
  *  @since
  */
 /////////////////////////////////////////////////
 /**
- * @brief  »ù´¡¹¤¾ßÀà£¬Ìá¹©ÁËÒ»Ğ©·Ç³£»ù±¾µÄº¯ÊıÊ¹ÓÃ.
+ * @brief  åŸºç¡€å·¥å…·ç±»ï¼Œæä¾›äº†ä¸€äº›éå¸¸åŸºæœ¬çš„å‡½æ•°ä½¿ç”¨.
  * @brief  Basic Utility Class. Some basic functions are provided.
  *
- * ÕâĞ©º¯Êı¶¼ÊÇÒÔ¾²Ì¬º¯ÊıÌá¹©¡£ °üÀ¨ÒÔÏÂ¼¸ÖÖº¯Êı:
+ * è¿™äº›å‡½æ•°éƒ½æ˜¯ä»¥é™æ€å‡½æ•°æä¾›ã€‚ åŒ…æ‹¬ä»¥ä¸‹å‡ ç§å‡½æ•°:
  * These functions are provided as static functions.It includes the following
  * functions:
  *
- * TrimÀàº¯Êı,´óĞ¡Ğ´×ª»»º¯Êı,·Ö¸ô×Ö·û´®º¯Êı£¨Ö±½Ó·Ö¸ô×Ö·û´®£¬
+ * Trimç±»å‡½æ•°,å¤§å°å†™è½¬æ¢å‡½æ•°,åˆ†éš”å­—ç¬¦ä¸²å‡½æ•°ï¼ˆç›´æ¥åˆ†éš”å­—ç¬¦ä¸²ï¼Œ
  * Trim class functions, case conversion functions, delimited string functions
  * (directly delimited strings, numbers, etc.),
  *
- * Êı×ÖµÈ£©,Ê±¼äÏà¹Øº¯Êı,×Ö·û´®×ª»»º¯Êı,¶ş½øÖÆ×Ö·û´®»¥×ªº¯Êı,
+ * æ•°å­—ç­‰ï¼‰,æ—¶é—´ç›¸å…³å‡½æ•°,å­—ç¬¦ä¸²è½¬æ¢å‡½æ•°,äºŒè¿›åˆ¶å­—ç¬¦ä¸²äº’è½¬å‡½æ•°,
  * time-dependent functions, string conversion functions, binary string
  * conversion functions,
  *
- * Ìæ»»×Ö·û´®º¯Êı,IpÆ¥Åäº¯Êı,ÅĞ¶ÏÒ»¸öÊıÊÇ·ñÊÇËØÊıµÈ
+ * æ›¿æ¢å­—ç¬¦ä¸²å‡½æ•°,IpåŒ¹é…å‡½æ•°,åˆ¤æ–­ä¸€ä¸ªæ•°æ˜¯å¦æ˜¯ç´ æ•°ç­‰
  * replacement string functions, IP matching functions, determining whether a
  * number is a prime number, etc.
  */
@@ -82,14 +82,14 @@ class UTIL_DLL_API KT_Common {
   static const int64_t ONE_DAY_SEC = 86400;
 
   /**
-   * @brief  ¿çÆ½Ì¨sleep
+   * @brief  è·¨å¹³å°sleep
    * @brief  Cross Platform Sleep
    */
   static void sleep(uint32_t sec);
   static void msleep(uint32_t ms);
 
   /**
-   * @brief  ¸¡µãÊı±È½Ï,double Ä¬ÈÏÈ¡6Î»¾«¶È£¬floatÄ¬ÈÏ6Î»¾«¶È
+   * @brief  æµ®ç‚¹æ•°æ¯”è¾ƒ,double é»˜è®¤å–6ä½ç²¾åº¦ï¼Œfloaté»˜è®¤6ä½ç²¾åº¦
    * @brief  Floating Number Comparison, double defaults to be 6-bit precision,
    * and float defaults to be 6-bit precision as well.
    */
@@ -100,7 +100,7 @@ class UTIL_DLL_API KT_Common {
   static bool equal(float x, float y, double epsilon);
 
   /**
-   * @brief  vector double ¸÷ÖÖ³¡¾°±È½Ïº¯Êı
+   * @brief  vector double å„ç§åœºæ™¯æ¯”è¾ƒå‡½æ•°
    * @brief  vector double, comparison functions for various scenarios
    */
   static bool equal(const vector<double> &vx, const vector<double> &vy, double epsilon = _EPSILON_DOUBLE);
@@ -119,7 +119,7 @@ class UTIL_DLL_API KT_Common {
   static bool equal(const unordered_set<float> &vx, const unordered_set<float> &vy, double epsilon);
 
   /**
-   * @brief  mapÖĞÈç¹ûkey»òÕßvalueÎªdouble/float×Ö¶Î£¬ÔòÓÃ´ËÄ£°åº¯Êı±È½Ï
+   * @brief  mapä¸­å¦‚æœkeyæˆ–è€…valueä¸ºdouble/floatå­—æ®µï¼Œåˆ™ç”¨æ­¤æ¨¡æ¿å‡½æ•°æ¯”è¾ƒ
    * @brief  In map, if the key or value is the double/float field, use this
    * template function to compare.
    */
@@ -132,7 +132,7 @@ class UTIL_DLL_API KT_Common {
                     E epsilon = _EPSILON_DOUBLE);
 
   /**
-   * ¹Ì¶¨¿í¶ÈÌî³ä×Ö·û´®, ÓÃÓÚÊä³ö¶ÔÆë¸ñÊ½ÓÃ(Ä¬ÈÏÓÒÌî³ä)
+   * å›ºå®šå®½åº¦å¡«å……å­—ç¬¦ä¸², ç”¨äºè¾“å‡ºå¯¹é½æ ¼å¼ç”¨(é»˜è®¤å³å¡«å……)
    * Fixed width filled string for output alignment format (default
    * right-padding)
    * @param s
@@ -149,352 +149,352 @@ class UTIL_DLL_API KT_Common {
   }
 
   /**
-   * @brief  È¥µôÍ·²¿ÒÔ¼°Î²²¿µÄ×Ö·û»ò×Ö·û´®.
+   * @brief  å»æ‰å¤´éƒ¨ä»¥åŠå°¾éƒ¨çš„å­—ç¬¦æˆ–å­—ç¬¦ä¸².
    * @brief  Remove the head and the tail characters or strings
    *
-   * @param sStr    ÊäÈë×Ö·û´®
+   * @param sStr    è¾“å…¥å­—ç¬¦ä¸²
    * @param sStr    input string
-   * @param s       ĞèÒªÈ¥µôµÄ×Ö·û
+   * @param s       éœ€è¦å»æ‰çš„å­—ç¬¦
    * @param s       the characters which need to be removed
-   * @param bChar   Èç¹ûÎªtrue, ÔòÈ¥µôsÖĞÃ¿¸ö×Ö·û; Èç¹ûÎªfalse, ÔòÈ¥µôs×Ö·û´®
+   * @param bChar   å¦‚æœä¸ºtrue, åˆ™å»æ‰sä¸­æ¯ä¸ªå­—ç¬¦; å¦‚æœä¸ºfalse, åˆ™å»æ‰så­—ç¬¦ä¸²
    * @param bChar   bool : true, Remove each character in 's'; false, remove the
    * s String
-   * @return string ·µ»ØÈ¥µôºóµÄ×Ö·û´®
+   * @return string è¿”å›å»æ‰åçš„å­—ç¬¦ä¸²
    * @return string Return the removed string
    */
   static string trim(const string &sStr, const string &s = " \r\n\t", bool bChar = true);
 
   /**
-   * @brief  È¥µô×ó±ßµÄ×Ö·û»ò×Ö·û´®.
+   * @brief  å»æ‰å·¦è¾¹çš„å­—ç¬¦æˆ–å­—ç¬¦ä¸².
    * @brief  Remove left character or string
    *
-   * @param sStr    ÊäÈë×Ö·û´®
+   * @param sStr    è¾“å…¥å­—ç¬¦ä¸²
    * @param sStr    input string
-   * @param s       ĞèÒªÈ¥µôµÄ×Ö·û
+   * @param s       éœ€è¦å»æ‰çš„å­—ç¬¦
    * @param s       the characters which need to be removed
-   * @param bChar   Èç¹ûÎªtrue, ÔòÈ¥µôsÖĞÃ¿¸ö×Ö·û; Èç¹ûÎªfalse, ÔòÈ¥µôs×Ö·û´®
+   * @param bChar   å¦‚æœä¸ºtrue, åˆ™å»æ‰sä¸­æ¯ä¸ªå­—ç¬¦; å¦‚æœä¸ºfalse, åˆ™å»æ‰så­—ç¬¦ä¸²
    * @param bChar   bool : true, Remove each character in 's'; false, remove the
    * s String
-   * @return string ·µ»ØÈ¥µôºóµÄ×Ö·û´®
+   * @return string è¿”å›å»æ‰åçš„å­—ç¬¦ä¸²
    * @return string Return the removed string
    */
   static string trimleft(const string &sStr, const string &s = " \r\n\t", bool bChar = true);
 
   /**
-   * @brief  È¥µôÓÒ±ßµÄ×Ö·û»ò×Ö·û´®.
+   * @brief  å»æ‰å³è¾¹çš„å­—ç¬¦æˆ–å­—ç¬¦ä¸².
    * @brief  Remove right character or string
    *
-   * @param sStr    ÊäÈë×Ö·û´®
+   * @param sStr    è¾“å…¥å­—ç¬¦ä¸²
    * @param sStr    input string
-   * @param s       ĞèÒªÈ¥µôµÄ×Ö·û
+   * @param s       éœ€è¦å»æ‰çš„å­—ç¬¦
    * @param s       the characters which need to be removed
-   * @param bChar   Èç¹ûÎªtrue, ÔòÈ¥µôsÖĞÃ¿¸ö×Ö·û; Èç¹ûÎªfalse, ÔòÈ¥µôs×Ö·û´®
+   * @param bChar   å¦‚æœä¸ºtrue, åˆ™å»æ‰sä¸­æ¯ä¸ªå­—ç¬¦; å¦‚æœä¸ºfalse, åˆ™å»æ‰så­—ç¬¦ä¸²
    * @param bChar   bool : true, Remove each character in 's'; false, remove the
    * s String
-   * @return string ·µ»ØÈ¥µôºóµÄ×Ö·û´®
+   * @return string è¿”å›å»æ‰åçš„å­—ç¬¦ä¸²
    * @return string Return the removed string
    */
   static string trimright(const string &sStr, const string &s = " \r\n\t", bool bChar = true);
 
   /**
-   * @brief  ×Ö·û´®×ª»»³ÉĞ¡Ğ´.
+   * @brief  å­—ç¬¦ä¸²è½¬æ¢æˆå°å†™.
    * @brief  Convert string to lowercase.
    *
-   * @param sString  ×Ö·û´®
+   * @param sString  å­—ç¬¦ä¸²
    * @param sString  String
-   * @return string  ×ª»»ºóµÄ×Ö·û´®
+   * @return string  è½¬æ¢åçš„å­—ç¬¦ä¸²
    * @return string  the converted string
    */
   static string lower(const string &sString);
 
   /**
-   * @brief  ×Ö·û´®×ª»»³É´óĞ´.
+   * @brief  å­—ç¬¦ä¸²è½¬æ¢æˆå¤§å†™.
    * @brief  Convert string to uppercase.
    *
-   * @param sString  ×Ö·û´®
+   * @param sString  å­—ç¬¦ä¸²
    * @param sString  string
-   * @return string  ×ª»»ºóµÄ´óĞ´µÄ×Ö·û´®
+   * @return string  è½¬æ¢åçš„å¤§å†™çš„å­—ç¬¦ä¸²
    * @return string  the converted string
    */
   static string upper(const string &sString);
 
   /**
-   * @brief  ×Ö·û´®ÊÇ·ñ¶¼ÊÇÊı×ÖµÄ.
+   * @brief  å­—ç¬¦ä¸²æ˜¯å¦éƒ½æ˜¯æ•°å­—çš„.
    * @brief  Whether strings are all numbers or not.
    *
-   * @param sString  ×Ö·û´®
+   * @param sString  å­—ç¬¦ä¸²
    * @param sString  string
-   * @return bool    ÊÇ·ñÊÇÊı×Ö
+   * @return bool    æ˜¯å¦æ˜¯æ•°å­—
    * @return bool    whether number or not
    */
   static bool isdigit(const string &sInput);
 
   /**
-   * @brief  ×Ö·û´®×ª»»³ÉÊ±¼ä½á¹¹.
+   * @brief  å­—ç¬¦ä¸²è½¬æ¢æˆæ—¶é—´ç»“æ„.
    * @brief  Convert string to time structure.
    *
-   * @param sString  ×Ö·û´®Ê±¼ä¸ñÊ½
+   * @param sString  å­—ç¬¦ä¸²æ—¶é—´æ ¼å¼
    * @param sString  string Time Format
-   * @param sFormat  ¸ñÊ½
+   * @param sFormat  æ ¼å¼
    * @param sFormat  format
-   * @param stTm     Ê±¼ä½á¹¹
+   * @param stTm     æ—¶é—´ç»“æ„
    * @param stTm     time structure
-   * @return         0: ³É¹¦, -1:Ê§°Ü
+   * @return         0: æˆåŠŸ, -1:å¤±è´¥
    * @return         0: success, -1: fail
    */
   static int str2tm(const string &sString, const string &sFormat, struct tm &stTm);
 
   /**
-   * @brief GMT¸ñÊ½µÄÊ±¼ä×ª»¯ÎªÊ±¼ä½á¹¹
+   * @brief GMTæ ¼å¼çš„æ—¶é—´è½¬åŒ–ä¸ºæ—¶é—´ç»“æ„
    * @brief Conversion of time into time structure in GMT format
    *
    * eg.Sat, 06 Feb 2010 09:29:29 GMT, %a, %d %b %Y %H:%M:%S GMT
    *
-   * ¿ÉÒÔÓÃmktime»»³Étime_t, µ«ÊÇ×¢ÒâÊ±Çø ¿ÉÒÔÓÃmktime(&stTm)
+   * å¯ä»¥ç”¨mktimeæ¢æˆtime_t, ä½†æ˜¯æ³¨æ„æ—¶åŒº å¯ä»¥ç”¨mktime(&stTm)
    * You can replace time_t with mktime. Be careful about the time zones, and it
    * can be used with mktime (&stTm)
    *
-   * - timezone»»³É±¾µØµÄÃë(time(NULL)ÖµÏàÍ¬) timezoneÊÇÏµÍ³µÄ ,
+   * - timezoneæ¢æˆæœ¬åœ°çš„ç§’(time(NULL)å€¼ç›¸åŒ) timezoneæ˜¯ç³»ç»Ÿçš„ ,
    * - timezone changes costs to local seconds (time (NULL) values are the
    * same). Timezones is systematic.
    *
-   * ĞèÒªextern long timezone;
+   * éœ€è¦extern long timezone;
    * need extern long timezone;
    *
-   * @param sString  GMT¸ñÊ½µÄÊ±¼ä£¬±¾µØÊ±¼ä
+   * @param sString  GMTæ ¼å¼çš„æ—¶é—´ï¼Œæœ¬åœ°æ—¶é—´
    * @param sString  time in GMT format
-   * @param stTm     ×ª»»ºóµÄÊ±¼ä½á¹¹
+   * @param stTm     è½¬æ¢åçš„æ—¶é—´ç»“æ„
    * @param stTm     converted Time Structure
-   * @return         0: ³É¹¦, -1:Ê§°Ü
+   * @return         0: æˆåŠŸ, -1:å¤±è´¥
    * @return         0: success, -1: fail
    */
   static int strgmt2tm(const string &sString, struct tm &stTm);
 
   /**
-   * @brief  ¸ñÊ½»¯µÄ×Ö·û´®Ê±¼ä×ªÎªÊ±¼ä´Á.
+   * @brief  æ ¼å¼åŒ–çš„å­—ç¬¦ä¸²æ—¶é—´è½¬ä¸ºæ—¶é—´æˆ³.
    * @brief  Format time string to timestamp
    *
-   * @param sString  ¸ñÊ½»¯µÄ×Ö·û´®Ê±¼ä£¬±¾µØÊ±¼ä
+   * @param sString  æ ¼å¼åŒ–çš„å­—ç¬¦ä¸²æ—¶é—´ï¼Œæœ¬åœ°æ—¶é—´
    * @param sString  format time string
-   * @param sFormat  ¸ñÊ½»¯µÄ×Ö·û´®Ê±¼äµÄ¸ñÊ½£¬Ä¬ÈÏÎª½ô´Õ¸ñÊ½
+   * @param sFormat  æ ¼å¼åŒ–çš„å­—ç¬¦ä¸²æ—¶é—´çš„æ ¼å¼ï¼Œé»˜è®¤ä¸ºç´§å‡‘æ ¼å¼
    * @param sFormat  format of formatted string time
-   * @return time_t  ×ª»»ºóµÄÊ±¼ä´Á
+   * @return time_t  è½¬æ¢åçš„æ—¶é—´æˆ³
    * @return time_t  the converted timestamp
    */
   static time_t str2time(const string &sString, const string &sFormat = "%Y%m%d%H%M%S");
 
   /**
-   * @brief  Ê±¼ä×ª»»³É×Ö·û´®.
+   * @brief  æ—¶é—´è½¬æ¢æˆå­—ç¬¦ä¸².
    * @brief  Convert time into string.
    *
-   * @param stTm     Ê±¼ä½á¹¹
+   * @param stTm     æ—¶é—´ç»“æ„
    * @param stTm     time structure
-   * @param sFormat  ĞèÒª×ª»»µÄÄ¿±ê¸ñÊ½£¬Ä¬ÈÏÎª½ô´Õ¸ñÊ½
+   * @param sFormat  éœ€è¦è½¬æ¢çš„ç›®æ ‡æ ¼å¼ï¼Œé»˜è®¤ä¸ºç´§å‡‘æ ¼å¼
    * @param sFormat  Target format to be converted, default to compact format
-   * @return string  ×ª»»ºóµÄÊ±¼ä×Ö·û´®
+   * @return string  è½¬æ¢åçš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string  converted time string
    */
   static string tm2str(const struct tm &stTm, const string &sFormat = "%Y%m%d%H%M%S");
 
   /**
-   * @brief  Ê±¼ä×ª»»³É×Ö·û´®.
+   * @brief  æ—¶é—´è½¬æ¢æˆå­—ç¬¦ä¸².
    * @brief  Convert time into string
    *
-   * @param t        Ê±¼ä½á¹¹
+   * @param t        æ—¶é—´ç»“æ„
    * @param t        time structure
-   * @param sFormat  ĞèÒª×ª»»µÄÄ¿±ê¸ñÊ½£¬Ä¬ÈÏÎª½ô´Õ¸ñÊ½
+   * @param sFormat  éœ€è¦è½¬æ¢çš„ç›®æ ‡æ ¼å¼ï¼Œé»˜è®¤ä¸ºç´§å‡‘æ ¼å¼
    * @param sFormat  Target format to be converted, default to compact format
-   * @return string  ×ª»»ºóµÄÊ±¼ä×Ö·û´®
+   * @return string  è½¬æ¢åçš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string  converted time string
    */
   static string tm2str(const time_t &t, const string &sFormat = "%Y%m%d%H%M%S");
 
   /**
-   * @brief  Ê±¼ä×ª»»tm.
+   * @brief  æ—¶é—´è½¬æ¢tm.
    * @brief  Convert time into tm.
    *
-   * @param t        Ê±¼ä½á¹¹£¬UTCÊ±¼ä´Á
+   * @param t        æ—¶é—´ç»“æ„ï¼ŒUTCæ—¶é—´æˆ³
    * @param t        time structure
    */
   static void tm2time(const time_t &t, struct tm &tt);
 
   /**
-   * @brief  time_t×ª»»³Étm(²»ÓÃÏµÍ³µÄlocaltime_r, ·ñÔòºÜÂı!!!)
+   * @brief  time_tè½¬æ¢æˆtm(ä¸ç”¨ç³»ç»Ÿçš„localtime_r, å¦åˆ™å¾ˆæ…¢!!!)
    * @brief  Convert time_t to tm (Don't use system's localtime_r. The function
    * will be slowed down.)
    *
-   * @param t        Ê±¼ä½á¹¹£¬UTCÊ±¼ä´Á
+   * @param t        æ—¶é—´ç»“æ„ï¼ŒUTCæ—¶é—´æˆ³
    * @param t        time structure
-   * @param sFormat  ĞèÒª×ª»»µÄÄ¿±ê¸ñÊ½£¬Ä¬ÈÏÎª½ô´Õ¸ñÊ½
+   * @param sFormat  éœ€è¦è½¬æ¢çš„ç›®æ ‡æ ¼å¼ï¼Œé»˜è®¤ä¸ºç´§å‡‘æ ¼å¼
    * @param sFormat  Target format to be converted, default to compact format
-   * @return string  ×ª»»ºóµÄÊ±¼ä×Ö·û´®
+   * @return string  è½¬æ¢åçš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string  converted time string
    */
   static void tm2tm(const time_t &t, struct tm &stTm);
 
   /**
-   * @brief  »ñÈ¡µ±Ç°µÄÃëºÍºÁÃë
+   * @brief  è·å–å½“å‰çš„ç§’å’Œæ¯«ç§’
    * @brief  Get the current seconds and milliseconds
    *
-   * @param t        Ê±¼ä½á¹¹
+   * @param t        æ—¶é—´ç»“æ„
    * @param t        time structure
    */
   static int gettimeofday(struct timeval &tv);
 
   /**
-   * @brief  µ±Ç°Ê±¼ä×ª»»³É½ô´Õ¸ñÊ½×Ö·û´®
+   * @brief  å½“å‰æ—¶é—´è½¬æ¢æˆç´§å‡‘æ ¼å¼å­—ç¬¦ä¸²
    * @brief  Convert current time to compact string
-   * @param sFormat ¸ñÊ½£¬Ä¬ÈÏÎª½ô´Õ¸ñÊ½
+   * @param sFormat æ ¼å¼ï¼Œé»˜è®¤ä¸ºç´§å‡‘æ ¼å¼
    * @param sFormat the format, default to compact format
-   * @return string ×ª»»ºóµÄÊ±¼ä×Ö·û´®
+   * @return string è½¬æ¢åçš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string converted time string
    */
   static string now2str(const string &sFormat = "%Y%m%d%H%M%S");
 
   /**
-   * @brief  ºÁÃëÊ±¼ä, Ò»°ãÓÃÓÚµ÷ÊÔÊä³ö
-   * @return string ×ª»»ºóµÄÊ±¼ä×Ö·û´®
+   * @brief  æ¯«ç§’æ—¶é—´, ä¸€èˆ¬ç”¨äºè°ƒè¯•è¾“å‡º
+   * @return string è½¬æ¢åçš„æ—¶é—´å­—ç¬¦ä¸²
    */
   static string now2msstr();
 
   /**
-   * @brief ºÁÃëÊ±¼ä×ª×Ö·û´®ÃèÊö
-   * @return string ×ª»»ºóµÄÊ±¼ä×Ö·û´®
+   * @brief æ¯«ç§’æ—¶é—´è½¬å­—ç¬¦ä¸²æè¿°
+   * @return string è½¬æ¢åçš„æ—¶é—´å­—ç¬¦ä¸²
    */
   static string ms2str(int64_t ms);
   /**
-   * @brief  Ê±¼ä×ª»»³ÉGMT×Ö·û´®£¬GMT¸ñÊ½:Fri, 12 Jan 2001 18:18:18 GMT
-   * @brief  Convert time into GMT string, GMT¸ñÊ½:Fri, 12 Jan 2001 18:18:18 GMT
-   * @param stTm    Ê±¼ä½á¹¹
+   * @brief  æ—¶é—´è½¬æ¢æˆGMTå­—ç¬¦ä¸²ï¼ŒGMTæ ¼å¼:Fri, 12 Jan 2001 18:18:18 GMT
+   * @brief  Convert time into GMT string, GMTæ ¼å¼:Fri, 12 Jan 2001 18:18:18 GMT
+   * @param stTm    æ—¶é—´ç»“æ„
    * @param stTm    time structure
-   * @return string GMT¸ñÊ½µÄÊ±¼ä×Ö·û´®
+   * @return string GMTæ ¼å¼çš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string time string in GMT format
    */
   static string tm2GMTstr(const struct tm &stTm);
 
   /**
-   * @brief  Ê±¼ä×ª»»³ÉGMT×Ö·û´®£¬GMT¸ñÊ½:Fri, 12 Jan 2001 18:18:18 GMT
-   * @brief  Convert time into GMT string, GMT¸ñÊ½:Fri, 12 Jan 2001 18:18:18 GMT
-   * @param stTm    Ê±¼ä½á¹¹
+   * @brief  æ—¶é—´è½¬æ¢æˆGMTå­—ç¬¦ä¸²ï¼ŒGMTæ ¼å¼:Fri, 12 Jan 2001 18:18:18 GMT
+   * @brief  Convert time into GMT string, GMTæ ¼å¼:Fri, 12 Jan 2001 18:18:18 GMT
+   * @param stTm    æ—¶é—´ç»“æ„
    * @param stTm    time structure
-   * @return string GMT¸ñÊ½µÄÊ±¼ä×Ö·û´®
+   * @return string GMTæ ¼å¼çš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string time string in GMT format
    */
   static string tm2GMTstr(const time_t &t);
 
   /**
-   * @brief  µ±Ç°Ê±¼ä×ª»»³ÉGMT×Ö·û´®£¬GMT¸ñÊ½:Fri, 12 Jan 2001 18:18:18 GMT
-   * @brief  Convert current time into GMT string, GMT¸ñÊ½:Fri, 12 Jan 2001
+   * @brief  å½“å‰æ—¶é—´è½¬æ¢æˆGMTå­—ç¬¦ä¸²ï¼ŒGMTæ ¼å¼:Fri, 12 Jan 2001 18:18:18 GMT
+   * @brief  Convert current time into GMT string, GMTæ ¼å¼:Fri, 12 Jan 2001
    * 18:18:18 GMT
-   * @return string GMT¸ñÊ½µÄÊ±¼ä×Ö·û´®
+   * @return string GMTæ ¼å¼çš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string time string in GMT format
    */
   static string now2GMTstr();
 
   /**
-   * @brief  µ±Ç°µÄÈÕÆÚ(ÄêÔÂÈÕ)×ª»»³É×Ö·û´®(%Y%m%d).
+   * @brief  å½“å‰çš„æ—¥æœŸ(å¹´æœˆæ—¥)è½¬æ¢æˆå­—ç¬¦ä¸²(%Y%m%d).
    * @brief  Get current date(yearmonthday) and convert it into string (%Y%m%d).
    *
-   * @return string (%Y%m%d)¸ñÊ½µÄÊ±¼ä×Ö·û´®
+   * @return string (%Y%m%d)æ ¼å¼çš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string time string in (%Y%m%d) format
    */
   static string nowdate2str();
 
   /**
-   * @brief  µ±Ç°µÄÊ±¼ä(Ê±·ÖÃë)×ª»»³É×Ö·û´®(%H%M%S).
+   * @brief  å½“å‰çš„æ—¶é—´(æ—¶åˆ†ç§’)è½¬æ¢æˆå­—ç¬¦ä¸²(%H%M%S).
    * @brief  Get current time(hourminutesecond) and convert it into string
    * (%H%M%S).
    *
-   * @return string (%H%M%S)¸ñÊ½µÄÊ±¼ä×Ö·û´®
+   * @return string (%H%M%S)æ ¼å¼çš„æ—¶é—´å­—ç¬¦ä¸²
    * @return string time string in (%H%M%S) format
    */
   static string nowtime2str();
 
   /**
-   * @brief  »ñÈ¡µ±Ç°Ê±¼äµÄµÄºÁÃëÊı.
+   * @brief  è·å–å½“å‰æ—¶é—´çš„çš„æ¯«ç§’æ•°.
    * @brief  Get the value of milliseconds of current time.
    *
-   * @return int64_t µ±Ç°Ê±¼äµÄµÄºÁÃëÊı
+   * @return int64_t å½“å‰æ—¶é—´çš„çš„æ¯«ç§’æ•°
    * @return int64_t current milliseconds of this time
    */
   static int64_t now2ms();
 
   /**
-   * @brief  È¡³öµ±Ç°Ê±¼äµÄÎ¢Ãë.
+   * @brief  å–å‡ºå½“å‰æ—¶é—´çš„å¾®ç§’.
    * @brief  Take out microseconds of current time.
    *
-   * @return int64_t È¡³öµ±Ç°Ê±¼äµÄÎ¢Ãë
+   * @return int64_t å–å‡ºå½“å‰æ—¶é—´çš„å¾®ç§’
    * @return int64_t Take out microseconds of current time.
    */
   static int64_t now2us();
 
   /**
-   * @brief  ×Ö·û´®×ª»¯³ÉTĞÍ£¬Èç¹ûTÊÇÊıÖµÀàĞÍ, Èç¹ûstrÎª¿Õ,ÔòTÎª0.
+   * @brief  å­—ç¬¦ä¸²è½¬åŒ–æˆTå‹ï¼Œå¦‚æœTæ˜¯æ•°å€¼ç±»å‹, å¦‚æœsträ¸ºç©º,åˆ™Tä¸º0.
    * @brief  Convert string to type T. if T is a numeric type and STR is empty,
    * then T values 0.
    *
-   * @param sStr  Òª×ª»»µÄ×Ö·û´®
+   * @param sStr  è¦è½¬æ¢çš„å­—ç¬¦ä¸²
    * @param sStr  the string needs to be converted
-   * @return T    TĞÍÀàĞÍ
+   * @return T    Tå‹ç±»å‹
    * @return T    the type of type T
    */
   template <typename T>
   static T strto(const string &sStr);
 
   /**
-   * @brief  ×Ö·û´®×ª»¯³ÉTĞÍ.
+   * @brief  å­—ç¬¦ä¸²è½¬åŒ–æˆTå‹.
    * @brief  Convert string to type T
    *
-   * @param sStr      Òª×ª»»µÄ×Ö·û´®
+   * @param sStr      è¦è½¬æ¢çš„å­—ç¬¦ä¸²
    * @param sStr      the string needs to be converted
-   * @param sDefault  È±Ê¡Öµ
+   * @param sDefault  ç¼ºçœå€¼
    * @param sDefault  default value
-   * @return T        ×ª»»ºóµÄTÀàĞÍ
+   * @return T        è½¬æ¢åçš„Tç±»å‹
    * @return T        the converted type of type T
    */
   template <typename T>
   static T strto(const string &sStr, const string &sDefault);
 
   /**
-   * @brief  ½âÎö×Ö·û´®,ÓÃ·Ö¸ô·ûºÅ·Ö¸ô,±£´æÔÚvectorÀï
+   * @brief  è§£æå­—ç¬¦ä¸²,ç”¨åˆ†éš”ç¬¦å·åˆ†éš”,ä¿å­˜åœ¨vectoré‡Œ
    * @brief  Parse string, separate with separator, and save in vector
    *
-   * Àı×Ó: |a|b||c|
+   * ä¾‹å­: |a|b||c|
    * Example: |a|b||c|
    *
-   * Èç¹ûwithEmpty=trueÊ±, ²ÉÓÃ|·Ö¸ôÎª:"","a", "b", "", "c", ""
+   * å¦‚æœwithEmpty=trueæ—¶, é‡‡ç”¨|åˆ†éš”ä¸º:"","a", "b", "", "c", ""
    * If 'withEmpty=true' then use '|' to separate it into "","a", "b", "", "c",
    * "".
    *
-   * Èç¹ûwithEmpty=falseÊ±, ²ÉÓÃ|·Ö¸ôÎª:"a", "b", "c"
+   * å¦‚æœwithEmpty=falseæ—¶, é‡‡ç”¨|åˆ†éš”ä¸º:"a", "b", "c"
    * If 'withEmpty=false' then use '|' to separate it into "a", "b", "c".
    *
-   * Èç¹ûTÀàĞÍÎªintµÈÊıÖµÀàĞÍ, Ôò·Ö¸ôµÄ×Ö·û´®Îª"", ÔòÇ¿ÖÆ×ª»¯Îª0
+   * å¦‚æœTç±»å‹ä¸ºintç­‰æ•°å€¼ç±»å‹, åˆ™åˆ†éš”çš„å­—ç¬¦ä¸²ä¸º"", åˆ™å¼ºåˆ¶è½¬åŒ–ä¸º0
    * If the T type is a numeric type such as int, the delimited string is' ',
    * then it is forced to 0.
    *
-   * @param sStr      ÊäÈë×Ö·û´®
+   * @param sStr      è¾“å…¥å­—ç¬¦ä¸²
    * @param sStr      input string
-   * @param sSep      ·Ö¸ô×Ö·û´®(Ã¿¸ö×Ö·û¶¼ËãÎª·Ö¸ô·û)
+   * @param sSep      åˆ†éš”å­—ç¬¦ä¸²(æ¯ä¸ªå­—ç¬¦éƒ½ç®—ä¸ºåˆ†éš”ç¬¦)
    * @param sSep      the separator string (each character counts as a
    * separator)
-   * @param withEmpty true´ú±í¿ÕµÄÒ²ËãÒ»¸öÔªËØ, falseÊ±¿ÕµÄ¹ıÂË
+   * @param withEmpty trueä»£è¡¨ç©ºçš„ä¹Ÿç®—ä¸€ä¸ªå…ƒç´ , falseæ—¶ç©ºçš„è¿‡æ»¤
    * @param withEmpty bool: true, represented that empty is also an element ;
    * false, filter empty ones.
-   * @return          ½âÎöºóµÄ×Ö·ûvector
+   * @return          è§£æåçš„å­—ç¬¦vector
    * @return          parsed character: vector
    */
   template <typename T>
   static vector<T> sepstr(const string &sStr, const string &sSep, bool withEmpty = false);
 
   /**
-   * @brief TĞÍ×ª»»³É×Ö·û´®£¬Ö»ÒªTÄÜ¹»Ê¹ÓÃostream¶ÔÏóÓÃ<<ÖØÔØ,¼´¿ÉÒÔ±»¸Ãº¯ÊıÖ§³Ö
+   * @brief Tå‹è½¬æ¢æˆå­—ç¬¦ä¸²ï¼Œåªè¦Tèƒ½å¤Ÿä½¿ç”¨ostreamå¯¹è±¡ç”¨<<é‡è½½,å³å¯ä»¥è¢«è¯¥å‡½æ•°æ”¯æŒ
    * @brief Convert T-type to string. As long as T can use ostream object with
    * << to overload, it can be supported by this function.
    *
-   * @param t Òª×ª»»µÄÊı¾İ
+   * @param t è¦è½¬æ¢çš„æ•°æ®
    * @param t the data needs to be converted
-   * @return  ×ª»»ºóµÄ×Ö·û´®
+   * @return  è½¬æ¢åçš„å­—ç¬¦ä¸²
    * @return  the converted string
    */
   template <typename T>
@@ -505,218 +505,218 @@ class UTIL_DLL_API KT_Common {
   }
 
   /**
-   * @brief  vector×ª»»³Éstring.
+   * @brief  vectorè½¬æ¢æˆstring.
    * @brief  Convert vector to string.
    *
-   * @param t Òª×ª»»µÄvectorĞÍµÄÊı¾İ
+   * @param t è¦è½¬æ¢çš„vectorå‹çš„æ•°æ®
    * @param t data which need to be convertes to vector type
-   * @return  ×ª»»ºóµÄ×Ö·û´®
+   * @return  è½¬æ¢åçš„å­—ç¬¦ä¸²
    * @return  the converted string
    */
   template <typename T>
   static string tostr(const vector<T> &t);
 
   /**
-   * @brief  °ÑmapÊä³öÎª×Ö·û´®.
+   * @brief  æŠŠmapè¾“å‡ºä¸ºå­—ç¬¦ä¸².
    * @brief  export map as string
    *
-   * @param map<K, V, D, A>  Òª×ª»»µÄmap¶ÔÏó
+   * @param map<K, V, D, A>  è¦è½¬æ¢çš„mapå¯¹è±¡
    * @param map<K, V, D, A>  the map object needs to be converted
-   * @return                    string Êä³öµÄ×Ö·û´®
+   * @return                    string è¾“å‡ºçš„å­—ç¬¦ä¸²
    * @return                    output string
    */
   template <typename K, typename V, typename D, typename A>
   static string tostr(const map<K, V, D, A> &t);
 
   /**
-   * @brief  mapÊä³öÎª×Ö·û´®.
+   * @brief  mapè¾“å‡ºä¸ºå­—ç¬¦ä¸².
    * @brief  export map as string
    *
-   * @param multimap<K, V, D, A>  map¶ÔÏó
+   * @param multimap<K, V, D, A>  mapå¯¹è±¡
    * @param multimap<K, V, D, A>  the map object needs to be converted
-   * @return                      Êä³öµÄ×Ö·û´®
+   * @return                      è¾“å‡ºçš„å­—ç¬¦ä¸²
    * @return                      output string
    */
   template <typename K, typename V, typename D, typename A>
   static string tostr(const multimap<K, V, D, A> &t);
 
   /**
-   * @brief  °ÑmapÊä³öÎª×Ö·û´®.
+   * @brief  æŠŠmapè¾“å‡ºä¸ºå­—ç¬¦ä¸².
    * @brief  export map as string
    *
-   * @param map<K, V, D, A>  Òª×ª»»µÄmap¶ÔÏó
+   * @param map<K, V, D, A>  è¦è½¬æ¢çš„mapå¯¹è±¡
    * @param map<K, V, D, A>  the map object needs to be converted
-   * @return                    string Êä³öµÄ×Ö·û´®
+   * @return                    string è¾“å‡ºçš„å­—ç¬¦ä¸²
    * @return                    output string
    */
   template <typename K, typename V, typename D, typename P, typename A>
   static string tostr(const unordered_map<K, V, D, P, A> &t);
 
   /**
-   * @brief  pair ×ª»¯Îª×Ö·û´®£¬±£Ö¤mapµÈ¹ØÏµÈİÆ÷¿ÉÒÔÖ±½ÓÓÃtostrÀ´Êä³ö
+   * @brief  pair è½¬åŒ–ä¸ºå­—ç¬¦ä¸²ï¼Œä¿è¯mapç­‰å…³ç³»å®¹å™¨å¯ä»¥ç›´æ¥ç”¨tostræ¥è¾“å‡º
    * @brief  Convert pair to string, ensure that the relationship containers
    * such as map can output directly with tostr.
-   * @param pair<F, S> pair¶ÔÏó
+   * @param pair<F, S> pairå¯¹è±¡
    * @param pair<F, S> object pair
-   * @return           Êä³öµÄ×Ö·û´®
+   * @return           è¾“å‡ºçš„å­—ç¬¦ä¸²
    * @return           output string
    */
   template <typename F, typename S>
   static string tostr(const pair<F, S> &itPair);
 
   /**
-   * @brief  container ×ª»»³É×Ö·û´®.
+   * @brief  container è½¬æ¢æˆå­—ç¬¦ä¸².
    * @brief  Convert container to string
    *
-   * @param iFirst  µü´úÆ÷
+   * @param iFirst  è¿­ä»£å™¨
    * @param iFirst  iterator
-   * @param iLast   µü´úÆ÷
+   * @param iLast   è¿­ä»£å™¨
    * @param iLast   iterator
-   * @param sSep    Á½¸öÔªËØÖ®¼äµÄ·Ö¸ô·û
+   * @param sSep    ä¸¤ä¸ªå…ƒç´ ä¹‹é—´çš„åˆ†éš”ç¬¦
    * @param sSep    the separator between two elements
-   * @return        ×ª»»ºóµÄ×Ö·û´®
+   * @return        è½¬æ¢åçš„å­—ç¬¦ä¸²
    * @return        the converted string
    */
   template <typename InputIter>
   static string tostr(InputIter iFirst, InputIter iLast, const string &sSep = "|");
 
   /**
-   * @brief  ¶ş½øÖÆÊı¾İ×ª»»³É×Ö·û´®.
+   * @brief  äºŒè¿›åˆ¶æ•°æ®è½¬æ¢æˆå­—ç¬¦ä¸².
    * @brief  Convert binary data t0 string
    *
-   * @param buf     ¶ş½øÖÆbuffer
+   * @param buf     äºŒè¿›åˆ¶buffer
    * @param buf     binary buffer
-   * @param len     buffer³¤¶È
+   * @param len     bufferé•¿åº¦
    * @param len     buffer length
-   * @param sSep    ·Ö¸ô·û
+   * @param sSep    åˆ†éš”ç¬¦
    * @param sSep    separator
-   * @param lines   ¶àÉÙ¸ö×Ö½Ú»»Ò»ĞĞ, Ä¬ÈÏ0±íÊ¾²»»»ĞĞ
+   * @param lines   å¤šå°‘ä¸ªå­—èŠ‚æ¢ä¸€è¡Œ, é»˜è®¤0è¡¨ç¤ºä¸æ¢è¡Œ
    * @param lines   The max number of bytes for oneline.By default, 0 means no
    * new line.
-   * @return        ×ª»»ºóµÄ×Ö·û´®
+   * @return        è½¬æ¢åçš„å­—ç¬¦ä¸²
    * @return        the converted string
    */
   static string bin2str(const void *buf, size_t len, const string &sSep = "", size_t lines = 0);
 
   /**
-   * @brief  ¶ş½øÖÆÊı¾İ×ª»»³É×Ö·û´®.
+   * @brief  äºŒè¿›åˆ¶æ•°æ®è½¬æ¢æˆå­—ç¬¦ä¸².
    * @brief  Convert binary data t0 string
    *
-   * @param sBinData  ¶ş½øÖÆÊı¾İ
+   * @param sBinData  äºŒè¿›åˆ¶æ•°æ®
    * @param sBinData  binary data
-   * @param sSep     ·Ö¸ô·û
+   * @param sSep     åˆ†éš”ç¬¦
    * @param sSep     separator
-   * @param lines    ¶àÉÙ¸ö×Ö½Ú»»Ò»ĞĞ, Ä¬ÈÏ0±íÊ¾²»»»ĞĞ
+   * @param lines    å¤šå°‘ä¸ªå­—èŠ‚æ¢ä¸€è¡Œ, é»˜è®¤0è¡¨ç¤ºä¸æ¢è¡Œ
    * @param lines    The max number of bytes for oneline.By default, 0 means no
    * new line.
-   * @return         ×ª»»ºóµÄ×Ö·û´®
+   * @return         è½¬æ¢åçš„å­—ç¬¦ä¸²
    * @return         the converted string
    */
   static string bin2str(const string &sBinData, const string &sSep = "", size_t lines = 0);
 
   /**
-   * @brief   ×Ö·û´®×ª»»³É¶ş½øÖÆ.
+   * @brief   å­—ç¬¦ä¸²è½¬æ¢æˆäºŒè¿›åˆ¶.
    * @brief   Convert string to binary
    *
-   * @param psAsciiData ×Ö·û´®
+   * @param psAsciiData å­—ç¬¦ä¸²
    * @param psAsciiData string
-   * @param sBinData    ¶ş½øÖÆÊı¾İ
+   * @param sBinData    äºŒè¿›åˆ¶æ•°æ®
    * @param sBinData    binary data
-   * @param iBinSize    ĞèÒª×ª»»µÄ×Ö·û´®³¤¶È
+   * @param iBinSize    éœ€è¦è½¬æ¢çš„å­—ç¬¦ä¸²é•¿åº¦
    * @param iBinSize    the length of the string which needs to be converted.
-   * @return            ×ª»»³¤¶È£¬Ğ¡ÓÚµÈÓÚ0Ôò±íÊ¾Ê§°Ü
+   * @return            è½¬æ¢é•¿åº¦ï¼Œå°äºç­‰äº0åˆ™è¡¨ç¤ºå¤±è´¥
    * @return            Conversion length, less than or equal to 0 means failure
    */
   static int str2bin(const char *psAsciiData, unsigned char *sBinData, int iBinSize);
 
   /**
-   * @brief  ×Ö·û´®×ª»»³É¶ş½øÖÆ.
+   * @brief  å­—ç¬¦ä¸²è½¬æ¢æˆäºŒè¿›åˆ¶.
    * @brief  convert string to binary
    *
-   * @param sBinData  Òª×ª»»µÄ×Ö·û´®
+   * @param sBinData  è¦è½¬æ¢çš„å­—ç¬¦ä¸²
    * @param sBinData  the string needs to be converted
-   * @param sSep      ·Ö¸ô·û
+   * @param sSep      åˆ†éš”ç¬¦
    * @param sSep      separator
-   * @param lines     ¶àÉÙ¸ö×Ö½Ú»»Ò»ĞĞ, Ä¬ÈÏ0±íÊ¾²»»»ĞĞ
+   * @param lines     å¤šå°‘ä¸ªå­—èŠ‚æ¢ä¸€è¡Œ, é»˜è®¤0è¡¨ç¤ºä¸æ¢è¡Œ
    * @param lines     The max number of bytes for oneline.By default, 0 means no
    * new line.
-   * @return          ×ª»»ºóµÄ¶ş½øÖÆÊı¾İ
+   * @return          è½¬æ¢åçš„äºŒè¿›åˆ¶æ•°æ®
    * @return          the converted binary data
    */
   static string str2bin(const string &sBinData, const string &sSep = "", size_t lines = 0);
 
   /**
-   * @brief  Ìæ»»×Ö·û´®.
+   * @brief  æ›¿æ¢å­—ç¬¦ä¸².
    * @brief  replace string
    *
-   * @param sString  ÊäÈë×Ö·û´®
+   * @param sString  è¾“å…¥å­—ç¬¦ä¸²
    * @param sString  input string
-   * @param sSrc     Ô­×Ö·û´®
+   * @param sSrc     åŸå­—ç¬¦ä¸²
    * @param sSrc     the original string
-   * @param sDest    Ä¿µÄ×Ö·û´®
+   * @param sDest    ç›®çš„å­—ç¬¦ä¸²
    * @param sDest    the target string
-   * @return string  Ìæ»»ºóµÄ×Ö·û´®
+   * @return string  æ›¿æ¢åçš„å­—ç¬¦ä¸²
    * @return string  the converted string
    */
   static string replace(const string &sString, const string &sSrc, const string &sDest);
 
   /**
-   * @brief  ÅúÁ¿Ìæ»»×Ö·û´®.
+   * @brief  æ‰¹é‡æ›¿æ¢å­—ç¬¦ä¸².
    * @brief  Batch replace string.
    *
-   * @param sString  ÊäÈë×Ö·û´®
+   * @param sString  è¾“å…¥å­—ç¬¦ä¸²
    * @param sString  input string
-   * @param mSrcDest  map<Ô­×Ö·û´®,Ä¿µÄ×Ö·û´®>
+   * @param mSrcDest  map<åŸå­—ç¬¦ä¸²,ç›®çš„å­—ç¬¦ä¸²>
    * @param mSrcDest  map<original,target>
-   * @return string  Ìæ»»ºóµÄ×Ö·û´®
+   * @return string  æ›¿æ¢åçš„å­—ç¬¦ä¸²
    * @return string  the converted string
    */
   static string replace(const string &sString, const map<string, string> &mSrcDest);
 
   /**
-   * @brief Æ¥ÅäÒÔ.·Ö¸ôµÄ×Ö·û´®£¬patÖĞ*Ôò´ú±íÍ¨Åä·û£¬´ú±í·Ç¿ÕµÄÈÎºÎ×Ö·û´®
-   * sÎª¿Õ, ·µ»Øfalse £¬patÎª¿Õ, ·µ»Øtrue
+   * @brief åŒ¹é…ä»¥.åˆ†éš”çš„å­—ç¬¦ä¸²ï¼Œpatä¸­*åˆ™ä»£è¡¨é€šé…ç¬¦ï¼Œä»£è¡¨éç©ºçš„ä»»ä½•å­—ç¬¦ä¸²
+   * sä¸ºç©º, è¿”å›false ï¼Œpatä¸ºç©º, è¿”å›true
    * @brief Match string separated by '.' And '*' in pat represents wildcard
    * which represents any string that is not empty. If s is empty, return false.
    * If pat is empty, return true.
-   * @param s    ÆÕÍ¨×Ö·û´®
+   * @param s    æ™®é€šå­—ç¬¦ä¸²
    * @param s    normal string
-   * @param pat  ´ø*Ôò±»Æ¥ÅäµÄ×Ö·û´®£¬ÓÃÀ´Æ¥ÅäipµØÖ·
+   * @param pat  å¸¦*åˆ™è¢«åŒ¹é…çš„å­—ç¬¦ä¸²ï¼Œç”¨æ¥åŒ¹é…ipåœ°å€
    * @param pat  string matched with * to match IP address
-   * @return     ÊÇ·ñÆ¥Åä³É¹¦
+   * @return     æ˜¯å¦åŒ¹é…æˆåŠŸ
    * @return     whether they matches or not
    */
   static bool matchPeriod(const string &s, const string &pat);
 
   /**
-   * ÅĞ¶ÏÔÚÍ¬Ò»¸öÖÜÆÚµÄÊ±¼äÊÇ·ñÏàµÈ
-   * @param lastDate ÈÕÆÚ:%Y%m%d¸ñÊ½
-   * @param date ÈÕÆÚ:%Y%m%d¸ñÊ½
-   * @param period: W(ÖÜ)/M(ÔÂ)/Q(¼¾)/S(°ëÄê)/Y(Äê)
+   * åˆ¤æ–­åœ¨åŒä¸€ä¸ªå‘¨æœŸçš„æ—¶é—´æ˜¯å¦ç›¸ç­‰
+   * @param lastDate æ—¥æœŸ:%Y%m%dæ ¼å¼
+   * @param date æ—¥æœŸ:%Y%m%dæ ¼å¼
+   * @param period: W(å‘¨)/M(æœˆ)/Q(å­£)/S(åŠå¹´)/Y(å¹´)
    * @return
    */
   static bool matchPeriod(int lastDate, int date, const std::string &period);
 
   /**
-   * @brief  Æ¥ÅäÒÔ.·Ö¸ôµÄ×Ö·û´®.
+   * @brief  åŒ¹é…ä»¥.åˆ†éš”çš„å­—ç¬¦ä¸².
    * @brief  Match strings separated by '.'
    *
-   * @param s   ÆÕÍ¨×Ö·û´®
+   * @param s   æ™®é€šå­—ç¬¦ä¸²
    * @param s   normal string
-   * @param pat vectorÖĞµÄÃ¿¸öÔªËØ¶¼ÊÇ´ø*Ôò±»Æ¥ÅäµÄ×Ö·û´®£¬ÓÃÀ´Æ¥ÅäipµØÖ·
+   * @param pat vectorä¸­çš„æ¯ä¸ªå…ƒç´ éƒ½æ˜¯å¸¦*åˆ™è¢«åŒ¹é…çš„å­—ç¬¦ä¸²ï¼Œç”¨æ¥åŒ¹é…ipåœ°å€
    * @param pat each elment in this vector means string matched with * to match
    * IP address
-   * @return    ÊÇ·ñÆ¥Åä³É¹¦
+   * @return    æ˜¯å¦åŒ¹é…æˆåŠŸ
    * @return    whether they matches or not
    */
   static bool matchPeriod(const string &s, const vector<string> &pat);
 
   /**
-   * @brief  ÅĞ¶ÏÒ»¸öÊıÊÇ·ñÎªËØÊı.
+   * @brief  åˆ¤æ–­ä¸€ä¸ªæ•°æ˜¯å¦ä¸ºç´ æ•°.
    * @brief  Determine whether a number is prime or not
-   * @param n  ĞèÒª±»ÅĞ¶ÏµÄÊı¾İ
+   * @param n  éœ€è¦è¢«åˆ¤æ–­çš„æ•°æ®
    * @param n  the data needs to be determined
-   * @return   true´ú±íÊÇËØÊı£¬false±íÊ¾·ÇËØÊı
+   * @return   trueä»£è¡¨æ˜¯ç´ æ•°ï¼Œfalseè¡¨ç¤ºéç´ æ•°
    * @return   true for prime , false for non prime
    */
   static bool isPrimeNumber(size_t n);
@@ -729,17 +729,17 @@ class UTIL_DLL_API KT_Common {
   static void daemon();
 
   /**
-   * @brief  ºöÂÔ¹ÜµÀÒì³£
+   * @brief  å¿½ç•¥ç®¡é“å¼‚å¸¸
    * @brief  Ignore pipe exceptions
    */
   static void ignorePipe();
 
   /**
-   * @brief  Éú³É»ùÓÚ16½øÖÆ×Ö·ûµÄËæ»ú´®
+   * @brief  ç”ŸæˆåŸºäº16è¿›åˆ¶å­—ç¬¦çš„éšæœºä¸²
    * @brief  Generating random strings based on hexadecimal characters.
-   * @param p            ´æ´¢Ëæ»ú×Ö·û´®
+   * @param p            å­˜å‚¨éšæœºå­—ç¬¦ä¸²
    * @param p            store random string
-   * @param len          ×Ö·û´®´óĞ¡
+   * @param len          å­—ç¬¦ä¸²å¤§å°
    * @param len          string length
    */
   static void getRandomHexChars(char *p, unsigned int len);
@@ -747,123 +747,123 @@ class UTIL_DLL_API KT_Common {
 #endif
 
   /**
-   * @brief  ½«Ò»¸östringÀàĞÍ×ª³ÉÒ»¸ö×Ö½Ú .
+   * @brief  å°†ä¸€ä¸ªstringç±»å‹è½¬æˆä¸€ä¸ªå­—èŠ‚ .
    * @brief  Convert a string type to a byte .
    *
-   * @param sWhat Òª×ª»»µÄ×Ö·û´®
+   * @param sWhat è¦è½¬æ¢çš„å­—ç¬¦ä¸²
    * @param sWhat the string which needs to be converted
-   * @return char    ×ª»»ºóµÄ×Ö½Ú
+   * @return char    è½¬æ¢åçš„å­—èŠ‚
    * @return char    the converted byte
    */
   static char x2c(const string &sWhat);
 
   /**
-   * @brief  ´óĞ¡×Ö·û´®»»³É×Ö½ÚÊı£¬Ö§³ÖK, M, GÁ½ÖÖ ÀıÈç: 1K, 3M, 4G, 4.5M, 2.3G
+   * @brief  å¤§å°å­—ç¬¦ä¸²æ¢æˆå­—èŠ‚æ•°ï¼Œæ”¯æŒK, M, Gä¸¤ç§ ä¾‹å¦‚: 1K, 3M, 4G, 4.5M, 2.3G
    * @brief  The string can be changed into bytes. It supports two kinds of K, M
    * and G, such as 1K, 3M, 4G, 4.5M and 2.3G
-   * @param s            Òª×ª»»µÄ×Ö·û´®
+   * @param s            è¦è½¬æ¢çš„å­—ç¬¦ä¸²
    * @param s            the string which needs to be converted
-   * @param iDefaultSize ¸ñÊ½´íÎóÊ±, È±Ê¡µÄ´óĞ¡
+   * @param iDefaultSize æ ¼å¼é”™è¯¯æ—¶, ç¼ºçœçš„å¤§å°
    * @param iDefaultSize the default size in case of format error
-   * @return             ×Ö½ÚÊı
+   * @return             å­—èŠ‚æ•°
    * @return             Bytes
    */
   static size_t toSize(const string &s, size_t iDefaultSize);
 
   /**
-   * @brief  »ñÈ¡Ö÷»úÃû³Æ.
+   * @brief  è·å–ä¸»æœºåç§°.
    * @brief  Get machine name
-   * @return string    Ö÷»úÃû£¬Ê§°ÜÊÇ·µ»Ø¿Õ
+   * @return string    ä¸»æœºåï¼Œå¤±è´¥æ˜¯è¿”å›ç©º
    * @return string    machine name. if failed returns null
    */
   static string getHostName();
 
-  //ÏÂÒ»ÌìÈÕÆÚ, sDateÊÇ:%Y%m%d
+  //ä¸‹ä¸€å¤©æ—¥æœŸ, sDateæ˜¯:%Y%m%d
   static string nextDate(const string &sDate);
-  //ÉÏÒ»ÌìÈÕÆÚ, sDateÊÇ:%Y%m%d
+  //ä¸Šä¸€å¤©æ—¥æœŸ, sDateæ˜¯:%Y%m%d
   static string prevDate(const string &sDate);
-  //ÏÂÒ»ÌìÈÕÆÚ, iDateÊÇ:%Y%m%d
+  //ä¸‹ä¸€å¤©æ—¥æœŸ, iDateæ˜¯:%Y%m%d
   static int nextDate(int iDate);
-  //ÉÏÒ»ÌìÈÕÆÚ, iDateÊÇ:%Y%m%d
+  //ä¸Šä¸€å¤©æ—¥æœŸ, iDateæ˜¯:%Y%m%d
   static int prevDate(int iDate);
 
-  //ÏÂÒ»¸öÔÂ·İ sMonthÊÇ:%Y%m
+  //ä¸‹ä¸€ä¸ªæœˆä»½ sMonthæ˜¯:%Y%m
   static string nextMonth(const string &sMonth);
-  //ÉÏÒ»¸öÔÂ·İ sMonthÊÇ:%Y%m
+  //ä¸Šä¸€ä¸ªæœˆä»½ sMonthæ˜¯:%Y%m
   static string prevMonth(const string &sMonth);
-  //ÏÂÒ»¸öÄê·İ sYearÊÇ:%Y
+  //ä¸‹ä¸€ä¸ªå¹´ä»½ sYearæ˜¯:%Y
   static string nextYear(const string &sYear);
-  //ÉÏÒ»¸öÄê·İ sYearÊÇ:%Y
+  //ä¸Šä¸€ä¸ªå¹´ä»½ sYearæ˜¯:%Y
   static string prevYear(const string &sYear);
 
-  //Ãëµ½ÈÕÆÚ%Y%m%d
+  //ç§’åˆ°æ—¥æœŸ%Y%m%d
   static int secondsToDateInt(time_t seconds);
-  //Ãëµ½ÈÕÆÚ%Y%m%d
+  //ç§’åˆ°æ—¥æœŸ%Y%m%d
   static string secondsToDateString(time_t seconds);
 
-  //Ãëµ½ÖÜÒ»%Y%m%d
+  //ç§’åˆ°å‘¨ä¸€%Y%m%d
   static string secondsToMondayString(time_t seconds);
-  //Ãëµ½ÔÂ %Y-%m
+  //ç§’åˆ°æœˆ %Y-%m
   static string secondsToMonthString(time_t seconds);
 
-  //ÈÕÆÚ(%Y%m%d)µ½ºÁÃë
+  //æ—¥æœŸ(%Y%m%d)åˆ°æ¯«ç§’
   static int64_t dateToMs(const string &sDate);
 
   static int64_t dateToSecond(const string &sDate);
 
   static int dateTo(const string &sDate, const string &sPeriod);
 
-  //ÈÕÆÚ(%Y%m%d)µ½ÖÜ¼¸
+  //æ—¥æœŸ(%Y%m%d)åˆ°å‘¨å‡ 
   static int dateToWeekday(const string &sDate);
 
-  //ÈÕÆÚ(%Y%m%d)µ½µÚ¼¸ÖÜ
+  //æ—¥æœŸ(%Y%m%d)åˆ°ç¬¬å‡ å‘¨
   static int dateToWeek(const string &sDate);
 
-  //ÈÕÆÚ(%Y%m%d)µ½xÔÂ
+  //æ—¥æœŸ(%Y%m%d)åˆ°xæœˆ
   static int dateToMonth(const string &sDate);
 
-  //ÈÕÆÚ(%Y%m%d)µ½x¼¾¶È
+  //æ—¥æœŸ(%Y%m%d)åˆ°xå­£åº¦
   static int dateToSeason(const string &sDate);
 
-  //ÈÕÆÚ(%Y%m%d)µ½ÉÏÏÂ°ëÄê
+  //æ—¥æœŸ(%Y%m%d)åˆ°ä¸Šä¸‹åŠå¹´
   static int dateToHalfYear(const string &sDate);
 
-  //ÈÕÆÚ(%Y%m%d)µ½xÄê
+  //æ—¥æœŸ(%Y%m%d)åˆ°xå¹´
   static int dateToYear(const string &sDate);
 
-  // MSµ½×Ö·û´® %Y%m%d-%H%M%S-xxx
+  // MSåˆ°å­—ç¬¦ä¸² %Y%m%d-%H%M%S-xxx
   static string msToTimeString(int64_t ms);
-  //×Ö·û´®µ½MS %Y%m%d-%H%M%S-xxx£¬×ª»»Ê§°Ü·µ»Ø0
+  //å­—ç¬¦ä¸²åˆ°MS %Y%m%d-%H%M%S-xxxï¼Œè½¬æ¢å¤±è´¥è¿”å›0
   static int64_t timeStringToMs(const string &timeStr);
 
-  // MS ÖĞÈ¡³öÈÕÆÚ(%Y%m%d)¡¢Ê±¼ä×Ö·û´®(%H%M%S)¡¢MS×Ö·û´®(xxx)
+  // MS ä¸­å–å‡ºæ—¥æœŸ(%Y%m%d)ã€æ—¶é—´å­—ç¬¦ä¸²(%H%M%S)ã€MSå­—ç¬¦ä¸²(xxx)
   static bool getSectionFromMs(int64_t ms, string &date, string &time, string &mstick);
-  // MS ÖĞÈ¡³öÈÕÆÚ(%Y%m%d)£¬Ê§°Ü·µ»Ø"00000000"
+  // MS ä¸­å–å‡ºæ—¥æœŸ(%Y%m%d)ï¼Œå¤±è´¥è¿”å›"00000000"
   static string getDateFromMs(int64_t ms);
-  // MS ÖĞÈ¡³öÊ±¼ä(%H%M%S)£¬Ê§°Ü·µ»Ø"000000"
+  // MS ä¸­å–å‡ºæ—¶é—´(%H%M%S)ï¼Œå¤±è´¥è¿”å›"000000"
   static string getTimeFromMs(int64_t ms);
 
-  //ºÁÃë»»³Éµ±ÌìµÄÃëÖÓ
+  //æ¯«ç§’æ¢æˆå½“å¤©çš„ç§’é’Ÿ
   static int msToNowSeconds(int64_t ms);
   static int nowDaySeconds();
-  //»»³Éµ±Ìì¿ªÊ¼µÄºÁÃë
+  //æ¢æˆå½“å¤©å¼€å§‹çš„æ¯«ç§’
   static int64_t msToNowMs(int64_t ms);
 
   static int64_t us();
 
-  //µ±Ç°µÄĞ¡Ê±»»³ÉÈÕÆÚÃëÊı 0 ~ (86400-1),hour 0~23 ;min 0~59
+  //å½“å‰çš„å°æ—¶æ¢æˆæ—¥æœŸç§’æ•° 0 ~ (86400-1),hour 0~23 ;min 0~59
   static int64_t timeToDaySec(int64_t hour, int64_t min);
 
-  //»ñÈ¡ÏÂÒ»¸öÍ¨ÖªµÄ¾ø¶ÔÊ±¼ä£¬clockSecÎªµ±Ìì»»³ÉÃëÖÓ
+  //è·å–ä¸‹ä¸€ä¸ªé€šçŸ¥çš„ç»å¯¹æ—¶é—´ï¼ŒclockSecä¸ºå½“å¤©æ¢æˆç§’é’Ÿ
   static int64_t getNextAbsClockMs(int64_t clockSec);
 
   static int nextDate(int iDate, int offset);
   static int prevDate(int iDate, int offset);
-  // È¡ÈÕÆÚËùÔÚµÄÖÜÆÚÖĞµÄ×îºóÒ»Ìì
+  // å–æ—¥æœŸæ‰€åœ¨çš„å‘¨æœŸä¸­çš„æœ€åä¸€å¤©
   static int lastDate(int iDate, const char period = 'D');
-  // »ñÈ¡ÈÕÆÚÁĞ±íÄÚºÍperiodÆ¥ÅäµÄÈÕÆÚ
-  // period: ('W', 1) ('M', -2), ('Q', 5) // È¡Ã¿ÖÜ/Ã¿ÔÂ/Ã¿¼¾¶ÈµÚ¼¸Ìì
-  // (¸ºÊıÔòÊÇµ¹ÊıµØ¼¸Ìì)
+  // è·å–æ—¥æœŸåˆ—è¡¨å†…å’ŒperiodåŒ¹é…çš„æ—¥æœŸ
+  // period: ('W', 1) ('M', -2), ('Q', 5) // å–æ¯å‘¨/æ¯æœˆ/æ¯å­£åº¦ç¬¬å‡ å¤©
+  // (è´Ÿæ•°åˆ™æ˜¯å€’æ•°åœ°å‡ å¤©)
   static int getMatchPeriodDays(const std::vector<int> &days, const std::pair<string, int> &period,
                                 std::vector<int> &matchDays);
 };

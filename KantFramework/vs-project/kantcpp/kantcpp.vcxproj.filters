@@ -20,6 +20,18 @@
     <Filter Include="util\include\util\asm">
       <UniqueIdentifier>{561acf93-df84-406b-b3e7-9af3eeb69561}</UniqueIdentifier>
     </Filter>
+    <Filter Include="util\src\epoll_windows">
+      <UniqueIdentifier>{bab3575e-562a-4820-ad72-6d0957c38b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\src\epoll_windows\src">
+      <UniqueIdentifier>{f71cf9ae-366e-406a-aeb7-3f863d875d5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\src\epoll_windows\sys">
+      <UniqueIdentifier>{394841d3-ac1e-4827-a7c7-152411b50e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\src\epoll_windows\test">
+      <UniqueIdentifier>{2c4cfa35-5f63-41ef-87e3-21e28d971319}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -76,6 +88,42 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_fcontext.h">
       <Filter>util\include\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_timer.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_thread_pool.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_cron.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_socket.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_clientsocket.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_epoller.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\sys\epoll.h">
+      <Filter>util\src\epoll_windows\sys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\src\msafd.h">
+      <Filter>util\src\epoll_windows\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\src\ntapi.h">
+      <Filter>util\src\epoll_windows\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_network_buffer.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_http.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeout_queue.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
@@ -115,6 +163,36 @@
       <Filter>util\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\util\src\kt_coroutine.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_timer.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_thread_pool.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_cron.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_socket.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_clientsocket.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_epoller.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\epoll_windows\test\test.c">
+      <Filter>util\src\epoll_windows\test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\epoll_windows\src\epoll.cpp">
+      <Filter>util\src\epoll_windows\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_network_buffer.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_http.cpp">
       <Filter>util\src</Filter>
     </ClCompile>
   </ItemGroup>

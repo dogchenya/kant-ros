@@ -32,6 +32,18 @@
     <Filter Include="util\src\epoll_windows\test">
       <UniqueIdentifier>{2c4cfa35-5f63-41ef-87e3-21e28d971319}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{6057c9c4-c75e-454d-bc93-583a8906d09a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\kant2cpp">
+      <UniqueIdentifier>{addec2b3-7118-4bc0-8590-76a575eec1e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\kantparse">
+      <UniqueIdentifier>{63f45167-4979-4778-9042-e5a2bd1195b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools\kantgrammar">
+      <UniqueIdentifier>{8c95737f-3722-4294-a133-8d15c7aed718}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -124,6 +136,36 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeout_queue.h">
       <Filter>util\include\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_openssl.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_singleton.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_config.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_uuid_generator.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\tools\kant2cpp\kant2cpp.h">
+      <Filter>tools\kant2cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_md5.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_option.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\tools\kantparse\element.h">
+      <Filter>tools\kantparse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\tools\kantparse\parse.h">
+      <Filter>tools\kantparse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\tools\kantparse\kant.tab.hpp">
+      <Filter>tools\kantparse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
@@ -194,6 +236,36 @@
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\util\src\kt_http.cpp">
       <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_openssl.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_config.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\tools\kant2cpp\main.cpp">
+      <Filter>tools\kant2cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\tools\kant2cpp\kant2cpp.cpp">
+      <Filter>tools\kant2cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_md5.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_option.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\element.cpp">
+      <Filter>tools\kantparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\parse.cpp">
+      <Filter>tools\kantparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.lex.cpp">
+      <Filter>tools\kantparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.tab.cpp">
+      <Filter>tools\kantparse</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +473,12 @@
     <None Include="..\..\kantcpp\util\src\asm\ontop_x86_64_sysv_macho_gas.S">
       <Filter>util\include\util\asm</Filter>
     </None>
+    <None Include="..\..\kantcpp\tools\kantgrammar\kant.l">
+      <Filter>tools\kantgrammar</Filter>
+    </None>
+    <None Include="..\..\kantcpp\tools\kantgrammar\kant.y">
+      <Filter>tools\kantgrammar</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
@@ -409,6 +487,18 @@
     </Text>
     <Text Include="..\..\kantcpp\util\src\CMakeLists.txt">
       <Filter>util\src</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\tools\kant2cpp\CMakeLists.txt">
+      <Filter>tools\kant2cpp</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\tools\kantparse\CMakeLists.txt">
+      <Filter>tools\kantparse</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\tools\kantgrammar\CMakeLists.txt">
+      <Filter>tools\kantgrammar</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\tools\CMakeLists.txt">
+      <Filter>tools</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

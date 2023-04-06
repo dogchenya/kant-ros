@@ -12,7 +12,7 @@
 #include "util/kt_thread_queue.h"
 #include "util/kt_monitor.h"
 #include "util/kt_thread.h"
-//#include "util/tc_epoller.h"
+#include "util/kt_epoller.h"
 
 using namespace std;
 namespace kant {
@@ -38,7 +38,7 @@ namespace kant {
  * - 该类对象使用线程私有变量保存, 可以通过静态函数来创建/获取/设置
  * - 每个线程都有自己的调度器对象, 调度器对象只能调度自身线程的协程, 调度过程(运行run)本质上就是阻塞在线程的过程(run不会退出, 直到有terminate调用)
  * - 调度过程简单的理解就是: 检查是否有需要执行的协程, 有则执行之, 没有则等待在epoll对象上, 直到有唤醒或者超时
- * - 调度器底层使用tc_epoller来完成协程的切换, 等待和阻塞等操作, 可以和网络IO无缝粘合, 因此可以通过KT_CoroutineScheduler对象拿到KT_Epoller指针, 并用于网络IO上
+ * - 调度器底层使用kt_epoller来完成协程的切换, 等待和阻塞等操作, 可以和网络IO无缝粘合, 因此可以通过KT_CoroutineScheduler对象拿到KT_Epoller指针, 并用于网络IO上
  * - 由于网络IO也是用相同的epoller对象, 因此可以做到当有数据发送/接受时, 唤醒epoll对象, 从而完成协程的切换
  * - 协程启动通过: go 函数来完成
  * - 协程在运行中, 主要使用三个函数来完成, 调度控制: yield/sleep/put
@@ -396,9 +396,7 @@ class KT_CoroutineScheduler {
      * 协程调度是否已经结束
      * @return
      */
-  bool isTerminate() const {
-    //return _epoller->isTerminate();
-  }
+  bool isTerminate() const { return _epoller->isTerminate(); }
 
   /**
      * 协程是否用完了
@@ -610,7 +608,7 @@ class KT_CoroutineScheduler {
   /**
      * epoller
      */
-  //KT_Epoller *_epoller = NULL;
+  KT_Epoller *_epoller = NULL;
 
   /**
      * 当协程都处理完毕后的回调

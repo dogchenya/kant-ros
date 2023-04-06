@@ -19,9 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\kantcpp\tools\kant2cpp\kant2cpp.h" />
+    <ClInclude Include="..\..\kantcpp\tools\kantparse\element.h" />
+    <ClInclude Include="..\..\kantcpp\tools\kantparse\kant.tab.hpp" />
+    <ClInclude Include="..\..\kantcpp\tools\kantparse\parse.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_cas_queue.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_clientsocket.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_common.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_config.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_coroutine.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_cron.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_epoller.h" />
@@ -31,10 +36,14 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_http.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_lock.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_logger.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_md5.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_monitor.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_network_buffer.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_openssl.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_option.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_platform.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_port.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_singleton.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_socket.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_spin_lock.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_strptime.h" />
@@ -46,15 +55,23 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeout_queue.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeprovider.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_timer.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_uuid_generator.h" />
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\src\msafd.h" />
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\src\ntapi.h" />
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\sys\epoll.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\kantcpp\tools\kant2cpp\main.cpp" />
+    <ClCompile Include="..\..\kantcpp\tools\kant2cpp\kant2cpp.cpp" />
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\element.cpp" />
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.lex.cpp" />
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.tab.cpp" />
+    <ClCompile Include="..\..\kantcpp\tools\kantparse\parse.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\epoll_windows\src\epoll.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\epoll_windows\test\test.c" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_clientsocket.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_common.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_config.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_coroutine.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_cron.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_epoller.cpp" />
@@ -62,7 +79,10 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_file.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_http.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_logger.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_md5.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_network_buffer.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_openssl.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_option.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_port.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_socket.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_spin_lock.cpp" />
@@ -76,6 +96,8 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\kantcpp\tools\kantgrammar\kant.l" />
+    <None Include="..\..\kantcpp\tools\kantgrammar\kant.y" />
     <None Include="..\..\kantcpp\util\src\asm\Jamfile.v2">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </None>
@@ -291,6 +313,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\tools\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\tools\kant2cpp\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\tools\kantgrammar\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\tools\kantparse\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\util\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\util\src\CMakeLists.txt" />
   </ItemGroup>
@@ -395,7 +421,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;$(ProjectDir)\..\..\kantcpp\servant\servant;$(ProjectDir)\..\..\kantcpp\servant\tup;$(ProjectDir)\..\..\kantcpp\tools\kantparse;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

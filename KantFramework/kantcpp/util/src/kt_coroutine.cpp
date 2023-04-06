@@ -248,17 +248,17 @@ KT_CoroutineScheduler::KT_CoroutineScheduler()
   : _currentSize(0), _usedSize(0), _uniqId(0), _currentCoro(NULL), _all_coro(NULL) {
   // LOG_CONSOLE_DEBUG << endl;
 
-  //_epoller = new TC_Epoller();
+  _epoller = new KT_Epoller();
 
-  //_epoller->create(10240);
+  _epoller->create(10240);
 }
 
 KT_CoroutineScheduler::~KT_CoroutineScheduler() {
   // LOG_CONSOLE_DEBUG << endl;
-  //if (_epoller) {
-  //  delete _epoller;
-  //  _epoller = NULL;
-  //}
+  if (_epoller) {
+    delete _epoller;
+    _epoller = NULL;
+  }
 }
 
 void KT_CoroutineScheduler::createCoroutineInfo(size_t poolSize) {
@@ -380,9 +380,9 @@ bool KT_CoroutineScheduler::full() {
 }
 
 void KT_CoroutineScheduler::notify() {
-  //assert(_epoller);
+  assert(_epoller);
 
-  //_epoller->notify();
+  _epoller->notify();
 }
 
 void KT_CoroutineScheduler::run() {
@@ -392,11 +392,10 @@ void KT_CoroutineScheduler::run() {
 
   _ready = true;
 
-  //while (!_epoller->isTerminate())
-  while (true) {
+  while (!_epoller->isTerminate()) {
     if (_activeCoroQueue.empty() && KT_CoroutineInfo::CoroutineHeadEmpty(&_avail) &&
         KT_CoroutineInfo::CoroutineHeadEmpty(&_active)) {
-      //_epoller->done(1000);
+      _epoller->done(1000);
     }
 
     //唤醒需要激活的协程
@@ -466,14 +465,13 @@ void KT_CoroutineScheduler::sleep(int iSleepTime) {
 
   moveToTimeout(_currentCoro);
 
-  //_epoller->postAtTime(iTimeout, []() {});
+  _epoller->postAtTime(iTimeout, []() {});
 
   switchCoro(&_mainCoro);
 }
 
 void KT_CoroutineScheduler::wakeupbyself() {
-  //if (!_needActiveCoroId.empty() && !_epoller->isTerminate())
-  if (!_needActiveCoroId.empty()) {
+  if (!_needActiveCoroId.empty() && !_epoller->isTerminate()) {
     list<uint32_t>::iterator it = _needActiveCoroId.begin();
     while (it != _needActiveCoroId.end()) {
       KT_CoroutineInfo *coro = _all_coro[*it];
@@ -489,16 +487,15 @@ void KT_CoroutineScheduler::wakeupbyself() {
 }
 
 void KT_CoroutineScheduler::put(uint32_t iCoroId) {
-  // if (!_epoller->isTerminate()) {
-  _activeCoroQueue.push_back(iCoroId);
+  if (!_epoller->isTerminate()) {
+    _activeCoroQueue.push_back(iCoroId);
 
-  //_epoller->notify();
-  //}
+    _epoller->notify();
+  }
 }
 
 void KT_CoroutineScheduler::wakeup() {
-  //if (!_activeCoroQueue.empty() && !_epoller->isTerminate())
-  if (!_activeCoroQueue.empty()) {
+  if (!_activeCoroQueue.empty() && !_epoller->isTerminate()) {
     deque<uint32_t> coroIds;
 
     _activeCoroQueue.swap(coroIds);
@@ -520,8 +517,7 @@ void KT_CoroutineScheduler::wakeup() {
 }
 
 void KT_CoroutineScheduler::wakeupbytimeout() {
-  //if (!_timeoutCoroId.empty() && !_epoller->isTerminate())
-  if (!_timeoutCoroId.empty()) {
+  if (!_timeoutCoroId.empty() && !_epoller->isTerminate()) {
     int64_t iNow = TNOWMS;
     while (true) {
       multimap<int64_t, uint32_t>::iterator it = _timeoutCoroId.begin();
@@ -540,9 +536,9 @@ void KT_CoroutineScheduler::wakeupbytimeout() {
 }
 
 void KT_CoroutineScheduler::terminate() {
-  //assert(_epoller);
+  assert(_epoller);
 
-  //_epoller->terminate();
+  _epoller->terminate();
 }
 
 uint32_t KT_CoroutineScheduler::generateId() {

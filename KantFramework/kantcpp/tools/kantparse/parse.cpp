@@ -1,0 +1,480 @@
+﻿#include "parse.h"
+#include "kant.tab.hpp"
+#include <errno.h>
+#include <fstream>
+#include <string.h>
+#include "util/kt_common.h"
+#include "util/kt_file.h"
+
+KantParsePtr g_parse = std::make_shared<KantParse>();
+
+void yyerror(char const *msg) { g_parse->error(msg); }
+
+KantParse::KantParse() {
+  _bWithKant = false;
+  _bUseCurrentPath = false;
+  _itab = 0;
+  _bUseCurrentPathFirst = false;
+  initScanner();
+}
+
+void KantParse::setKant(bool bWithKant) { _bWithKant = bWithKant; }
+
+void KantParse::setHeader(const string &sHeader) { _sHeader = sHeader; }
+
+void KantParse::setCurrentPriority(bool bFlag) { _bUseCurrentPathFirst = bFlag; }
+
+string KantParse::getHeader() {
+  if (_sHeader.empty()) return _sHeader;
+  return _sHeader + "/";
+}
+
+void KantParse::clear() {
+  while (!_contexts.empty()) _contexts.pop();
+  while (!_contains.empty()) _contains.pop();
+  _vcontexts.clear();
+  _structs.clear();
+  _enums.clear();
+  _namespaces.clear();
+}
+
+void KantParse::parse(const string &sFileName) {
+  if (_bUseCurrentPath) {
+    std::string sTemp = sFileName;
+    bool isExist = kant::KT_File::isFileExist(sFileName);
+
+    if (!isExist) {
+      sTemp = kant::KT_File::extractFileName(sFileName);
+    }
+
+    clear();
+
+    _contains.push(std::make_shared<Container>(""));
+    if (!(yyin = fopen(sTemp.c_str(), "r"))) {
+      error("open file '" + sFileName + "(" + sTemp + ")" + "' error :" + string(strerror(errno)));
+    }
+
+    pushFile(sFileName);
+
+    yyparse();
+
+    return;
+  }
+
+  if (_bUseCurrentPathFirst) {
+    std::string sTemp = kant::KT_File::extractFileName(sFileName);
+    bool isExist = kant::KT_File::isFileExist(sTemp);
+
+    if (!isExist) {
+      sTemp = sFileName;
+    }
+
+    clear();
+
+    _contains.push(std::make_shared<Container>(""));
+    if (!(yyin = fopen(sTemp.c_str(), "r"))) {
+      error("open file '" + sFileName + "(" + sTemp + ")" + "' error :" + string(strerror(errno)));
+    }
+
+    pushFile(sFileName);
+
+    yyparse();
+
+    return;
+  }
+
+  {
+    clear();
+
+    _contains.push(std::make_shared<Container>(""));
+    if (!(yyin = fopen(sFileName.c_str(), "r"))) {
+      error("open file '" + sFileName + "' error :" + string(strerror(errno)));
+    }
+
+    pushFile(sFileName);
+
+    yyparse();
+  }
+}
+
+void KantParse::pushFile(const string &file) {
+  ContextPtr c = std::make_shared<Context>(file);
+  _contexts.push(c);
+  _vcontexts.push_back(c);
+}
+
+ContextPtr KantParse::popFile() {
+  ContextPtr c = _contexts.top();
+  _contexts.pop();
+  return c;
+}
+
+bool KantParse::getFilePath(const string &s, string &file) {
+  if (_bUseCurrentPath) {
+    if (s.length() < 2 || s[0] != '\"' || s[s.length() - 1] != '\"') {
+      error("#include need \"FILENAME\"");
+    }
+
+    file = s.substr(1, s.length() - 2);
+
+    std::string sTemp = file;
+    bool isExist = kant::KT_File::isFileExist(file);
+
+    if (!isExist) {
+      file = kant::KT_File::extractFileName(file);
+    }
+
+    for (size_t i = 0; i < _vcontexts.size(); i++) {
+      if (_vcontexts[i]->getFileName() == file) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  if (_bUseCurrentPathFirst) {
+    if (s.length() < 2 || s[0] != '\"' || s[s.length() - 1] != '\"') {
+      error("#include need \"FILENAME\"");
+    }
+
+    file = s.substr(1, s.length() - 2);
+
+    std::string sTemp = kant::KT_File::extractFileName(file);
+    bool isExist = kant::KT_File::isFileExist(sTemp);
+
+    if (isExist) {
+      file = sTemp;
+    }
+
+    for (size_t i = 0; i < _vcontexts.size(); i++) {
+      if (_vcontexts[i]->getFileName() == file) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  if (s.length() < 2 || s[0] != '\"' || s[s.length() - 1] != '\"') {
+    error("#include need \"FILENAME\"");
+  }
+
+  file = s.substr(1, s.length() - 2);
+
+  if (!kant::KT_File::isFileExist(file)) {
+    for (size_t i = 0; i < _vIncludePath.size(); i++) {
+      if (kant::KT_File::isFileExist(_vIncludePath[i] + "/" + file)) {
+        file = _vIncludePath[i] + "/" + file;
+        break;
+      }
+    }
+  }
+
+  for (size_t i = 0; i < _vcontexts.size(); i++) {
+    if (_vcontexts[i]->getFileName() == file) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+string KantParse::getCurrFileName() { return _contexts.top()->getFileName(); }
+
+void KantParse::nextLine() { _contexts.top()->nextLine(); }
+
+ContextPtr KantParse::currentContextPtr() { return _contexts.top(); }
+
+void KantParse::error(const string &msg) {
+  cerr << _contexts.top()->getFileName() << ": " << _contexts.top()->getCurrLine() << ": error: " << msg << endl;
+  exit(-1);
+}
+
+int KantParse::checkKeyword(const string &s) {
+  std::map<std::string, int>::const_iterator it = _keywordMap.find(s);
+  if (it != _keywordMap.end()) {
+    return it->second;
+  }
+
+  if (!_bWithKant) {
+    string sPrefix = "kant";
+    //不能以kant开头
+    if ((s.length() >= sPrefix.length()) && (s.substr(0, sPrefix.length()) == sPrefix)) {
+      error("identifier can't start with 'kant'");
+    }
+  }
+  return KANT_IDENTIFIER;
+}
+
+void KantParse::initScanner() {
+  _keywordMap["void"] = KANT_VOID;
+  _keywordMap["struct"] = KANT_STRUCT;
+  _keywordMap["bool"] = KANT_BOOL;
+  _keywordMap["byte"] = KANT_BYTE;
+  _keywordMap["short"] = KANT_SHORT;
+  _keywordMap["int"] = KANT_INT;
+  _keywordMap["double"] = KANT_DOUBLE;
+  _keywordMap["float"] = KANT_FLOAT;
+  _keywordMap["long"] = KANT_LONG;
+  _keywordMap["string"] = KANT_STRING;
+  _keywordMap["vector"] = KANT_VECTOR;
+  _keywordMap["map"] = KANT_MAP;
+  _keywordMap["key"] = KANT_KEY;
+  _keywordMap["routekey"] = KANT_ROUTE_KEY;
+  _keywordMap["module"] = KANT_NAMESPACE;
+  _keywordMap["interface"] = KANT_INTERFACE;
+  _keywordMap["out"] = KANT_OUT;
+  _keywordMap["require"] = KANT_REQUIRE;
+  _keywordMap["optional"] = KANT_OPTIONAL;
+  _keywordMap["false"] = KANT_FALSE;
+  _keywordMap["true"] = KANT_TRUE;
+  _keywordMap["enum"] = KANT_ENUM;
+  _keywordMap["const"] = KANT_CONST;
+  _keywordMap["unsigned"] = KANT_UNSIGNED;
+}
+
+string KantParse::getTab() {
+  ostringstream s;
+  for (int i = 0; i < _itab; i++) {
+    s << "    ";
+  }
+
+  return s.str();
+}
+
+BuiltinPtr KantParse::createBuiltin(Builtin::Kind kind, bool isUnsigned) {
+  return std::make_shared<Builtin>(kind, isUnsigned);
+}
+
+VectorPtr KantParse::createVector(const TypePtr &ptr) { return std::make_shared<Vector>(ptr); }
+
+MapPtr KantParse::createMap(const TypePtr &pleft, const TypePtr &pright) {
+  return std::make_shared<Map>(pleft, pright);
+}
+
+void KantParse::addNamespacePtr(const NamespacePtr &nPtr) { _namespaces.push_back(nPtr); }
+
+NamespacePtr KantParse::findNamespace(const string &id) {
+  for (size_t i = 0; i < _namespaces.size(); i++) {
+    if (_namespaces[i]->getId() == id) {
+      return _namespaces[i];
+    }
+  }
+
+  return NULL;
+}
+
+NamespacePtr KantParse::currentNamespace() { return _namespaces.back(); }
+
+void KantParse::addStructPtr(const StructPtr &sPtr) { _structs.push_back(sPtr); }
+
+void KantParse::addEnumPtr(const EnumPtr &ePtr) { _enums.push_back(ePtr); }
+
+StructPtr KantParse::findStruct(const string &sid) {
+  string ssid = sid;
+
+  //在当前namespace中查找
+  NamespacePtr np = currentNamespace();
+  if (ssid.find("::") == string::npos) {
+    ssid = np->getId() + "::" + ssid;
+  }
+
+  for (size_t i = 0; i < _structs.size(); i++) {
+    if (_structs[i]->getSid() == ssid) {
+      return _structs[i];
+    }
+  }
+
+  return NULL;
+}
+
+EnumPtr KantParse::findEnum(const string &sid) {
+  string ssid = sid;
+
+  //在当前namespace中查找
+  NamespacePtr np = currentNamespace();
+  if (ssid.find("::") == string::npos) {
+    ssid = np->getId() + "::" + sid;
+  }
+
+  for (size_t i = 0; i < _enums.size(); i++) {
+    if (_enums[i]->getSid() == ssid) {
+      return _enums[i];
+    }
+  }
+
+  return NULL;
+}
+
+bool KantParse::checkEnum(const string &idName) {
+  for (size_t i = 0; i < _enums.size(); i++) {
+    vector<TypeIdPtr> &list = _enums[i]->getAllMemberPtr();
+
+    for (size_t j = 0; j < list.size(); j++) {
+      if (list[j]->getId() == idName) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+void KantParse::checkConflict(const string &sid) {
+  //是否和枚举重名
+  if (findEnum(sid)) {
+    error("conflicts with enum '" + sid + "'");
+  }
+
+  //是否和结构重名
+  if (findStruct(sid)) {
+    error("conflicts with struct '" + sid + "'");
+  }
+}
+
+TypePtr KantParse::findUserType(const string &sid) {
+  StructPtr sPtr = findStruct(sid);
+  if (sPtr) return sPtr;
+
+  EnumPtr ePtr = findEnum(sid);
+  if (ePtr) return ePtr;
+
+  return NULL;
+}
+
+ContainerPtr KantParse::currentContainer() { return _contains.top(); }
+
+void KantParse::pushContainer(const ContainerPtr &c) {
+  _contains.push(c);
+  NamespacePtr np = std::dynamic_pointer_cast<Namespace>(c);
+  if (np) {
+    addNamespacePtr(np);
+  }
+}
+
+ContainerPtr KantParse::popContainer() {
+  ContainerPtr c = _contains.top();
+  _contains.pop();
+
+  return c;
+}
+
+void KantParse::checkTag(int i) {
+  if (i >= 256) {
+    error("struct memeber tag can't beyond 256");
+  }
+  if (i < 0) {
+    error("struct memeber tag can't less then 0");
+  }
+}
+
+void KantParse::checkSize(int i) {
+  if (i >= 1024 * 1024) {
+    error("struct memeber size can't beyond 1M");
+  }
+  if (i < 1) {
+    error("struct memeber size can't less than 1");
+  }
+}
+
+void KantParse::checkArrayVaid(TypePtr &tPtr, int size) {
+  checkSize(size);
+  //只有string/vector可以为array类型
+  //vector不可以嵌套array类型 例如不允许vector<string:8>:2;
+
+  VectorPtr vPtr = std::dynamic_pointer_cast<Vector>(tPtr);
+  if (vPtr) {
+    if (vPtr->getTypePtr()->isArray()) {
+      error("fixed array type can not be nested");
+    }
+    return;
+  }
+  BuiltinPtr bPtr = std::dynamic_pointer_cast<Builtin>(tPtr);
+  if (bPtr && bPtr->kind() == Builtin::KindString) {
+    return;
+  }
+  error("only string or vector can use fix array");
+}
+
+void KantParse::checkPointerVaid(TypePtr &tPtr) {
+  //必须为vector<Byte>类型
+
+  VectorPtr vPtr = std::dynamic_pointer_cast<Vector>(tPtr);
+  if (vPtr) {
+    BuiltinPtr bPtr = std::dynamic_pointer_cast<Builtin>(vPtr->getTypePtr());
+    if (bPtr && bPtr->kind() == Builtin::KindByte) return;
+  }
+  error("only 'byte *' can  be pointer type");
+}
+
+void KantParse::checkConstValue(TypeIdPtr &tPtr, int c) {
+  //只有内建类型才能有缺省值
+  BuiltinPtr bPtr = std::dynamic_pointer_cast<Builtin>(tPtr->getTypePtr());
+  EnumPtr ePtr = std::dynamic_pointer_cast<Enum>(tPtr->getTypePtr());
+  if (!bPtr && !ePtr) {
+    error("only base/enum type can have default value");
+  }
+
+  if (ePtr) {
+    if (c != ConstGrammar::VALUE && c != ConstGrammar::ENUM) {
+      error("default value of enum only be int or enum_type");
+    }
+
+    return;
+  }
+
+  int b = bPtr->kind();
+
+  if (c == ConstGrammar::VALUE) {
+    if (b == Builtin::KindBool) {
+      error("default value of bool can only be true or false");
+    }
+    if (b == Builtin::KindString) {
+      error("default value of string can only be \"string\"");
+    }
+  } else if (c == ConstGrammar::BOOL) {
+    if (b != Builtin::KindBool) {
+      error("only bool type can be true or false");
+    }
+  } else if (c == ConstGrammar::STRING) {
+    if (b != Builtin::KindString) {
+      error("only string type can be \"string\"");
+    }
+  }
+}
+
+string KantParse::printHeaderRemark() {
+  ostringstream s;
+  s << "// **********************************************************************" << endl;
+  s << "// This file was generated by a KANT parser!" << endl;
+  s << "// KANT version "
+    << "KANT_VERSION"
+    << "." << endl;
+  s << "// **********************************************************************" << endl;
+  s << endl;
+
+  return s.str();
+}
+
+string KantParse::getFileName(const string &fileName) {
+  string tmpFileName = fileName;
+  string::size_type pos = tmpFileName.rfind('/');
+  if (pos != string::npos) {
+    tmpFileName = tmpFileName.substr(pos + 1);
+  } else {
+    pos = tmpFileName.rfind('\\');
+    if (pos != string::npos) {
+      tmpFileName = tmpFileName.substr(pos + 1);
+    }
+  }
+
+  return kant::KT_File::excludeFileExt(tmpFileName);
+}
+
+string KantParse::replaceFileName(const string &fileName, const string &ext) {
+  return kant::KT_File::excludeFileExt(getFileName(fileName)) + "." + ext;
+}
+
+string KantParse::getAbsoluteFileName(const string &baseDir, const string &fileName) {
+  return baseDir + FILE_SEP + fileName;
+}

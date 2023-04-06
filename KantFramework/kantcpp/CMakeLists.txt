@@ -51,7 +51,7 @@ include_directories(${PROJECT_SOURCE_DIR}/util/src/epoll_windows)
 ENDIF()
 
 add_subdirectory(util)
-# add_subdirectory(tools)
+add_subdirectory(tools)
 # add_subdirectory(servant)
 
 IF (NOT ${ONLY_LIB})

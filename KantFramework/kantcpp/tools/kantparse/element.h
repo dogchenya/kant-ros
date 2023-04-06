@@ -9,6 +9,7 @@
 #include <map>
 #include <stack>
 #include <sstream>
+#include <memory>
 #include "errno.h"
 //#include "util/tc_autoptr.h"
 

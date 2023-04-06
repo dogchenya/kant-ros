@@ -30,7 +30,7 @@ add_subdirectory(kantgrammar)
 ENDIF(UNIX)
 
 add_subdirectory(kantparse)
-add_subdirectory(kantmerge)
+#add_subdirectory(kantmerge)
 add_subdirectory(kant2cpp)
 
 IF(KANT_PROTOBUF)

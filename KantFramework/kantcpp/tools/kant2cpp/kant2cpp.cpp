@@ -1176,7 +1176,7 @@ string Kant2Cpp::generateParamDecl(const ParamDeclPtr& pPtr) const {
 
 string Kant2Cpp::generateDispatchAsync(const OperationPtr& pPtr, const string& cn) const {
   ostringstream s;
-  s << TAB << "if (msg->response->iRet != kant::TARSSERVERSUCCESS)" << endl << TAB << "{" << endl;
+  s << TAB << "if (msg->response->iRet != kant::KANTSERVERSUCCESS)" << endl << TAB << "{" << endl;
 
   INC_TAB;
   s << TAB << "callback_" << pPtr->getId() << "_exception(msg->response->iRet);" << endl;
@@ -1241,7 +1241,7 @@ string Kant2Cpp::generateDispatchAsync(const OperationPtr& pPtr, const string& c
     s << TAB << "}" << endl;
 
     s << TAB
-      << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CR), TRACE_ANNOTATION_CR, \"\", "
+      << "KANT_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CR), TRACE_ANNOTATION_CR, \"\", "
          "ServerConfig::Application + \".\" + ServerConfig::ServerName, \""
       << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
     DEL_TAB;
@@ -1273,7 +1273,7 @@ string Kant2Cpp::generateDispatchAsync(const OperationPtr& pPtr, const string& c
   s << TAB << "pCbtd->delResponseContext();" << endl;
   s << endl;
 
-  s << TAB << "return kant::TARSSERVERSUCCESS;" << endl;
+  s << TAB << "return kant::KANTSERVERSUCCESS;" << endl;
 
   return s.str();
 }
@@ -1281,7 +1281,7 @@ string Kant2Cpp::generateDispatchAsync(const OperationPtr& pPtr, const string& c
 ///////////////////////////////////////////////////////////////////////////////////////////////
 string Kant2Cpp::generateDispatchCoroAsync(const OperationPtr& pPtr, const string& cn) const {
   ostringstream s;
-  s << TAB << "if (msg->response->iRet != kant::TARSSERVERSUCCESS)" << endl << TAB << "{" << endl;
+  s << TAB << "if (msg->response->iRet != kant::KANTSERVERSUCCESS)" << endl << TAB << "{" << endl;
 
   INC_TAB;
   s << TAB << "callback_" << pPtr->getId() << "_exception(msg->response->iRet);" << endl;
@@ -1345,9 +1345,9 @@ string Kant2Cpp::generateDispatchCoroAsync(const OperationPtr& pPtr, const strin
     s << TAB << "{" << endl;
 
     INC_TAB;
-    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::TARSCLIENTDECODEERR);" << endl;
+    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::KANTCLIENTDECODEERR);" << endl;
     s << endl;
-    s << TAB << "return kant::TARSCLIENTDECODEERR;" << endl;
+    s << TAB << "return kant::KANTCLIENTDECODEERR;" << endl;
     DEL_TAB;
 
     s << TAB << "}" << endl;
@@ -1355,16 +1355,16 @@ string Kant2Cpp::generateDispatchCoroAsync(const OperationPtr& pPtr, const strin
     s << TAB << "{" << endl;
 
     INC_TAB;
-    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::TARSCLIENTDECODEERR);" << endl;
+    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::KANTCLIENTDECODEERR);" << endl;
     s << endl;
-    s << TAB << "return kant::TARSCLIENTDECODEERR;" << endl;
+    s << TAB << "return kant::KANTCLIENTDECODEERR;" << endl;
     DEL_TAB;
 
     s << TAB << "}" << endl;
     s << endl;
   }
 
-  s << TAB << "return kant::TARSSERVERSUCCESS;" << endl;
+  s << TAB << "return kant::KANTSERVERSUCCESS;" << endl;
 
   return s.str();
 }
@@ -1581,7 +1581,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << TAB << "}" << endl;
 
     s << TAB
-      << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_SR), TRACE_ANNOTATION_SR, \"\", "
+      << "KANT_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_SR), TRACE_ANNOTATION_SR, \"\", "
          "ServerConfig::Application + \".\" + ServerConfig::ServerName, \""
       << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
     DEL_TAB;
@@ -1747,7 +1747,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB
-      << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_SS), TRACE_ANNOTATION_SS, \"\", "
+      << "KANT_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_SS), TRACE_ANNOTATION_SS, \"\", "
          "ServerConfig::Application + \".\" + ServerConfig::ServerName, \""
       << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
     DEL_TAB;
@@ -1771,7 +1771,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << endl;
   }
 
-  s << TAB << "return kant::TARSSERVERSUCCESS;" << endl;
+  s << TAB << "return kant::KANTSERVERSUCCESS;" << endl;
 
   return s.str();
 }
@@ -1839,7 +1839,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
       routekey = vParamDecl[i]->getTypeIdPtr()->getId();
     }
   }
-  s << "const map<string, string>& context = TARS_CONTEXT())";
+  s << "const map<string, string>& context = KANT_CONTEXT())";
   s << endl;
 
   s << TAB << "{" << endl;
@@ -1899,14 +1899,14 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB
-      << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CS), TRACE_ANNOTATION_CS, "
+      << "KANT_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CS), TRACE_ANNOTATION_CS, "
          "ServerConfig::Application + \".\" + ServerConfig::ServerName, kant_name(), \""
       << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
   }
 
-  s << TAB << "kant_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
+  s << TAB << "kant_invoke_async(kant::KANTNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
     << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
@@ -1943,7 +1943,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     s << TAB << "_mStatus.insert(std::make_pair(ServantProxy::STATUS_GRID_KEY, " << os.str() << "));" << endl;
   }
 
-  s << TAB << "kant_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
+  s << TAB << "kant_invoke_async(kant::KANTNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
     << endl;
   s << endl;
   s << TAB << "return promise.getFuture();" << endl;
@@ -1960,7 +1960,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
       s << generateParamDecl(vParamDecl[i]) << ",";
     }
   }
-  s << "const map<string, string>& context = TARS_CONTEXT())";
+  s << "const map<string, string>& context = KANT_CONTEXT())";
   s << endl;
 
   s << TAB << "{" << endl;
@@ -1988,7 +1988,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     s << TAB << "_mStatus.insert(std::make_pair(ServantProxy::STATUS_GRID_KEY, " << os.str() << "));" << endl;
   }
 
-  s << TAB << "kant_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback, true);"
+  s << TAB << "kant_invoke_async(kant::KANTNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback, true);"
     << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
@@ -2019,7 +2019,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
   if (bVirtual) {
     s << "kant::KantCurrentPtr current) = 0;";
   } else {
-    s << "const map<string, string> &context = TARS_CONTEXT(),map<string, string> * pResponseContext = NULL)";
+    s << "const map<string, string> &context = KANT_CONTEXT(),map<string, string> * pResponseContext = NULL)";
 
     s << endl;
 
@@ -2071,7 +2071,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       DEL_TAB;
       s << TAB << "}" << endl;
       s << TAB
-        << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CS), TRACE_ANNOTATION_CS, "
+        << "KANT_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CS), TRACE_ANNOTATION_CS, "
            "ServerConfig::Application + \".\" + ServerConfig::ServerName, kant_name(), \""
         << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
       DEL_TAB;
@@ -2089,8 +2089,8 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "_mStatus.insert(std::make_pair(ServantProxy::STATUS_GRID_KEY, " << os.str() << "));" << endl;
     }
 
-    // s << TAB << "kant_invoke(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os.getByteBuffer(), context, _mStatus, rep);" << endl;
-    s << TAB << "shared_ptr<" + _namespace + "::ResponsePacket> rep = kant_invoke(kant::TARSNORMAL,\"" << pPtr->getId()
+    // s << TAB << "kant_invoke(kant::KANTNORMAL,\"" << pPtr->getId() << "\", _os.getByteBuffer(), context, _mStatus, rep);" << endl;
+    s << TAB << "shared_ptr<" + _namespace + "::ResponsePacket> rep = kant_invoke(kant::KANTNORMAL,\"" << pPtr->getId()
       << "\", _os, context, _mStatus);" << endl;
     s << TAB << "if(pResponseContext)" << endl;
     s << TAB << "{" << endl;
@@ -2148,7 +2148,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
         DEL_TAB;
         s << TAB << "}" << endl;
         s << TAB
-          << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CR), TRACE_ANNOTATION_CR, "
+          << "KANT_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CR), TRACE_ANNOTATION_CR, "
              "ServerConfig::Application + \".\" + ServerConfig::ServerName, kant_name(), \""
           << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
         DEL_TAB;
@@ -2165,7 +2165,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "{" << endl;
       INC_TAB;
       s << TAB
-        << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CR), TRACE_ANNOTATION_CR, \"\", "
+        << "KANT_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CR), TRACE_ANNOTATION_CR, \"\", "
            "\"\", \""
         << pPtr->getId() << "\", 0, \"\", \"\");" << endl;
       DEL_TAB;
@@ -2230,7 +2230,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
     s << endl;
     s << TAB << "vector<char> sTupResponseBuffer;" << endl;
     s << TAB << "kantAttr.encode(sTupResponseBuffer);" << endl;
-    s << TAB << "current->sendResponse(kant::TARSSERVERSUCCESS, sTupResponseBuffer);" << endl;
+    s << TAB << "current->sendResponse(kant::KANTSERVERSUCCESS, sTupResponseBuffer);" << endl;
     if (_bTrace) {
       s << TAB << "_rsp_len_ = sTupResponseBuffer.size();" << endl;
     }
@@ -2264,7 +2264,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "vector<char> sJsonResponseBuffer;" << endl;
 
       s << TAB << _namespace << "::KT_Json::writeValue(_p, sJsonResponseBuffer);" << endl;
-      s << TAB << "current->sendResponse(kant::TARSSERVERSUCCESS, sJsonResponseBuffer);" << endl;
+      s << TAB << "current->sendResponse(kant::KANTSERVERSUCCESS, sJsonResponseBuffer);" << endl;
       if (_bTrace) {
         s << TAB << "_rsp_len_ = sJsonResponseBuffer.size();" << endl;
       }
@@ -2287,8 +2287,8 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << writeTo(vParamDecl[i]->getTypeIdPtr()) << endl;
     }
 
-    //s << TAB << "current->sendResponse(kant::TARSSERVERSUCCESS, string(_os.getBuffer(), _os.getLength()));" << endl;
-    s << TAB << "current->sendResponse(kant::TARSSERVERSUCCESS, _os.getByteBuffer());" << endl;
+    //s << TAB << "current->sendResponse(kant::KANTSERVERSUCCESS, string(_os.getBuffer(), _os.getLength()));" << endl;
+    s << TAB << "current->sendResponse(kant::KANTSERVERSUCCESS, _os.getByteBuffer());" << endl;
     if (_bTrace) {
       s << TAB << "_rsp_len_ = _os.getLength();" << endl;
     }
@@ -2329,7 +2329,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       DEL_TAB;
       s << TAB << "}" << endl;
       s << TAB
-        << "TARS_TRACE(current->getTraceKey(), TRACE_ANNOTATION_SS, \"\", ServerConfig::Application + \".\" + "
+        << "KANT_TRACE(current->getTraceKey(), TRACE_ANNOTATION_SS, \"\", ServerConfig::Application + \".\" + "
            "ServerConfig::ServerName, \""
         << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
       DEL_TAB;
@@ -2411,7 +2411,7 @@ string Kant2Cpp::generateHPromiseAsync(const InterfacePtr& pInter, const Operati
 }
 string Kant2Cpp::generateDispatchPromiseAsync(const OperationPtr& pPtr, const string& cn) const {
   ostringstream s;
-  s << TAB << "if (msg->response->iRet != kant::TARSSERVERSUCCESS)" << endl << TAB << "{" << endl;
+  s << TAB << "if (msg->response->iRet != kant::KANTSERVERSUCCESS)" << endl << TAB << "{" << endl;
   INC_TAB;
   s << TAB << "callback_" << pPtr->getId() << "_exception(msg->response->iRet);" << endl;
   s << endl;
@@ -2452,17 +2452,17 @@ string Kant2Cpp::generateDispatchPromiseAsync(const OperationPtr& pPtr, const st
     s << TAB << "catch(std::exception &ex)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::TARSCLIENTDECODEERR);" << endl;
+    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::KANTCLIENTDECODEERR);" << endl;
     s << endl;
-    s << TAB << "return kant::TARSCLIENTDECODEERR;" << endl;
+    s << TAB << "return kant::KANTCLIENTDECODEERR;" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB << "catch(...)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::TARSCLIENTDECODEERR);" << endl;
+    s << TAB << "callback_" << pPtr->getId() << "_exception(kant::KANTCLIENTDECODEERR);" << endl;
     s << endl;
-    s << TAB << "return kant::TARSCLIENTDECODEERR;" << endl;
+    s << TAB << "return kant::KANTCLIENTDECODEERR;" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
     s << endl;
@@ -2471,7 +2471,7 @@ string Kant2Cpp::generateDispatchPromiseAsync(const OperationPtr& pPtr, const st
   s << endl;
   s << TAB << "callback_" << pPtr->getId() << "(ptr);" << endl;
   s << endl;
-  s << TAB << "return kant::TARSSERVERSUCCESS;" << endl;
+  s << TAB << "return kant::KANTSERVERSUCCESS;" << endl;
   return s.str();
 }
 /******************************InterfacePtr***************************************/
@@ -2543,7 +2543,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << TAB << "pair<string*, string*> r = equal_range(" << dname << ", " << dname << "+" << vOperation.size()
     << ", string(msg->request.sFuncName));" << endl;
 
-  s << TAB << "if(r.first == r.second) return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "if(r.first == r.second) return kant::KANTSERVERNOFUNCERR;" << endl;
 
   s << TAB << "switch(r.first - " << dname << ")" << endl;
   s << TAB << "{" << endl;
@@ -2563,7 +2563,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   DEL_TAB;
   s << TAB << "}" << endl;
 
-  s << TAB << "return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "return kant::KANTSERVERNOFUNCERR;" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
 
@@ -2608,7 +2608,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << endl;
   s << TAB << "pair<string*, string*> r = equal_range(" << dname << ", " << dname << "+" << vOperation.size()
     << ", string(msg->request.sFuncName));" << endl;
-  s << TAB << "if(r.first == r.second) return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "if(r.first == r.second) return kant::KANTSERVERNOFUNCERR;" << endl;
   s << TAB << "switch(r.first - " << dname << ")" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
@@ -2622,7 +2622,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   }
   DEL_TAB;
   s << TAB << "}" << endl;
-  s << TAB << "return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "return kant::KANTSERVERNOFUNCERR;" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
   s << endl;
@@ -2680,7 +2680,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << TAB << "pair<string*, string*> r = equal_range(" << dname << ", " << dname << "+" << vOperation.size()
     << ", string(msg->request.sFuncName));" << endl;
 
-  s << TAB << "if(r.first == r.second) return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "if(r.first == r.second) return kant::KANTSERVERNOFUNCERR;" << endl;
 
   s << TAB << "switch(r.first - " << dname << ")" << endl;
   s << TAB << "{" << endl;
@@ -2700,7 +2700,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   DEL_TAB;
   s << TAB << "}" << endl;
 
-  s << TAB << "return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "return kant::KANTSERVERNOFUNCERR;" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
 
@@ -2727,7 +2727,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << TAB << "{" << endl;
   s << TAB << "public:" << endl;
   INC_TAB;
-  s << TAB << "typedef map<string, string> TARS_CONTEXT;" << endl;
+  s << TAB << "typedef map<string, string> KANT_CONTEXT;" << endl;
 
   for (size_t i = 0; i < vOperation.size(); i++) {
     s << generateH(vOperation[i], false, pPtr->getId());  // << endl;
@@ -2816,7 +2816,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << TAB << "pair<string*, string*> r = equal_range(" << dname << ", " << dname << "+" << vOperation.size()
     << ", _current->getFuncName());" << endl;
 
-  s << TAB << "if(r.first == r.second) return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "if(r.first == r.second) return kant::KANTSERVERNOFUNCERR;" << endl;
 
   s << TAB << "switch(r.first - " << dname << ")" << endl;
   s << TAB << "{" << endl;
@@ -2836,7 +2836,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   DEL_TAB;
   s << TAB << "}" << endl;
 
-  s << TAB << "return kant::TARSSERVERNOFUNCERR;" << endl;
+  s << TAB << "return kant::KANTSERVERNOFUNCERR;" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
 
@@ -3132,7 +3132,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << TAB << "{" << endl;
 //     s << TAB << "public:" << endl << endl;
 //     INC_TAB;
-//     s << TAB << "typedef map<string, string> TARS_CONTEXT;" << endl << endl;
+//     s << TAB << "typedef map<string, string> KANT_CONTEXT;" << endl << endl;
 
 //     s << TAB << "enum enumResult" << endl;
 //     s << TAB << "{" << endl;
@@ -3182,7 +3182,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 
 //     s << endl;
 //     s << TAB << "static string encodeBasePacket(const string & sServantName, const string & sFuncName, const vector<char> & buffer, "
-//         << "const map<string, string>& context = TARS_CONTEXT())" << endl;
+//         << "const map<string, string>& context = KANT_CONTEXT())" << endl;
 //     s << TAB << "{" << endl;
 //     INC_TAB;
 
@@ -3249,7 +3249,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //         }
 //     }
 //     s << endl;
-//     s << TAB << "    const map<string, string>& context = TARS_CONTEXT())" << endl;
+//     s << TAB << "    const map<string, string>& context = KANT_CONTEXT())" << endl;
 //     s << TAB << "{" << endl;
 
 //     INC_TAB;

@@ -1493,8 +1493,8 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << TAB << "else if (_current->getRequestVersion() == JSONVERSION)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << _namespace << "::JsonValueObjPtr _jsonPtr = std::make_shared<" << _namespace << "::JsonValueObj>("
-      << _namespace << "::KT_Json::getValue(_current->getRequestBuffer()));" << endl;
+    s << TAB << _namespace << "::JsonValueObjPtr _jsonPtr = std::dynamic_pointer_cast<" << _namespace
+      << "::JsonValueObj>(" << _namespace << "::KT_Json::getValue(_current->getRequestBuffer()));" << endl;
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
       string sEnum2Int = (std::dynamic_pointer_cast<Enum>(vParamDecl[i]->getTypeIdPtr()->getTypePtr()))
@@ -1521,7 +1521,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
 
     s << TAB
       << "kant::XmlValueObjPtr _xmlPtr = "
-         "std::make_shared<kant::XmlValueObj>(kant::KT_Xml::getValue(_current->getRequestBuffer()));"
+         "std::dynamic_pointer_cast<kant::XmlValueObj>(kant::KT_Xml::getValue(_current->getRequestBuffer()));"
       << endl;
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();

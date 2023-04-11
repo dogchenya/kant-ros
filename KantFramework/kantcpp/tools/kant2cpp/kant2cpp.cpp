@@ -877,7 +877,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "throw KT_Xml_Exception(s);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
-    s << TAB << "kant::XmlValueObjPtr pObj= std::make_shared<kant::XmlValueObj>(p);" << endl;
+    s << TAB << "kant::XmlValueObjPtr pObj= std::dynamic_pointer_cast<kant::XmlValueObj>(p);" << endl;
     for (size_t j = 0; j < member.size(); j++) {
       s << readFromXml(member[j]);
     }
@@ -2363,7 +2363,7 @@ string Kant2Cpp::generateHPromiseAsync(const InterfacePtr& pInter, const Operati
   DEL_TAB;
   s << TAB << "public:" << endl;
   INC_TAB;
-  s << TAB << "struct Promise" << sStruct << ": virtual public KT_HandleBase" << endl;
+  s << TAB << "struct Promise" << sStruct << endl;
   s << TAB << "{" << endl;
   s << TAB << "public:" << endl;
   INC_TAB;

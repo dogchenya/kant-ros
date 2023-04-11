@@ -133,7 +133,8 @@ class JsonInput {
     T &v, const JsonValuePtr &p, bool isRequire = true,
     typename std::enable_if<std::is_convertible<T *, KantStructBase *>::value, void ***>::type dummy = 0) {
     if (p && p->getType() == eJsonTypeObj) {
-      JsonValueObj *pObj = dynamic_cast<JsonValueObj *>(p.get());
+      //JsonValueObj *pObj = dynamic_cast<JsonValueObj *>(p.get());
+      auto pObj = std::dynamic_pointer_cast<JsonValueObj>(p);
       v.readFromJson(pObj);
     } else if (isRequire) {
       char s[128];

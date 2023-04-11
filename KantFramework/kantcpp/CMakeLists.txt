@@ -52,7 +52,7 @@ ENDIF()
 
 add_subdirectory(util)
 add_subdirectory(tools)
-# add_subdirectory(servant)
+add_subdirectory(servant)
 
 IF (NOT ${ONLY_LIB})
 # add_subdirectory(examples)

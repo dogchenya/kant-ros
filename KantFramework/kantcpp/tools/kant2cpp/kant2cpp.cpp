@@ -95,7 +95,7 @@ string Kant2Cpp::readFromXml(const TypeIdPtr& pPtr, bool bIsRequire) const {
 string Kant2Cpp::writeToSql(const TypeIdPtr& pPtr) const {
   ostringstream s;
   if (std::dynamic_pointer_cast<Enum>(pPtr->getTypePtr())) {
-    s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::TC_Mysql::DB_INT, kant::KT_Common::tostr("
+    s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::KT_Mysql::DB_INT, kant::KT_Common::tostr("
       << pPtr->getId() << "));" << endl;
   }
 
@@ -107,16 +107,16 @@ string Kant2Cpp::writeToSql(const TypeIdPtr& pPtr) const {
       case Builtin::KindShort:
       case Builtin::KindInt:
       case Builtin::KindLong:
-        s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::TC_Mysql::DB_INT, kant::KT_Common::tostr("
+        s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::KT_Mysql::DB_INT, kant::KT_Common::tostr("
           << pPtr->getId() << "));" << endl;
         break;
       case Builtin::KindFloat:
       case Builtin::KindDouble:
-        s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::TC_Mysql::DB_STR, kant::KT_Common::tostr("
+        s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::KT_Mysql::DB_STR, kant::KT_Common::tostr("
           << pPtr->getId() << "));" << endl;
         break;
       case Builtin::KindString:
-        s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::TC_Mysql::DB_STR, kant::KT_Common::trim("
+        s << TAB << "_mycols[\"" << pPtr->getId() << "\"] = make_pair(kant::KT_Mysql::DB_STR, kant::KT_Common::trim("
           << pPtr->getId() << "));" << endl;
         break;
       default:
@@ -124,10 +124,11 @@ string Kant2Cpp::writeToSql(const TypeIdPtr& pPtr) const {
     }
   } else if (!pPtr->getTypePtr()->isSimple()) {
     s << TAB << "_mycols[\"" << pPtr->getId()
-      << "\"] = make_pair(kant::TC_Mysql::DB_STR, kant::TC_Json::writeValue(kant::JsonOutput::writeJson("
+      << "\"] = make_pair(kant::KT_Mysql::DB_STR, kant::KT_Json::writeValue(kant::JsonOutput::writeJson("
       << pPtr->getId() << ")));" << endl;
   }
 
+  return s.str();
   return s.str();
 }
 
@@ -174,7 +175,7 @@ string Kant2Cpp::readFromSql(const TypeIdPtr& pPtr, bool bIsRequire) const {
         break;
     }
   } else if (!pPtr->getTypePtr()->isSimple()) {
-    s << TAB << "kant::JsonInput::readJson(" << pPtr->getId() << ", kant::TC_Json::getValue(_mysrd[\"" << pPtr->getId()
+    s << TAB << "kant::JsonInput::readJson(" << pPtr->getId() << ", kant::KT_Json::getValue(_mysrd[\"" << pPtr->getId()
       << "\"]), false);" << endl;
   }
 
@@ -566,7 +567,7 @@ string Kant2Cpp::tostrEnum(const EnumPtr& pPtr) const { return pPtr->getSid(); }
 string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) const {
   ostringstream s;
 
-  s << TAB << "struct " << pPtr->getId() << " : public " + _namespace + "::TarsStructBase" << endl;
+  s << TAB << "struct " << pPtr->getId() << " : public " + _namespace + "::KantStructBase" << endl;
   s << TAB << "{" << endl;
 
   s << TAB << "public:" << endl;
@@ -761,7 +762,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
   s << TAB << "}" << endl;
 
   s << TAB << "template<typename WriterT>" << endl;
-  s << TAB << "void writeTo(" + _namespace + "::TarsOutputStream<WriterT>& _os) const" << endl;
+  s << TAB << "void writeTo(" + _namespace + "::KantOutputStream<WriterT>& _os) const" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
   for (size_t j = 0; j < member.size(); j++) {
@@ -776,7 +777,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
 
   ///////////////////////////////////////////////////////////
   s << TAB << "template<typename ReaderT>" << endl;
-  s << TAB << "void readFrom(" + _namespace + "::TarsInputStream<ReaderT>& _is)" << endl;
+  s << TAB << "void readFrom(" + _namespace + "::KantInputStream<ReaderT>& _is)" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
   s << TAB << "resetDefautlt();" << endl;
@@ -795,7 +796,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "kant::JsonValueObjPtr writeToJson() const" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "kant::JsonValueObjPtr p = new kant::JsonValueObj();" << endl;
+    s << TAB << "kant::JsonValueObjPtr p = std::make_shared<kant::JsonValueObj>();" << endl;
     for (size_t j = 0; j < member.size(); j++) {
       s << writeToJson(member[j]);
     }
@@ -806,7 +807,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "string writeToJsonString() const" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "return kant::TC_Json::writeValue(writeToJson());" << endl;
+    s << TAB << "return kant::KT_Json::writeValue(writeToJson());" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
 
@@ -820,10 +821,10 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "char s[128];" << endl;
     s << TAB << "snprintf(s, sizeof(s), \"read 'struct' type mismatch, get type: %d.\", (p.get() ? p->getType() : 0));"
       << endl;
-    s << TAB << "throw kant::TC_Json_Exception(s);" << endl;
+    s << TAB << "throw kant::KT_Json_Exception(s);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
-    s << TAB << "kant::JsonValueObjPtr pObj=std::shared_ptr<kant::JsonValueObj>(p);" << endl;
+    s << TAB << "kant::JsonValueObjPtr pObj=std::dynamic_pointer_cast<kant::JsonValueObj>(p);" << endl;
     for (size_t j = 0; j < member.size(); j++) {
       s << readFromJson(member[j]);
     }
@@ -833,7 +834,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "void readFromJsonString(const string & str)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "readFromJson(kant::TC_Json::getValue(str));" << endl;
+    s << TAB << "readFromJson(kant::KT_Json::getValue(str));" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
   }
@@ -849,7 +850,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "kant::XmlValueObjPtr writeToXml() const" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "kant::XmlValueObjPtr p = new kant::XmlValueObj();" << endl;
+    s << TAB << "kant::XmlValueObjPtr p = std::make_shared<kant::XmlValueObj>();" << endl;
     for (size_t j = 0; j < member.size(); j++) {
       s << writeToXml(member[j]);
     }
@@ -860,7 +861,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "string writeToXmlString() const" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "return kant::TC_Xml::writeValue(writeToXml());" << endl;
+    s << TAB << "return kant::KT_Xml::writeValue(writeToXml());" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
 
@@ -873,7 +874,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     INC_TAB;
     s << TAB << "char s[128];" << endl;
     s << TAB << "snprintf(s, sizeof(s), \"read 'struct' type mismatch, get type: %d.\", p->getType());" << endl;
-    s << TAB << "throw TC_Xml_Exception(s);" << endl;
+    s << TAB << "throw KT_Xml_Exception(s);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB << "kant::XmlValueObjPtr pObj= std::make_shared<kant::XmlValueObj>(p);" << endl;
@@ -886,13 +887,13 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "void readFromXmlString(const string & str)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << "readFromXml(kant::TC_Xml::getValue(str));" << endl;
+    s << TAB << "readFromXml(kant::KT_Xml::getValue(str));" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
   }
 
   if (_bSqlSupport) {
-    s << TAB << "kant::TC_Mysql::RECORD_DATA& toSql(kant::TC_Mysql::RECORD_DATA& _mycols) const" << endl;
+    s << TAB << "kant::KT_Mysql::RECORD_DATA& toSql(kant::KT_Mysql::RECORD_DATA& _mycols) const" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
     for (size_t j = 0; j < member.size(); j++) {
@@ -901,7 +902,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
     s << TAB << "return _mycols;" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
-    s << TAB << "void fromSql(kant::TC_Mysql::MysqlRecord& _mysrd)" << endl;
+    s << TAB << "void fromSql(kant::KT_Mysql::MysqlRecord& _mysrd)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
     s << TAB << "resetDefautlt();" << endl;
@@ -915,7 +916,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
   s << TAB << "ostream& display(ostream& _os, int _level=0) const" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << _namespace + "::TarsDisplayer _ds(_os, _level);" << endl;
+  s << TAB << _namespace + "::KantDisplayer _ds(_os, _level);" << endl;
 
   for (size_t j = 0; j < member.size(); j++) {
     s << display(member[j]);
@@ -927,7 +928,7 @@ string Kant2Cpp::generateH(const StructPtr& pPtr, const string& namespaceId) con
   s << TAB << "ostream& displaySimple(ostream& _os, int _level=0) const" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << _namespace + "::TarsDisplayer _ds(_os, _level);" << endl;
+  s << TAB << _namespace + "::KantDisplayer _ds(_os, _level);" << endl;
 
   for (size_t j = 0; j < member.size(); j++) {
     s << displaySimple(member[j], (j != member.size() - 1 ? true : false));
@@ -1185,7 +1186,7 @@ string Kant2Cpp::generateDispatchAsync(const OperationPtr& pPtr, const string& c
   DEL_TAB;
   s << TAB << "}" << endl;
 
-  s << TAB << _namespace + "::TarsInputStream<" + _namespace + "::BufferReader> _is;" << endl;
+  s << TAB << _namespace + "::KantInputStream<" + _namespace + "::BufferReader> _is;" << endl;
   s << endl;
   vector<ParamDeclPtr>& vParamDecl = pPtr->getAllParamDeclPtr();
 
@@ -1229,7 +1230,7 @@ string Kant2Cpp::generateDispatchAsync(const OperationPtr& pPtr, const string& c
           << "::JsonOutput::writeJson(" << vParamDecl[i]->getTypeIdPtr()->getId() << ");" << endl;
       }
     }
-    s << TAB << "_trace_param_ = " + _namespace + "::TC_Json::writeValue(_p_);" << endl;
+    s << TAB << "_trace_param_ = " + _namespace + "::KT_Json::writeValue(_p_);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB << "else if(ServantProxyThreadData::TraceContext::ENP_OVERMAXLEN == _trace_param_flag_)" << endl;
@@ -1290,7 +1291,7 @@ string Kant2Cpp::generateDispatchCoroAsync(const OperationPtr& pPtr, const strin
   DEL_TAB;
   s << TAB << "}" << endl;
 
-  s << TAB << _namespace + "::TarsInputStream<" + _namespace + "::BufferReader> _is;" << endl;
+  s << TAB << _namespace + "::KantInputStream<" + _namespace + "::BufferReader> _is;" << endl;
   s << endl;
   vector<ParamDeclPtr>& vParamDecl = pPtr->getAllParamDeclPtr();
 
@@ -1434,7 +1435,7 @@ string Kant2Cpp::generateInitValue(const TypeIdPtr& pPtr) const {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string& cn) const {
   ostringstream s;
-  s << TAB << _namespace + "::TarsInputStream<" + _namespace + "::BufferReader> _is;" << endl;
+  s << TAB << _namespace + "::KantInputStream<" + _namespace + "::BufferReader> _is;" << endl;
   s << TAB << "_is.setBuffer(_current->getRequestBuffer());" << endl;
 
   vector<ParamDeclPtr>& vParamDecl = pPtr->getAllParamDeclPtr();
@@ -1454,10 +1455,10 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
   s << TAB << "if (_current->getRequestVersion() == TUPVERSION)" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << "UniAttribute<" + _namespace + "::BufferWriterVector, " + _namespace + "::BufferReader>  tarsAttr;"
+  s << TAB << "UniAttribute<" + _namespace + "::BufferWriterVector, " + _namespace + "::BufferReader>  kantAttr;"
     << endl;
-  s << TAB << "tarsAttr.setVersion(_current->getRequestVersion());" << endl;
-  s << TAB << "tarsAttr.decode(_current->getRequestBuffer());" << endl;
+  s << TAB << "kantAttr.setVersion(_current->getRequestVersion());" << endl;
+  s << TAB << "kantAttr.decode(_current->getRequestBuffer());" << endl;
   for (size_t i = 0; i < vParamDecl.size(); i++) {
     string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
     string sEnum2Int = (std::dynamic_pointer_cast<Enum>(vParamDecl[i]->getTypeIdPtr()->getTypePtr()))
@@ -1467,18 +1468,18 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
       //枚举类型转成int
       if (std::dynamic_pointer_cast<Enum>(vParamDecl[i]->getTypeIdPtr()->getTypePtr())) {
         s << TAB << sParamName << " = (" << tostr(vParamDecl[i]->getTypeIdPtr()->getTypePtr())
-          << ") tarsAttr.get<" + _namespace + "::Int32>(\"" << sParamName << "\");" << endl;
+          << ") kantAttr.get<" + _namespace + "::Int32>(\"" << sParamName << "\");" << endl;
       } else {
-        s << TAB << "tarsAttr.get(\"" << sParamName << "\", " << sParamName << ");" << endl;
+        s << TAB << "kantAttr.get(\"" << sParamName << "\", " << sParamName << ");" << endl;
       }
     } else {
       //枚举类型转成int
       if (std::dynamic_pointer_cast<Enum>(vParamDecl[i]->getTypeIdPtr()->getTypePtr())) {
         s << TAB << sParamName << " = (" << tostr(vParamDecl[i]->getTypeIdPtr()->getTypePtr())
-          << ") tarsAttr.getByDefault<" + _namespace + "::Int32>(\"" << sParamName << "\", " << sEnum2Int << sParamName
+          << ") kantAttr.getByDefault<" + _namespace + "::Int32>(\"" << sParamName << "\", " << sEnum2Int << sParamName
           << ");" << endl;
       } else {
-        s << TAB << "tarsAttr.getByDefault(\"" << sParamName << "\", " << sEnum2Int << sParamName << ", " << sEnum2Int
+        s << TAB << "kantAttr.getByDefault(\"" << sParamName << "\", " << sEnum2Int << sParamName << ", " << sEnum2Int
           << sParamName << ");" << endl;
       }
     }
@@ -1493,7 +1494,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << TAB << "{" << endl;
     INC_TAB;
     s << TAB << _namespace << "::JsonValueObjPtr _jsonPtr = std::make_shared<" << _namespace << "::JsonValueObj>("
-      << _namespace << "::TC_Json::getValue(_current->getRequestBuffer()));" << endl;
+      << _namespace << "::KT_Json::getValue(_current->getRequestBuffer()));" << endl;
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
       string sEnum2Int = (std::dynamic_pointer_cast<Enum>(vParamDecl[i]->getTypeIdPtr()->getTypePtr()))
@@ -1520,7 +1521,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
 
     s << TAB
       << "kant::XmlValueObjPtr _xmlPtr = "
-         "std::make_shared<kant::XmlValueObj>(kant::TC_Xml::getValue(_current->getRequestBuffer()));"
+         "std::make_shared<kant::XmlValueObj>(kant::KT_Xml::getValue(_current->getRequestBuffer()));"
       << endl;
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
@@ -1569,7 +1570,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
       s << TAB << "_p_->value[\"" << vParamDecl[i]->getTypeIdPtr()->getId() << "\"] = " << _namespace
         << "::JsonOutput::writeJson(" << vParamDecl[i]->getTypeIdPtr()->getId() << ");" << endl;
     }
-    s << TAB << "_trace_param_ = " + _namespace + "::TC_Json::writeValue(_p_);" << endl;
+    s << TAB << "_trace_param_ = " + _namespace + "::KT_Json::writeValue(_p_);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB << "else if(ServantProxyThreadData::TraceContext::ENP_OVERMAXLEN == _trace_param_flag_)" << endl;
@@ -1613,14 +1614,14 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
   s << TAB << "{" << endl;
   INC_TAB;
 
-  s << TAB << "UniAttribute<" + _namespace + "::BufferWriterVector, " + _namespace + "::BufferReader>  tarsAttr;"
+  s << TAB << "UniAttribute<" + _namespace + "::BufferWriterVector, " + _namespace + "::BufferReader>  kantAttr;"
     << endl;
-  s << TAB << "tarsAttr.setVersion(_current->getRequestVersion());" << endl;
+  s << TAB << "kantAttr.setVersion(_current->getRequestVersion());" << endl;
   if (pPtr->getReturnPtr()->getTypePtr()) {
     string sEnum2Int =
       (std::dynamic_pointer_cast<Enum>(pPtr->getReturnPtr()->getTypePtr())) ? "(" + _namespace + "::Int32)" : "";
-    s << TAB << "tarsAttr.put(\"\", " << sEnum2Int << "_ret);" << endl;
-    s << TAB << "tarsAttr.put(\"tars_ret\", " << sEnum2Int << "_ret);" << endl;
+    s << TAB << "kantAttr.put(\"\", " << sEnum2Int << "_ret);" << endl;
+    s << TAB << "kantAttr.put(\"kant_ret\", " << sEnum2Int << "_ret);" << endl;
   }
   for (size_t i = 0; i < vParamDecl.size(); i++) {
     string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
@@ -1628,10 +1629,10 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
                          ? "(" + _namespace + "::Int32)"
                          : "";
     if (vParamDecl[i]->isOut()) {
-      s << TAB << "tarsAttr.put(\"" << sParamName << "\", " << sEnum2Int << sParamName << ");" << endl;
+      s << TAB << "kantAttr.put(\"" << sParamName << "\", " << sEnum2Int << sParamName << ");" << endl;
     }
   }
-  s << TAB << "tarsAttr.encode(_sResponseBuffer);" << endl;
+  s << TAB << "kantAttr.encode(_sResponseBuffer);" << endl;
 
   DEL_TAB;
   s << TAB << "}" << endl;
@@ -1653,15 +1654,15 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     }
 
     if (pPtr->getReturnPtr()->getTypePtr()) {
-      s << TAB << "_p->value[\"tars_ret\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
+      s << TAB << "_p->value[\"kant_ret\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
       // BuiltinPtr retPtr = std::dynamic_pointer_cast<Builtin>(pPtr->getReturnPtr()->getTypePtr());
       // if (retPtr->kind() >= Builtin::KindBool && retPtr->kind() <= Builtin::KindLong)
       // {
-      //     s << TAB << "_p->value[\"tars_ret\"] = "<< _namespace << "::JsonOutput::writeJson(" << pPtr->getReturnPtr()->getId() << ");" << endl;
+      //     s << TAB << "_p->value[\"kant_ret\"] = "<< _namespace << "::JsonOutput::writeJson(" << pPtr->getReturnPtr()->getId() << ");" << endl;
       // }
     }
 
-    s << TAB << _namespace << "::TC_Json::writeValue(_p, _sResponseBuffer);" << endl;
+    s << TAB << _namespace << "::KT_Json::writeValue(_p, _sResponseBuffer);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
   }
@@ -1672,7 +1673,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << TAB << "{" << endl;
     INC_TAB;
 
-    s << TAB << "kant::XmlValueObjPtr _p = new kant::XmlValueObj();" << endl;
+    s << TAB << "kant::XmlValueObjPtr _p = std::make_shared<kant::XmlValueObj>();" << endl;
 
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
@@ -1688,7 +1689,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
       }
     }
 
-    s << TAB << "kant::TC_Xml::writeValue(_p, _sResponseBuffer);" << endl;
+    s << TAB << "kant::KT_Xml::writeValue(_p, _sResponseBuffer);" << endl;
 
     DEL_TAB;
     s << TAB << "}" << endl;
@@ -1699,7 +1700,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
   //普通kant调用输出参数
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
+  s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
 
   if (pPtr->getReturnPtr()->getTypePtr()) {
     s << writeTo(pPtr->getReturnPtr());
@@ -1736,7 +1737,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
           << "::JsonOutput::writeJson(" << vParamDecl[i]->getTypeIdPtr()->getId() << ");" << endl;
       }
     }
-    s << TAB << "_trace_param_ = " + _namespace + "::TC_Json::writeValue(_p_);" << endl;
+    s << TAB << "_trace_param_ = " + _namespace + "::KT_Json::writeValue(_p_);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB << "else if(ServantProxyThreadData::TraceContext::ENP_OVERMAXLEN == _trace_param_flag_)" << endl;
@@ -1845,10 +1846,10 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
   INC_TAB;
 
   if (_kantMaster) {
-    s << TAB << "this->tars_setMasterFlag(true);" << endl;
+    s << TAB << "this->kant_setMasterFlag(true);" << endl;
   }
 
-  s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
+  s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
 
   for (size_t i = 0; i < vParamDecl.size(); i++) {
     if (vParamDecl[i]->isOut()) {
@@ -1888,7 +1889,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
       s << TAB << "_p_->value[\"" << vParamDecl[i]->getTypeIdPtr()->getId() << "\"] = " << _namespace
         << "::JsonOutput::writeJson(" << vParamDecl[i]->getTypeIdPtr()->getId() << ");" << endl;
     }
-    s << TAB << "_trace_param_ = " + _namespace + "::TC_Json::writeValue(_p_);" << endl;
+    s << TAB << "_trace_param_ = " + _namespace + "::KT_Json::writeValue(_p_);" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
     s << TAB << "else if(ServantProxyThreadData::TraceContext::ENP_OVERMAXLEN == _trace_param_flag_)" << endl;
@@ -1899,13 +1900,13 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     s << TAB << "}" << endl;
     s << TAB
       << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CS), TRACE_ANNOTATION_CS, "
-         "ServerConfig::Application + \".\" + ServerConfig::ServerName, tars_name(), \""
+         "ServerConfig::Application + \".\" + ServerConfig::ServerName, kant_name(), \""
       << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
     DEL_TAB;
     s << TAB << "}" << endl;
   }
 
-  s << TAB << "tars_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
+  s << TAB << "kant_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
     << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
@@ -1923,12 +1924,12 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
   s << TAB << "{" << endl;
   INC_TAB;
   if (_kantMaster) {
-    s << TAB << "this->tars_setMasterFlag(true);" << endl;
+    s << TAB << "this->kant_setMasterFlag(true);" << endl;
   }
   s << TAB << "kant::Promise< " << cn << "PrxCallbackPromise::Promise" << sStruct << "Ptr > promise;" << endl;
   s << TAB << cn << "PrxCallbackPromisePtr callback = new " << cn << "PrxCallbackPromise(promise);" << endl;
   s << endl;
-  s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
+  s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
   for (size_t i = 0; i < vParamDecl.size(); i++) {
     if (vParamDecl[i]->isOut()) {
       continue;
@@ -1942,7 +1943,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     s << TAB << "_mStatus.insert(std::make_pair(ServantProxy::STATUS_GRID_KEY, " << os.str() << "));" << endl;
   }
 
-  s << TAB << "tars_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
+  s << TAB << "kant_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback);"
     << endl;
   s << endl;
   s << TAB << "return promise.getFuture();" << endl;
@@ -1966,10 +1967,10 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
   INC_TAB;
 
   if (_kantMaster) {
-    s << TAB << "this->tars_setMasterFlag(true);" << endl;
+    s << TAB << "this->kant_setMasterFlag(true);" << endl;
   }
 
-  s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
+  s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
 
   for (size_t i = 0; i < vParamDecl.size(); i++) {
     if (vParamDecl[i]->isOut()) {
@@ -1987,7 +1988,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     s << TAB << "_mStatus.insert(std::make_pair(ServantProxy::STATUS_GRID_KEY, " << os.str() << "));" << endl;
   }
 
-  s << TAB << "tars_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback, true);"
+  s << TAB << "kant_invoke_async(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os, context, _mStatus, callback, true);"
     << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
@@ -2016,7 +2017,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
   }
 
   if (bVirtual) {
-    s << "kant::TarsCurrentPtr current) = 0;";
+    s << "kant::KantCurrentPtr current) = 0;";
   } else {
     s << "const map<string, string> &context = TARS_CONTEXT(),map<string, string> * pResponseContext = NULL)";
 
@@ -2027,10 +2028,10 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
     INC_TAB;
 
     if (_kantMaster) {
-      s << TAB << "this->tars_setMasterFlag(true);" << endl;
+      s << TAB << "this->kant_setMasterFlag(true);" << endl;
     }
 
-    s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
+    s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
 
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       //if(vParamDecl[i]->isOut()) continue;
@@ -2060,7 +2061,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
         s << TAB << "_p_->value[\"" << vParamDecl[i]->getTypeIdPtr()->getId() << "\"] = " << _namespace
           << "::JsonOutput::writeJson(" << vParamDecl[i]->getTypeIdPtr()->getId() << ");" << endl;
       }
-      s << TAB << "_trace_param_ = " + _namespace + "::TC_Json::writeValue(_p_);" << endl;
+      s << TAB << "_trace_param_ = " + _namespace + "::KT_Json::writeValue(_p_);" << endl;
       DEL_TAB;
       s << TAB << "}" << endl;
       s << TAB << "else if(ServantProxyThreadData::TraceContext::ENP_OVERMAXLEN == _trace_param_flag_)" << endl;
@@ -2071,7 +2072,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "}" << endl;
       s << TAB
         << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CS), TRACE_ANNOTATION_CS, "
-           "ServerConfig::Application + \".\" + ServerConfig::ServerName, tars_name(), \""
+           "ServerConfig::Application + \".\" + ServerConfig::ServerName, kant_name(), \""
         << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
       DEL_TAB;
       s << TAB << "}" << endl;
@@ -2088,8 +2089,8 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "_mStatus.insert(std::make_pair(ServantProxy::STATUS_GRID_KEY, " << os.str() << "));" << endl;
     }
 
-    // s << TAB << "tars_invoke(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os.getByteBuffer(), context, _mStatus, rep);" << endl;
-    s << TAB << "shared_ptr<" + _namespace + "::ResponsePacket> rep = tars_invoke(kant::TARSNORMAL,\"" << pPtr->getId()
+    // s << TAB << "kant_invoke(kant::TARSNORMAL,\"" << pPtr->getId() << "\", _os.getByteBuffer(), context, _mStatus, rep);" << endl;
+    s << TAB << "shared_ptr<" + _namespace + "::ResponsePacket> rep = kant_invoke(kant::TARSNORMAL,\"" << pPtr->getId()
       << "\", _os, context, _mStatus);" << endl;
     s << TAB << "if(pResponseContext)" << endl;
     s << TAB << "{" << endl;
@@ -2102,7 +2103,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
     s << endl;
 
     if (vParamDecl.size() > 0 || pPtr->getReturnPtr()->getTypePtr()) {
-      s << TAB << _namespace + "::TarsInputStream<" + _namespace + "::BufferReader> _is;" << endl;
+      s << TAB << _namespace + "::KantInputStream<" + _namespace + "::BufferReader> _is;" << endl;
       s << TAB << "_is.setBuffer(rep->sBuffer);" << endl;
       if (pPtr->getReturnPtr()->getTypePtr()) {
         s << TAB << tostr(pPtr->getReturnPtr()->getTypePtr()) << " " << pPtr->getReturnPtr()->getId()
@@ -2137,7 +2138,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
               << "::JsonOutput::writeJson(" << vParamDecl[i]->getTypeIdPtr()->getId() << ");" << endl;
           }
         }
-        s << TAB << "_trace_param_ = " + _namespace + "::TC_Json::writeValue(_p_);" << endl;
+        s << TAB << "_trace_param_ = " + _namespace + "::KT_Json::writeValue(_p_);" << endl;
         DEL_TAB;
         s << TAB << "}" << endl;
         s << TAB << "else if(ServantProxyThreadData::TraceContext::ENP_OVERMAXLEN == _trace_param_flag_)" << endl;
@@ -2148,7 +2149,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
         s << TAB << "}" << endl;
         s << TAB
           << "TARS_TRACE(pSptd->getTraceKey(ServantProxyThreadData::TraceContext::EST_CR), TRACE_ANNOTATION_CR, "
-             "ServerConfig::Application + \".\" + ServerConfig::ServerName, tars_name(), \""
+             "ServerConfig::Application + \".\" + ServerConfig::ServerName, kant_name(), \""
           << pPtr->getId() << "\", 0, _trace_param_, \"\");" << endl;
         DEL_TAB;
         s << TAB << "}" << endl;
@@ -2178,7 +2179,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
 
   if (bVirtual) {
     //异步回调
-    s << TAB << "static void async_response_" << pPtr->getId() << "(kant::TarsCurrentPtr current";
+    s << TAB << "static void async_response_" << pPtr->getId() << "(kant::KantCurrentPtr current";
     if (pPtr->getReturnPtr()->getTypePtr()) {
       s << ", ";
       if (pPtr->getReturnPtr()->getTypePtr()->isSimple()) {
@@ -2208,14 +2209,14 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
     s << TAB << "{" << endl;
     INC_TAB;
 
-    s << TAB << "UniAttribute<" + _namespace + "::BufferWriterVector, " + _namespace + "::BufferReader>  tarsAttr;"
+    s << TAB << "UniAttribute<" + _namespace + "::BufferWriterVector, " + _namespace + "::BufferReader>  kantAttr;"
       << endl;
-    s << TAB << "tarsAttr.setVersion(current->getRequestVersion());" << endl;
+    s << TAB << "kantAttr.setVersion(current->getRequestVersion());" << endl;
     if (pPtr->getReturnPtr()->getTypePtr()) {
       string sEnum2Int =
         (std::dynamic_pointer_cast<Enum>(pPtr->getReturnPtr()->getTypePtr())) ? "(" + _namespace + "::Int32)" : "";
-      s << TAB << "tarsAttr.put(\"\", " << sEnum2Int << "_ret);" << endl;
-      s << TAB << "tarsAttr.put(\"tars_ret\", " << sEnum2Int << "_ret);" << endl;
+      s << TAB << "kantAttr.put(\"\", " << sEnum2Int << "_ret);" << endl;
+      s << TAB << "kantAttr.put(\"kant_ret\", " << sEnum2Int << "_ret);" << endl;
     }
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
@@ -2223,12 +2224,12 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
                            ? "(" + _namespace + "::Int32)"
                            : "";
       if (vParamDecl[i]->isOut()) {
-        s << TAB << "tarsAttr.put(\"" << sParamName << "\", " << sEnum2Int << sParamName << ");" << endl;
+        s << TAB << "kantAttr.put(\"" << sParamName << "\", " << sEnum2Int << sParamName << ");" << endl;
       }
     }
     s << endl;
     s << TAB << "vector<char> sTupResponseBuffer;" << endl;
-    s << TAB << "tarsAttr.encode(sTupResponseBuffer);" << endl;
+    s << TAB << "kantAttr.encode(sTupResponseBuffer);" << endl;
     s << TAB << "current->sendResponse(kant::TARSSERVERSUCCESS, sTupResponseBuffer);" << endl;
     if (_bTrace) {
       s << TAB << "_rsp_len_ = sTupResponseBuffer.size();" << endl;
@@ -2251,18 +2252,18 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       }
 
       if (pPtr->getReturnPtr()->getTypePtr()) {
-        s << TAB << "_p->value[\"tars_ret\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
+        s << TAB << "_p->value[\"kant_ret\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
         // BuiltinPtr retPtr = std::dynamic_pointer_cast<Builtin>(pPtr->getReturnPtr()->getTypePtr());
         // if (retPtr && retPtr->kind() >= Builtin::KindBool && retPtr->kind() <= Builtin::KindLong)
         // {
-        //     s << TAB << "_p->value[\"tars_ret\"] = " << _namespace << "::JsonOutput::writeJson(" << pPtr->getReturnPtr()->getId() << ");" << endl;
+        //     s << TAB << "_p->value[\"kant_ret\"] = " << _namespace << "::JsonOutput::writeJson(" << pPtr->getReturnPtr()->getId() << ");" << endl;
         //     //s << TAB << "_p->value[\"\"] = " << _namespace << "::JsonOutput::writeJson(" << pPtr->getReturnPtr()->getId() << ");" << endl;
         // }
       }
 
       s << TAB << "vector<char> sJsonResponseBuffer;" << endl;
 
-      s << TAB << _namespace << "::TC_Json::writeValue(_p, sJsonResponseBuffer);" << endl;
+      s << TAB << _namespace << "::KT_Json::writeValue(_p, sJsonResponseBuffer);" << endl;
       s << TAB << "current->sendResponse(kant::TARSSERVERSUCCESS, sJsonResponseBuffer);" << endl;
       if (_bTrace) {
         s << TAB << "_rsp_len_ = sJsonResponseBuffer.size();" << endl;
@@ -2276,7 +2277,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
 
     INC_TAB;
 
-    s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
+    s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
     if (pPtr->getReturnPtr()->getTypePtr()) {
       s << writeTo(pPtr->getReturnPtr()) << endl;
     }
@@ -2318,7 +2319,7 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
             << "::JsonOutput::writeJson(" << vParamDecl[i]->getTypeIdPtr()->getId() << ");" << endl;
         }
       }
-      s << TAB << "_trace_param_ = " + _namespace + "::TC_Json::writeValue(_p_);" << endl;
+      s << TAB << "_trace_param_ = " + _namespace + "::KT_Json::writeValue(_p_);" << endl;
       DEL_TAB;
       s << TAB << "}" << endl;
       s << TAB << "else if(ServantProxyThreadData::TraceContext::ENP_OVERMAXLEN == _trace_param_flag_)" << endl;
@@ -2357,7 +2358,7 @@ string Kant2Cpp::generateHPromiseAsync(const InterfacePtr& pInter, const Operati
   DEL_TAB;
   s << TAB << "public:" << endl;
   INC_TAB;
-  s << TAB << "struct Promise" << sStruct << ": virtual public TC_HandleBase" << endl;
+  s << TAB << "struct Promise" << sStruct << ": virtual public KT_HandleBase" << endl;
   s << TAB << "{" << endl;
   s << TAB << "public:" << endl;
   INC_TAB;
@@ -2374,7 +2375,7 @@ string Kant2Cpp::generateHPromiseAsync(const InterfacePtr& pInter, const Operati
   DEL_TAB;
   s << TAB << "};" << endl;
   s << TAB << endl;
-  s << TAB << "typedef kant::TC_AutoPtr< " << pInter->getId() << "PrxCallbackPromise::Promise" << sStruct
+  s << TAB << "typedef kant::KT_AutoPtr< " << pInter->getId() << "PrxCallbackPromise::Promise" << sStruct
     << " > Promise" << sStruct << "Ptr;" << endl;
   s << endl;
   s << TAB << pInter->getId() << "PrxCallbackPromise(const kant::Promise< " << pInter->getId()
@@ -2417,7 +2418,7 @@ string Kant2Cpp::generateDispatchPromiseAsync(const OperationPtr& pPtr, const st
   s << TAB << "return msg->response->iRet;" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
-  s << TAB << _namespace + "::TarsInputStream<" + _namespace + "::BufferReader> _is;" << endl;
+  s << TAB << _namespace + "::KantInputStream<" + _namespace + "::BufferReader> _is;" << endl;
   s << endl;
   vector<ParamDeclPtr>& vParamDecl = pPtr->getAllParamDeclPtr();
   s << TAB << "_is.setBuffer(msg->response->sBuffer);" << endl;
@@ -2505,7 +2506,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << TAB << "if(!pCbtd->getContextValid())" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << "throw TC_Exception(\"cann't get response context\");" << endl;
+  s << TAB << "throw KT_Exception(\"cann't get response context\");" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
   s << TAB << "return pCbtd->getResponseContext();" << endl;
@@ -2571,7 +2572,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   DEL_TAB;
   s << TAB << "};" << endl;
 
-  s << TAB << "typedef kant::TC_AutoPtr<" << pPtr->getId() << "PrxCallback> " << pPtr->getId() << "PrxCallbackPtr;"
+  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "PrxCallback> " << pPtr->getId() << "PrxCallbackPtr;"
     << endl;
   s << endl;
   //生成promise异步回调Proxy
@@ -2627,7 +2628,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << endl;
   DEL_TAB;
   s << TAB << "};" << endl;
-  s << TAB << "typedef kant::TC_AutoPtr<" << pPtr->getId() << "PrxCallbackPromise> " << pPtr->getId()
+  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "PrxCallbackPromise> " << pPtr->getId()
     << "PrxCallbackPromisePtr;" << endl;
   s << endl;
   //生成协程异步回调类，用于并发请求
@@ -2716,7 +2717,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
 
   s << TAB << "};" << endl;
 
-  s << TAB << "typedef kant::TC_AutoPtr<" << pPtr->getId() << "CoroPrxCallback> " << pPtr->getId()
+  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "CoroPrxCallback> " << pPtr->getId()
     << "CoroPrxCallbackPtr;" << endl;
   s << endl;
 
@@ -2733,44 +2734,44 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
     s << generateHAsync(vOperation[i], pPtr->getId()) << endl;
   }
 
-  s << TAB << pPtr->getId() << "Proxy* tars_hash(int64_t key)" << endl;
+  s << TAB << pPtr->getId() << "Proxy* kant_hash(int64_t key)" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::tars_hash(key);" << endl;
+  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::kant_hash(key);" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
   s << endl;
 
-  s << TAB << pPtr->getId() << "Proxy* tars_consistent_hash(int64_t key)" << endl;
+  s << TAB << pPtr->getId() << "Proxy* kant_consistent_hash(int64_t key)" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::tars_consistent_hash(key);" << endl;
+  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::kant_consistent_hash(key);" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
   s << endl;
 
-  s << TAB << pPtr->getId() << "Proxy* tars_open_trace(bool traceParam = false)" << endl;
+  s << TAB << pPtr->getId() << "Proxy* kant_open_trace(bool traceParam = false)" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::tars_open_trace(traceParam);" << endl;
+  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::kant_open_trace(traceParam);" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
   s << endl;
 
-  s << TAB << pPtr->getId() << "Proxy* tars_set_timeout(int msecond)" << endl;
+  s << TAB << pPtr->getId() << "Proxy* kant_set_timeout(int msecond)" << endl;
   s << TAB << "{" << endl;
   INC_TAB;
-  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::tars_set_timeout(msecond);" << endl;
+  s << TAB << "return (" << pPtr->getId() + "Proxy*)ServantProxy::kant_set_timeout(msecond);" << endl;
   DEL_TAB;
   s << TAB << "}" << endl;
   s << endl;
 
-  s << TAB << "static const char* tars_prxname() { return \"" << pPtr->getId() << "Proxy\"; }" << endl;
+  s << TAB << "static const char* kant_prxname() { return \"" << pPtr->getId() << "Proxy\"; }" << endl;
 
   DEL_TAB;
   s << TAB << "};" << endl;
 
-  s << TAB << "typedef kant::TC_AutoPtr<" << pPtr->getId() << "Proxy> " << pPtr->getId() << "Prx;" << endl;
+  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "Proxy> " << pPtr->getId() << "Prx;" << endl;
   s << endl;
 
   //生成服务端Servant
@@ -2789,7 +2790,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << TAB << "public:" << endl;
   INC_TAB;
 
-  s << TAB << "int onDispatch(kant::TarsCurrentPtr _current, vector<char> &_sResponseBuffer)" << endl;
+  s << TAB << "int onDispatch(kant::KantCurrentPtr _current, vector<char> &_sResponseBuffer)" << endl;
 
   s << TAB << "{" << endl;
   INC_TAB;
@@ -2989,10 +2990,10 @@ void Kant2Cpp::generateH(const ContextPtr& pPtr) const {
   s << "#include <map>" << endl;
   s << "#include <string>" << endl;
   s << "#include <vector>" << endl;
-  s << "#include \"tup/Tars.h\"" << endl;
-  if (_bJsonSupport) s << "#include \"tup/TarsJson.h\"" << endl;
+  s << "#include \"tup/Kant.h\"" << endl;
+  if (_bJsonSupport) s << "#include \"tup/KantJson.h\"" << endl;
   if (_bSqlSupport) s << "#include \"util/tc_mysql.h\"" << endl;
-  if (_bXmlSupport) s << "#include \"tup/TarsXml.h\"" << endl;
+  if (_bXmlSupport) s << "#include \"tup/KantXml.h\"" << endl;
 
   s << "using namespace std;" << endl;
 
@@ -3137,17 +3138,17 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << TAB << "{" << endl;
 //     INC_TAB;
 
-//     s << TAB << "eTarsServerSuccess      = 0," << endl;
-//     s << TAB << "eTarsPacketLess         = 1," << endl;
-//     s << TAB << "eTarsPacketErr          = 2," << endl;
-//     s << TAB << "eTarsServerDecodeErr    = -1," << endl;
-//     s << TAB << "eTarsServerEncodeErr    = -2," << endl;
-//     s << TAB << "eTarsServerNoFuncErr    = -3," << endl;
-//     s << TAB << "eTarsServerNoServantErr = -4," << endl;
-//     s << TAB << "eTarsServerQueueTimeout = -6," << endl;
-//     s << TAB << "eTarsAsyncCallTimeout   = -7," << endl;
-//     s << TAB << "eTarsProxyConnectErr    = -8," << endl;
-//     s << TAB << "eTarsServerUnknownErr   = -99," << endl;
+//     s << TAB << "eKantServerSuccess      = 0," << endl;
+//     s << TAB << "eKantPacketLess         = 1," << endl;
+//     s << TAB << "eKantPacketErr          = 2," << endl;
+//     s << TAB << "eKantServerDecodeErr    = -1," << endl;
+//     s << TAB << "eKantServerEncodeErr    = -2," << endl;
+//     s << TAB << "eKantServerNoFuncErr    = -3," << endl;
+//     s << TAB << "eKantServerNoServantErr = -4," << endl;
+//     s << TAB << "eKantServerQueueTimeout = -6," << endl;
+//     s << TAB << "eKantAsyncCallTimeout   = -7," << endl;
+//     s << TAB << "eKantProxyConnectErr    = -8," << endl;
+//     s << TAB << "eKantServerUnknownErr   = -99," << endl;
 
 //     DEL_TAB;
 //     s << TAB << "};" << endl << endl;
@@ -3164,14 +3165,14 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << TAB << "{" << endl;
 
 //     INC_TAB;
-//     s << TAB << "if(in.length() < sizeof(" + _namespace + "::Int32)) return eTarsPacketLess;" << endl;
+//     s << TAB << "if(in.length() < sizeof(" + _namespace + "::Int32)) return eKantPacketLess;" << endl;
 
 //     s << TAB << "" + _namespace + "::Int32 iHeaderLen;" << endl;
 //     s << TAB << "memcpy(&iHeaderLen, in.c_str(), sizeof(" + _namespace + "::Int32));" << endl;
 
 //     s << TAB << "iHeaderLen = ntohl(iHeaderLen);" << endl;
-//     s << TAB << "if(iHeaderLen < (" + _namespace + "::Int32)sizeof(" + _namespace + "::Int32) || iHeaderLen > 100000000) return eTarsPacketErr;" << endl;
-//     s << TAB << "if((" + _namespace + "::Int32)in.length() < iHeaderLen) return eTarsPacketLess;" << endl;
+//     s << TAB << "if(iHeaderLen < (" + _namespace + "::Int32)sizeof(" + _namespace + "::Int32) || iHeaderLen > 100000000) return eKantPacketErr;" << endl;
+//     s << TAB << "if((" + _namespace + "::Int32)in.length() < iHeaderLen) return eKantPacketLess;" << endl;
 
 //     s << TAB << "out = in.substr(sizeof(" + _namespace + "::Int32), iHeaderLen - sizeof(" + _namespace + "::Int32)); " << endl;
 //     s << TAB << "return 0;" << endl;
@@ -3185,7 +3186,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << TAB << "{" << endl;
 //     INC_TAB;
 
-//     s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> os;" << endl;
+//     s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> os;" << endl;
 //     s << TAB << "os.write(1, 1);" << endl;
 //     s << TAB << "os.write(0, 2);" << endl;
 //     s << TAB << "os.write(0, 3);" << endl;
@@ -3213,7 +3214,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << TAB << "{" << endl;
 //     INC_TAB;
 
-//     s << TAB << _namespace + "::TarsInputStream<" + _namespace + "::BufferReader> is;" << endl;
+//     s << TAB << _namespace + "::KantInputStream<" + _namespace + "::BufferReader> is;" << endl;
 //     s << TAB << "is.setBuffer(in.c_str(), in.length());" << endl;
 //     s << TAB << "is.read(iServerRet, 5, true);" << endl;
 //     s << TAB << "is.read(buffer, 6, true);" << endl;
@@ -3256,7 +3257,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << TAB << "{" << endl;
 
 //     INC_TAB;
-//     s << TAB << _namespace + "::TarsOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
+//     s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
 
 //     for (size_t i = 0; i < vParamDecl.size(); i++)
 //     {
@@ -3269,7 +3270,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     DEL_TAB;
 
 //     s << TAB << "}" << endl;
-//     s << TAB << "catch (" + _namespace + "::TarsException & ex)" << endl;
+//     s << TAB << "catch (" + _namespace + "::KantException & ex)" << endl;
 //     s << TAB << "{" << endl;
 //     INC_TAB;
 //     s << TAB << "return \"\";" << endl;
@@ -3308,7 +3309,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << TAB << _namespace + "::Int32 iRet = 0;" << endl;
 //     s << TAB << "if((iRet = fetchPacket(in, out)) != 0) return iRet;" << endl;
 
-//     s << TAB << _namespace + "::TarsInputStream<" + _namespace + "::BufferReader> _is;" << endl;
+//     s << TAB << _namespace + "::KantInputStream<" + _namespace + "::BufferReader> _is;" << endl;
 //     s << TAB << _namespace + "::Int32 iServerRet=0;" << endl;
 //     s << TAB << "vector<char> buffer;" << endl;
 //     s << TAB << "decodeBasePacket(out, iServerRet, buffer);" << endl;
@@ -3333,10 +3334,10 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 
 //     DEL_TAB;
 //     s << TAB << "}" << endl;
-//     s << TAB << "catch (" + _namespace + "::TarsException & ex)" << endl;
+//     s << TAB << "catch (" + _namespace + "::KantException & ex)" << endl;
 //     s << TAB << "{" << endl;
 //     INC_TAB;
-//     s << TAB << "return eTarsPacketErr;" << endl;
+//     s << TAB << "return eKantPacketErr;" << endl;
 //     DEL_TAB;
 //     s << TAB << "}" << endl;
 
@@ -3367,7 +3368,7 @@ StructPtr Kant2Cpp::findStruct(const ContextPtr& pPtr, const string& id) {
 //     s << "#include <map>" << endl;
 //     s << "#include <string>" << endl;
 //     s << "#include <vector>" << endl;
-//     s << "#include \"tup/Tars.h\"" << endl;
+//     s << "#include \"tup/Kant.h\"" << endl;
 
 //     s << "using namespace std;" << endl;
 

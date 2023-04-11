@@ -1220,7 +1220,7 @@ string Kant2Cpp::generateDispatchAsync(const OperationPtr& pPtr, const string& c
     s << TAB << "if (ServantProxyThreadData::TraceContext::ENP_NORMAL == _trace_param_flag_)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << _namespace << "::JsonValueObjPtr _p_ = new " << _namespace << "::JsonValueObj();" << endl;
+    s << TAB << _namespace << "::JsonValueObjPtr _p_ = std::make_shared<" << _namespace << "::JsonValueObj>();" << endl;
     if (pPtr->getReturnPtr()->getTypePtr()) {
       s << TAB << "_p_->value[\"\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
     }
@@ -1564,7 +1564,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << TAB << "if (ServantProxyThreadData::TraceContext::ENP_NORMAL == _trace_param_flag_)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << _namespace << "::JsonValueObjPtr _p_ = new " << _namespace << "::JsonValueObj();" << endl;
+    s << TAB << _namespace << "::JsonValueObjPtr _p_ = std::make_shared<" << _namespace << "::JsonValueObj>();" << endl;
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       if (vParamDecl[i]->isOut()) continue;
       s << TAB << "_p_->value[\"" << vParamDecl[i]->getTypeIdPtr()->getId() << "\"] = " << _namespace
@@ -1644,7 +1644,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << TAB << "else if (_current->getRequestVersion() == JSONVERSION)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << _namespace << "::JsonValueObjPtr _p = new " << _namespace << "::JsonValueObj();" << endl;
+    s << TAB << _namespace << "::JsonValueObjPtr _p = std::make_shared< " << _namespace << "::JsonValueObj>();" << endl;
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
       if (vParamDecl[i]->isOut()) {
@@ -1727,7 +1727,7 @@ string Kant2Cpp::generateServantDispatch(const OperationPtr& pPtr, const string&
     s << TAB << "if (ServantProxyThreadData::TraceContext::ENP_NORMAL == _trace_param_flag_)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << _namespace << "::JsonValueObjPtr _p_ = new " << _namespace << "::JsonValueObj();" << endl;
+    s << TAB << _namespace << "::JsonValueObjPtr _p_ = std::make_shared<" << _namespace << "::JsonValueObj>();" << endl;
     if (pPtr->getReturnPtr()->getTypePtr()) {
       s << TAB << "_p_->value[\"\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
     }
@@ -1883,7 +1883,7 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     s << TAB << "if (ServantProxyThreadData::TraceContext::ENP_NORMAL == _trace_param_flag_)" << endl;
     s << TAB << "{" << endl;
     INC_TAB;
-    s << TAB << _namespace << "::JsonValueObjPtr _p_ = new " << _namespace << "::JsonValueObj();" << endl;
+    s << TAB << _namespace << "::JsonValueObjPtr _p_ = std::make_shared<" << _namespace << "::JsonValueObj>();" << endl;
     for (size_t i = 0; i < vParamDecl.size(); i++) {
       if (vParamDecl[i]->isOut()) continue;
       s << TAB << "_p_->value[\"" << vParamDecl[i]->getTypeIdPtr()->getId() << "\"] = " << _namespace
@@ -1927,7 +1927,8 @@ string Kant2Cpp::generateHAsync(const OperationPtr& pPtr, const string& cn) cons
     s << TAB << "this->kant_setMasterFlag(true);" << endl;
   }
   s << TAB << "kant::Promise< " << cn << "PrxCallbackPromise::Promise" << sStruct << "Ptr > promise;" << endl;
-  s << TAB << cn << "PrxCallbackPromisePtr callback = new " << cn << "PrxCallbackPromise(promise);" << endl;
+  s << TAB << cn << "PrxCallbackPromisePtr callback = std::make_shared<" << cn << "PrxCallbackPromise>(promise);"
+    << endl;
   s << endl;
   s << TAB << _namespace + "::KantOutputStream<" + _namespace + "::BufferWriterVector> _os;" << endl;
   for (size_t i = 0; i < vParamDecl.size(); i++) {
@@ -2055,7 +2056,8 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "if (ServantProxyThreadData::TraceContext::ENP_NORMAL == _trace_param_flag_)" << endl;
       s << TAB << "{" << endl;
       INC_TAB;
-      s << TAB << _namespace << "::JsonValueObjPtr _p_ = new " << _namespace << "::JsonValueObj();" << endl;
+      s << TAB << _namespace << "::JsonValueObjPtr _p_ = std::make_shared<" << _namespace << "::JsonValueObj>();"
+        << endl;
       for (size_t i = 0; i < vParamDecl.size(); i++) {
         if (vParamDecl[i]->isOut()) continue;
         s << TAB << "_p_->value[\"" << vParamDecl[i]->getTypeIdPtr()->getId() << "\"] = " << _namespace
@@ -2128,7 +2130,8 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
         s << TAB << "if (ServantProxyThreadData::TraceContext::ENP_NORMAL == _trace_param_flag_)" << endl;
         s << TAB << "{" << endl;
         INC_TAB;
-        s << TAB << _namespace << "::JsonValueObjPtr _p_ = new " << _namespace << "::JsonValueObj();" << endl;
+        s << TAB << _namespace << "::JsonValueObjPtr _p_ = std::make_shared<" << _namespace << "::JsonValueObj>();"
+          << endl;
         if (pPtr->getReturnPtr()->getTypePtr()) {
           s << TAB << "_p_->value[\"\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
         }
@@ -2242,7 +2245,8 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "else if (current->getRequestVersion() == JSONVERSION)" << endl;
       s << TAB << "{" << endl;
       INC_TAB;
-      s << TAB << _namespace << "::JsonValueObjPtr _p = new " << _namespace << "::JsonValueObj();" << endl;
+      s << TAB << _namespace << "::JsonValueObjPtr _p = std::make_shared< " << _namespace << "::JsonValueObj>();"
+        << endl;
       for (size_t i = 0; i < vParamDecl.size(); i++) {
         string sParamName = vParamDecl[i]->getTypeIdPtr()->getId();
         if (vParamDecl[i]->isOut()) {
@@ -2309,7 +2313,8 @@ string Kant2Cpp::generateH(const OperationPtr& pPtr, bool bVirtual, const string
       s << TAB << "if (ServantProxyThreadData::TraceContext::ENP_NORMAL == _trace_param_flag_)" << endl;
       s << TAB << "{" << endl;
       INC_TAB;
-      s << TAB << _namespace << "::JsonValueObjPtr _p_ = new " << _namespace << "::JsonValueObj();" << endl;
+      s << TAB << _namespace << "::JsonValueObjPtr _p_ = std::make_shared<" << _namespace << "::JsonValueObj>();"
+        << endl;
       if (pPtr->getReturnPtr()->getTypePtr()) {
         s << TAB << "_p_->value[\"\"] = " << _namespace << "::JsonOutput::writeJson(_ret);" << endl;
       }
@@ -2375,8 +2380,8 @@ string Kant2Cpp::generateHPromiseAsync(const InterfacePtr& pInter, const Operati
   DEL_TAB;
   s << TAB << "};" << endl;
   s << TAB << endl;
-  s << TAB << "typedef kant::KT_AutoPtr< " << pInter->getId() << "PrxCallbackPromise::Promise" << sStruct
-    << " > Promise" << sStruct << "Ptr;" << endl;
+  s << TAB << "typedef std::shared_ptr< " << pInter->getId() << "PrxCallbackPromise::Promise" << sStruct << " > Promise"
+    << sStruct << "Ptr;" << endl;
   s << endl;
   s << TAB << pInter->getId() << "PrxCallbackPromise(const kant::Promise< " << pInter->getId()
     << "PrxCallbackPromise::Promise" << sStruct << "Ptr > &promise)" << endl;
@@ -2424,8 +2429,8 @@ string Kant2Cpp::generateDispatchPromiseAsync(const OperationPtr& pPtr, const st
   s << TAB << "_is.setBuffer(msg->response->sBuffer);" << endl;
   s << endl;
   string sStruct = pPtr->getId();
-  s << TAB << cn << "PrxCallbackPromise::Promise" << sStruct << "Ptr ptr = new " << cn << "PrxCallbackPromise::Promise"
-    << sStruct << "();" << endl;
+  s << TAB << cn << "PrxCallbackPromise::Promise" << sStruct << "Ptr ptr = std::make_shared<" << cn
+    << "PrxCallbackPromise::Promise" << sStruct << ">();" << endl;
   s << endl;
   if (pPtr->getReturnPtr()->getTypePtr() || vParamDecl.size() > 0) {
     s << TAB << "try" << endl;
@@ -2572,7 +2577,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   DEL_TAB;
   s << TAB << "};" << endl;
 
-  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "PrxCallback> " << pPtr->getId() << "PrxCallbackPtr;"
+  s << TAB << "typedef std::shared_ptr<" << pPtr->getId() << "PrxCallback> " << pPtr->getId() << "PrxCallbackPtr;"
     << endl;
   s << endl;
   //生成promise异步回调Proxy
@@ -2628,7 +2633,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << endl;
   DEL_TAB;
   s << TAB << "};" << endl;
-  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "PrxCallbackPromise> " << pPtr->getId()
+  s << TAB << "typedef std::shared_ptr<" << pPtr->getId() << "PrxCallbackPromise> " << pPtr->getId()
     << "PrxCallbackPromisePtr;" << endl;
   s << endl;
   //生成协程异步回调类，用于并发请求
@@ -2717,7 +2722,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
 
   s << TAB << "};" << endl;
 
-  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "CoroPrxCallback> " << pPtr->getId()
+  s << TAB << "typedef std::shared_ptr<" << pPtr->getId() << "CoroPrxCallback> " << pPtr->getId()
     << "CoroPrxCallbackPtr;" << endl;
   s << endl;
 
@@ -2771,7 +2776,7 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   DEL_TAB;
   s << TAB << "};" << endl;
 
-  s << TAB << "typedef kant::KT_AutoPtr<" << pPtr->getId() << "Proxy> " << pPtr->getId() << "Prx;" << endl;
+  s << TAB << "typedef std::shared_ptr<" << pPtr->getId() << "Proxy> " << pPtr->getId() << "Prx;" << endl;
   s << endl;
 
   //生成服务端Servant

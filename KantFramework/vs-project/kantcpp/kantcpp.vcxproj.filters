@@ -427,6 +427,18 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_http2.h">
       <Filter>util\include\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\AdminF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\NodeF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\NotifyF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\QueryF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">

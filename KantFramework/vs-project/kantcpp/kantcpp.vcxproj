@@ -29,6 +29,7 @@
     <ClInclude Include="..\..\kantcpp\servant\promise\type_list.h" />
     <ClInclude Include="..\..\kantcpp\servant\promise\when_all.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\AdapterProxy.h" />
+    <ClInclude Include="..\..\kantcpp\servant\servant\AdminF.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\AdminServant.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\AppCache.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\Application.h" />
@@ -50,11 +51,14 @@
     <ClInclude Include="..\..\kantcpp\servant\servant\KeepAliveNodeF.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\LogF.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\Message.h" />
+    <ClInclude Include="..\..\kantcpp\servant\servant\NodeF.h" />
+    <ClInclude Include="..\..\kantcpp\servant\servant\NotifyF.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\NotifyObserver.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\ObjectProxy.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\ObjectProxyFactory.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\PropertyF.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\PropertyReport.h" />
+    <ClInclude Include="..\..\kantcpp\servant\servant\QueryF.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\RemoteConfig.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\RemoteLogger.h" />
     <ClInclude Include="..\..\kantcpp\servant\servant\RemoteNotify.h" />

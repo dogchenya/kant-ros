@@ -362,6 +362,17 @@ class KT_CoroutineScheduler {
   bool isReady() const { return _ready; }
 
   /**
+	 * 开启epoll模式, 调度器使用run时, 会阻塞在epollwait上, 该epoll对象可以用于网络
+	 */
+  inline KT_Epoller *getEpoller() { return _epoller; }
+
+  /**
+	 * 获取epoller对象
+	 * @return
+	 */
+  KT_Epoller *epoller() { return _epoller; }
+
+  /**
      * 当前协程放弃继续执行
      * @param bFlag: true, 会自动唤醒(等到下次协程调度, 都会再激活当前线程), false: 不再自动唤醒, 除非自己调度该协程(比如put到调度器中)
      */

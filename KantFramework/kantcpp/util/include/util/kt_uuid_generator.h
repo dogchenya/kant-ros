@@ -19,7 +19,7 @@
 
 namespace kant {
 
-class KT_UUIDGenerator : public TC_Singleton<KT_UUIDGenerator> {
+class KT_UUIDGenerator : public KT_Singleton<KT_UUIDGenerator> {
  public:
   KT_UUIDGenerator() : initOK(false) { init(""); }
 
@@ -37,7 +37,11 @@ class KT_UUIDGenerator : public TC_Singleton<KT_UUIDGenerator> {
       return;
     }
 
+#if TARGET_PLATFORM_LINUX || TARGET_PLATFORM_IOS
     pid = (uint32_t)getpid();
+#else
+    pid = (uint32_t)_getpid();
+#endif
     seq = 0;
     initOK = true;
   }

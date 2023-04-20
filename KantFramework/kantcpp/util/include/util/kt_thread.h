@@ -122,7 +122,7 @@ class KT_Thread : public KT_Runable {
      * 注意: autoQuit=true时, 当前所有协程执行完毕, 则线程调度退出(线程也退出了) 
      *      autoQuit=false时, 协程调度器不主动退出, 除非调用协程调度器的terminate
 	 */
-  //KT_ThreadControl startCoroutine(uint32_t iPoolSize, size_t iStackSize, bool autoQuit = false);
+  KT_ThreadControl startCoroutine(uint32_t iPoolSize, size_t iStackSize, bool autoQuit = false);
 
   /**
      * @brief  获取线程控制类.
@@ -196,7 +196,7 @@ class KT_Thread : public KT_Runable {
 	 *  
 	 * @param pThread 线程对象
 	 */
-  //static void coroutineEntry(KT_Thread *pThread, uint32_t iPoolSize, size_t iStackSize, bool autoQuit);
+  static void coroutineEntry(KT_Thread *pThread, uint32_t iPoolSize, size_t iStackSize, bool autoQuit);
 
   /**
      * @brief  运行

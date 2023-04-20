@@ -1,6 +1,6 @@
 ﻿#include "util/kt_thread.h"
 #include "util/kt_port.h"
-//#include "util/kt_coroutine.h"
+#include "util/kt_coroutine.h"
 #include "util/kt_common.h"
 #include <sstream>
 #include <cerrno>
@@ -96,47 +96,47 @@ KT_ThreadControl KT_Thread::start() {
   return KT_ThreadControl(_th);
 }
 
-//void KT_Thread::coroutineEntry(KT_Thread *pThread, uint32_t iPoolSize, size_t iStackSize, bool autoQuit) {
-//  pThread->_scheduler = TC_CoroutineScheduler::create();
-//
-//  pThread->_scheduler->setPoolStackSize(iPoolSize, iStackSize);
-//
-//  if (autoQuit) {
-//    pThread->_scheduler->setNoCoroutineCallback([](TC_CoroutineScheduler *scheduler) { scheduler->terminate(); });
-//  }
-//
-//  pThread->_scheduler->go(std::bind(KT_Thread::threadEntry, pThread));
-//
-//  {
-//    KT_ThreadLock::Lock sync(pThread->_lock);
-//    pThread->_lock.notifyAll();
-//  }
-//
-//  pThread->_scheduler->run();
-//
-//  pThread->_running = false;
-//
-//  pThread->_scheduler.reset();
-//  TC_CoroutineScheduler::reset();
-//}
-//
-//KT_ThreadControl KT_Thread::startCoroutine(uint32_t iPoolSize, size_t iStackSize, bool autoQuit) {
-//  KT_ThreadLock::Lock sync(_lock);
-//
-//  if (_running) {
-//    throw KT_ThreadThreadControl_Exception("[KT_Thread::startCoroutine] thread has start");
-//  }
-//
-//  try {
-//    _th = new std::thread(&KT_Thread::coroutineEntry, this, iPoolSize, iStackSize, autoQuit);
-//  } catch (...) {
-//    throw KT_ThreadThreadControl_Exception("[KT_Thread::startCoroutine] thread start error");
-//  }
-//
-//  _lock.wait();
-//
-//  return KT_ThreadControl(_th);
-//}
+void KT_Thread::coroutineEntry(KT_Thread *pThread, uint32_t iPoolSize, size_t iStackSize, bool autoQuit) {
+  pThread->_scheduler = KT_CoroutineScheduler::create();
+
+  pThread->_scheduler->setPoolStackSize(iPoolSize, iStackSize);
+
+  if (autoQuit) {
+    pThread->_scheduler->setNoCoroutineCallback([](KT_CoroutineScheduler *scheduler) { scheduler->terminate(); });
+  }
+
+  pThread->_scheduler->go(std::bind(KT_Thread::threadEntry, pThread));
+
+  {
+    KT_ThreadLock::Lock sync(pThread->_lock);
+    pThread->_lock.notifyAll();
+  }
+
+  pThread->_scheduler->run();
+
+  pThread->_running = false;
+
+  pThread->_scheduler.reset();
+  KT_CoroutineScheduler::reset();
+}
+
+KT_ThreadControl KT_Thread::startCoroutine(uint32_t iPoolSize, size_t iStackSize, bool autoQuit) {
+  KT_ThreadLock::Lock sync(_lock);
+
+  if (_running) {
+    throw KT_ThreadThreadControl_Exception("[KT_Thread::startCoroutine] thread has start");
+  }
+
+  try {
+    _th = new std::thread(&KT_Thread::coroutineEntry, this, iPoolSize, iStackSize, autoQuit);
+  } catch (...) {
+    throw KT_ThreadThreadControl_Exception("[KT_Thread::startCoroutine] thread start error");
+  }
+
+  _lock.wait();
+
+  return KT_ThreadControl(_th);
+}
 
 void KT_Thread::join() {
   if (!_th) {

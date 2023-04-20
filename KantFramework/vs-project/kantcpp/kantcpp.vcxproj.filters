@@ -44,6 +44,27 @@
     <Filter Include="tools\kantgrammar">
       <UniqueIdentifier>{8c95737f-3722-4294-a133-8d15c7aed718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="servant">
+      <UniqueIdentifier>{42c370aa-7c9d-4e4a-9941-6154c6ed903f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="servant\tup">
+      <UniqueIdentifier>{606fe245-c134-4bba-a7b0-91e0560b7309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="servant\servant">
+      <UniqueIdentifier>{472ceb30-cf63-403d-8138-4426c853e14b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="servant\libservant">
+      <UniqueIdentifier>{6e4f2da0-cc0f-4f72-b15b-157bd5ca151a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="servant\protocol">
+      <UniqueIdentifier>{7db456ea-de58-4235-9ca3-ad953bc07293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="servant\protocol\servant">
+      <UniqueIdentifier>{cbeae0c7-8e3f-4639-82d4-9a3e4d35dda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="servant\promise">
+      <UniqueIdentifier>{e7c9f816-c0f5-4009-9073-c0948ec0ccbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -166,6 +187,246 @@
     <ClInclude Include="..\..\kantcpp\tools\kantparse\kant.tab.hpp">
       <Filter>tools\kantparse</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\tup\KantType.h">
+      <Filter>servant\tup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\tup\Kant.h">
+      <Filter>servant\tup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\tup\KantJson.h">
+      <Filter>servant\tup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_json.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\tup\KantDisplayer.h">
+      <Filter>servant\tup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\tup\KantXml.h">
+      <Filter>servant\tup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_xml.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\tup\RequestF.h">
+      <Filter>servant\tup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\Global.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\RemoteLogger.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\PropertyReport.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\BaseF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\LogF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\bind.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\bind_internal.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\callback.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\exception.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\function.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\promise.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\template_helper.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\type_list.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\promise\when_all.h">
+      <Filter>servant\promise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\AdminServant.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\AppCache.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\Application.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\AppProtocol.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\AsyncProcThread.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\AuthLogic.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\AdapterProxy.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\Communicator.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\CommunicatorEpoll.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\CommunicatorFactory.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\Cookie.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\Current.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\EndpointInfo.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\EndpointManager.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\BaseNotify.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\RemoteNotify.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\Servant.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\ServantHandle.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\ServantHelper.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\ServantProxy.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\ServantProxyFactory.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\StatReport.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\KeepAliveNodeF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\Message.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\NotifyObserver.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\ObjectProxy.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\ObjectProxyFactory.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\RemoteConfig.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_epoll_server.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_transceiver.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_proxy_info.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_base64.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_loop_queue.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\tup\tup.h">
+      <Filter>servant\tup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\EndpointF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_readers_writer_data.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\StatF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\PropertyF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_thread_rwlock.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\ConfigF.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\servant\servant\KantLogger.h">
+      <Filter>servant\servant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeout_queue_map.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeout_queue_new.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_timeout_queue_noid.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_consistent_hash.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_des.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_shm.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_sha.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_consistent_hash_new.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_hashmap.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_hashmap_compact.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_hash_fun.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_mem_queue.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_mem_vector.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_mmap.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_mem_chunk.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_grpc.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_http2.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
@@ -266,6 +527,129 @@
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.tab.cpp">
       <Filter>tools\kantparse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_json.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_xml.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\Global.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\PropertyReport.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\RemoteLogger.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_epoll_server.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_transceiver.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_proxy_info.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_base64.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\Message.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_thread_rwlock.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\RemoteConfig.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\BaseNotify.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\Application.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\AdapterProxy.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\EndpointManager.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\AdminServant.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\AppCache.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\AppProtocol.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\AsyncProcThread.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\AuthLogic.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_des.cpp">
+      <Filter>util\include\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_sha.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_shm.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_consistent_hash_new.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_grpc.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_http2.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\CommunicatorEpoll.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\Current.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\Communicator.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\EndpointInfo.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\KeepAliveNodeF.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\NotifyObserver.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\ObjectProxy.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\RemoteNotify.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\Servant.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\ServantHelper.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\ServantHandle.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\ServantProxyFactory.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\StatReport.cpp">
+      <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\servant\libservant\ServantProxy.cpp">
+      <Filter>servant\libservant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -479,6 +863,42 @@
     <None Include="..\..\kantcpp\tools\kantgrammar\kant.y">
       <Filter>tools\kantgrammar</Filter>
     </None>
+    <None Include="..\..\kantcpp\servant\tup\RequestF.kant">
+      <Filter>servant\tup</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\AdminF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\AuthF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\BaseF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\EndpointF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\ConfigF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\NodeF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\NotifyF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\PropertyF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\QueryF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\StatF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\servant\LogF.kant">
+      <Filter>servant\protocol\servant</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
@@ -499,6 +919,21 @@
     </Text>
     <Text Include="..\..\kantcpp\tools\CMakeLists.txt">
       <Filter>tools</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\servant\tup\CMakeLists.txt">
+      <Filter>servant\tup</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\servant\protocol\servant\CMakeLists.txt">
+      <Filter>servant\protocol\servant</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\servant\CMakeLists.txt">
+      <Filter>servant</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\util\include\CMakeLists.txt">
+      <Filter>util\include</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\servant\libservant\CMakeLists.txt">
+      <Filter>servant\libservant</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

@@ -1276,7 +1276,7 @@ class KT_HttpRequest : public KT_Http {
   ///////////////////////////////////////////////////////////////////
   KT_HttpRequest() {
     KT_HttpRequest::reset();
-    //setUserAgent("Tars-Http");
+    //setUserAgent("Kant-Http");
   }
 
   /**

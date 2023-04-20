@@ -64,11 +64,11 @@ endmacro()
 add_subdirectory(protocol/servant)
 #add_subdirectory(protocol/framework)
 add_subdirectory(tup)
-#add_subdirectory(libservant)
+add_subdirectory(libservant)
 
-#install(DIRECTORY servant DESTINATION include)
-#install(DIRECTORY promise DESTINATION include)
-#install(DIRECTORY tup DESTINATION include)
+install(DIRECTORY servant DESTINATION include)
+install(DIRECTORY promise DESTINATION include)
+install(DIRECTORY tup DESTINATION include)
 #install(DIRECTORY jmem DESTINATION include)
 #install(DIRECTORY script DESTINATION .
 #        PATTERN "*.sh"

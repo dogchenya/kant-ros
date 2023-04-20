@@ -607,7 +607,7 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
   };
 
   /**
-		* @brief 枚举类型,定义日志的四种等级 . 此处级别被修改了，与tars标准不一样
+		* @brief 枚举类型,定义日志的四种等级 . 此处级别被修改了，与kant标准不一样
 		* @brief Enumeration type, defines four levels of logs. This level has been modified and is different from the TARS standard
 		*/
   enum {
@@ -770,7 +770,7 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
 		* @brief TARS记日志
 		* @brief TARS Log
 		*/
-  LoggerStream tars() { return stream(TARS_LOG_LEVEL); }
+  LoggerStream kant() { return stream(TARS_LOG_LEVEL); }
 
   /**
 		* @brief DEBUG记日志
@@ -962,7 +962,7 @@ class RollWrapperInterface {
 		* @brief TARS记日志
 		* @brief TARS Log
 		*/
-  virtual LoggerStream tars() = 0;
+  virtual LoggerStream kant() = 0;
 
   /**
 		* @brief INFO记日志

@@ -23,7 +23,7 @@ class KT_ThreadCond;
 *  
 * 不可重复加锁，即同一个线程不可以重复加锁 
 *  
-* 通常不直接使用，和TC_Monitor配合使用，即TC_ThreadLock; 
+* 通常不直接使用，和KT_Monitor配合使用，即KT_ThreadLock; 
 */
 class UTIL_DLL_API KT_ThreadMutex {
  public:

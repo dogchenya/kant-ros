@@ -652,7 +652,7 @@ class JsonOutput {
   template <typename T>
   static JsonValueObjPtr writeJson(
     const T &v, typename std::enable_if<std::is_convertible<T *, KantStructBase *>::value, void ***>::type dummy = 0) {
-    return JsonValueObjPtr::dynamicCast(v.writeToJson());
+    return std::dynamic_pointer_cast<JsonValueObj>(v.writeToJson());
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////

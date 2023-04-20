@@ -16,7 +16,7 @@ namespace kant {
  * 
  * 没有实现对单件生命周期的管理,使用示例代码如下:
  * 
- * class A : public TC_Singleton<A, CreateStatic,  DefaultLifetime>
+ * class A : public KT_Singleton<A, CreateStatic,  DefaultLifetime>
  * 
  * {
  * 
@@ -205,7 +205,7 @@ struct NoDestroyLifetime {
 // Singleton
 template <typename T, template <typename> class CreatePolicy = CreateUsingNew,
           template <typename> class LifetimePolicy = DefaultLifetime>
-class TC_Singleton {
+class KT_Singleton {
  public:
   typedef T instance_type;
   typedef volatile T volatile_type;
@@ -239,7 +239,7 @@ class TC_Singleton {
     return sin;
   }
 
-  virtual ~TC_Singleton(){};
+  virtual ~KT_Singleton(){};
 
  protected:
   static void destroySingleton() {
@@ -254,16 +254,16 @@ class TC_Singleton {
   static bool __destroyed;
 
  protected:
-  TC_Singleton() = default;
-  TC_Singleton(const TC_Singleton &) = default;
-  TC_Singleton &operator=(const TC_Singleton &) = default;
+  KT_Singleton() = default;
+  KT_Singleton(const KT_Singleton &) = default;
+  KT_Singleton &operator=(const KT_Singleton &) = default;
 };
 
 template <class T, template <class> class CreatePolicy, template <class> class LifetimePolicy>
-bool TC_Singleton<T, CreatePolicy, LifetimePolicy>::__destroyed = false;
+bool KT_Singleton<T, CreatePolicy, LifetimePolicy>::__destroyed = false;
 
 template <class T, template <class> class CreatePolicy, template <class> class LifetimePolicy>
-atomic<T *> TC_Singleton<T, CreatePolicy, LifetimePolicy>::__pInstance = {nullptr};
+atomic<T *> KT_Singleton<T, CreatePolicy, LifetimePolicy>::__pInstance = {nullptr};
 }  // namespace kant
 
 #endif

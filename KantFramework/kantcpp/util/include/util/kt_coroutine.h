@@ -739,4 +739,4 @@ class KT_Coroutine : public KT_Thread {
 
 }  // namespace kant
 
-#endif _KT_COROUTINES_H_
+#endif

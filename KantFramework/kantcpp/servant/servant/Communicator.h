@@ -200,7 +200,7 @@ class SVT_DLL_API Communicator : public KT_ThreadRecMutex {
   void stringToProxy(const string& objectName, T& proxy, const string& setName = "") {
     ServantProxy* pServantProxy = getServantProxy(objectName, setName, true);
     std::shared_ptr<ServantProxy> ptr(pServantProxy);
-    proxy = std::dynamic_pointer_cast<T::element_type>(ptr);
+    proxy = std::dynamic_pointer_cast<typename T::element_type>(ptr);
   }
 
   /**
@@ -367,7 +367,7 @@ class SVT_DLL_API Communicator : public KT_ThreadRecMutex {
   void stringToProxy(const string& objectName, T& proxy, const string& setName, bool rootServant) {
     ServantProxy* pServantProxy = getServantProxy(objectName, setName, rootServant);
     std::shared_ptr<ServantProxy> ptr(pServantProxy);
-    proxy = std::dynamic_pointer_cast<T::element_type>(ptr);
+    proxy = std::dynamic_pointer_cast<typename T::element_type>(ptr);
   }
 
   /**

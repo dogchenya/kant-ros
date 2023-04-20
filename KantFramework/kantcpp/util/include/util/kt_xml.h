@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
+#include <memory>
 
 #include <stdio.h>
 #include "util/kt_ex.h"

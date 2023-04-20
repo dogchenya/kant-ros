@@ -17,7 +17,7 @@
 #ifndef _KANT_CURRENT_H_
 #define _KANT_CURRENT_H_
 
-#include "util/KT_epoll_server.h"
+#include "util/kt_epoll_server.h"
 #include "tup/RequestF.h"
 #include "tup/tup.h"
 #include "servant/BaseF.h"

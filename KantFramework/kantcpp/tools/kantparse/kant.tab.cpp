@@ -62,7 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "kant.y" /* yacc.c:339  */
+#line 1 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:339  */
 
 #include <iostream>
 #include <memory>
@@ -1462,14 +1462,14 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 59 "kant.y" /* yacc.c:1646  */
+#line 59 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1469 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 63 "kant.y" /* yacc.c:1646  */
+#line 63 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     yyerrok;
 }
@@ -1477,7 +1477,7 @@ yyreduce:
     break;
 
   case 7:
-#line 68 "kant.y" /* yacc.c:1646  */
+#line 68 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("`;' missing after definition");
 }
@@ -1485,14 +1485,14 @@ yyreduce:
     break;
 
   case 8:
-#line 72 "kant.y" /* yacc.c:1646  */
+#line 72 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1492 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 80 "kant.y" /* yacc.c:1646  */
+#line 80 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     assert((yyvsp[0]) == 0 || std::dynamic_pointer_cast<Namespace>((yyvsp[0])));
 }
@@ -1500,7 +1500,7 @@ yyreduce:
     break;
 
   case 10:
-#line 84 "kant.y" /* yacc.c:1646  */
+#line 84 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     assert((yyvsp[0]) == 0 || std::dynamic_pointer_cast<Interface>((yyvsp[0])));
 }
@@ -1508,7 +1508,7 @@ yyreduce:
     break;
 
   case 11:
-#line 88 "kant.y" /* yacc.c:1646  */
+#line 88 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     assert((yyvsp[0]) == 0 || std::dynamic_pointer_cast<Struct>((yyvsp[0])));
 }
@@ -1516,14 +1516,14 @@ yyreduce:
     break;
 
   case 12:
-#line 92 "kant.y" /* yacc.c:1646  */
+#line 92 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1523 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 95 "kant.y" /* yacc.c:1646  */
+#line 95 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     assert((yyvsp[0]) == 0 || std::dynamic_pointer_cast<Enum>((yyvsp[0])));
 }
@@ -1531,7 +1531,7 @@ yyreduce:
     break;
 
   case 14:
-#line 99 "kant.y" /* yacc.c:1646  */
+#line 99 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     assert((yyvsp[0]) == 0 || std::dynamic_pointer_cast<Const>((yyvsp[0])));
 }
@@ -1539,7 +1539,7 @@ yyreduce:
     break;
 
   case 15:
-#line 108 "kant.y" /* yacc.c:1646  */
+#line 108 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = (yyvsp[0]);
 }
@@ -1547,7 +1547,7 @@ yyreduce:
     break;
 
   case 16:
-#line 112 "kant.y" /* yacc.c:1646  */
+#line 112 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     if((yyvsp[-2]))
     {
@@ -1565,7 +1565,7 @@ yyreduce:
     break;
 
   case 17:
-#line 131 "kant.y" /* yacc.c:1646  */
+#line 131 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     NamespacePtr c = std::dynamic_pointer_cast<Namespace>(g_parse->currentContainer());
     if(!c)
@@ -1582,7 +1582,7 @@ yyreduce:
     break;
 
   case 18:
-#line 144 "kant.y" /* yacc.c:1646  */
+#line 144 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     g_parse->error("keyword `" + ident->v + "' cannot be used as enumeration name");
@@ -1592,7 +1592,7 @@ yyreduce:
     break;
 
   case 19:
-#line 155 "kant.y" /* yacc.c:1646  */
+#line 155 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = (yyvsp[-1]);
 }
@@ -1600,14 +1600,14 @@ yyreduce:
     break;
 
   case 20:
-#line 159 "kant.y" /* yacc.c:1646  */
+#line 159 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1607 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 167 "kant.y" /* yacc.c:1646  */
+#line 167 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypePtr type        = std::dynamic_pointer_cast<Type>(g_parse->createBuiltin(Builtin::KindLong));
     StringGrammarPtr ident  = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
@@ -1622,7 +1622,7 @@ yyreduce:
     break;
 
   case 22:
-#line 178 "kant.y" /* yacc.c:1646  */
+#line 178 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     g_parse->error("keyword `" + ident->v + "' cannot be used as enumerator");
@@ -1631,7 +1631,7 @@ yyreduce:
     break;
 
   case 23:
-#line 183 "kant.y" /* yacc.c:1646  */
+#line 183 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypePtr type        = std::dynamic_pointer_cast<Type>(g_parse->createBuiltin(Builtin::KindLong));
     StringGrammarPtr ident  = std::dynamic_pointer_cast<StringGrammar>((yyvsp[-2]));
@@ -1648,14 +1648,14 @@ yyreduce:
     break;
 
   case 24:
-#line 196 "kant.y" /* yacc.c:1646  */
+#line 196 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1655 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 204 "kant.y" /* yacc.c:1646  */
+#line 204 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident  = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     ContainerPtr c      = g_parse->currentContainer();
@@ -1674,7 +1674,7 @@ yyreduce:
     break;
 
   case 26:
-#line 219 "kant.y" /* yacc.c:1646  */
+#line 219 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     if((yyvsp[-3]))
     {
@@ -1690,7 +1690,7 @@ yyreduce:
     break;
 
   case 27:
-#line 237 "kant.y" /* yacc.c:1646  */
+#line 237 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[-1]));
     StructPtr sp = std::dynamic_pointer_cast<Struct>(g_parse->findUserType(ident->v));
@@ -1705,14 +1705,14 @@ yyreduce:
     break;
 
   case 28:
-#line 248 "kant.y" /* yacc.c:1646  */
+#line 248 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1712 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 256 "kant.y" /* yacc.c:1646  */
+#line 256 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     StructPtr np = g_parse->getKeyStruct();
@@ -1729,7 +1729,7 @@ yyreduce:
     break;
 
   case 30:
-#line 269 "kant.y" /* yacc.c:1646  */
+#line 269 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     StructPtr np = g_parse->getKeyStruct();
@@ -1746,7 +1746,7 @@ yyreduce:
     break;
 
   case 31:
-#line 288 "kant.y" /* yacc.c:1646  */
+#line 288 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
 
@@ -1767,7 +1767,7 @@ yyreduce:
     break;
 
   case 32:
-#line 305 "kant.y" /* yacc.c:1646  */
+#line 305 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     if((yyvsp[-3]))
     {
@@ -1783,7 +1783,7 @@ yyreduce:
     break;
 
   case 33:
-#line 322 "kant.y" /* yacc.c:1646  */
+#line 322 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = (yyvsp[0]);
 }
@@ -1791,7 +1791,7 @@ yyreduce:
     break;
 
   case 34:
-#line 326 "kant.y" /* yacc.c:1646  */
+#line 326 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     g_parse->error("keyword `" + ident->v + "' cannot be used as interface name");
@@ -1801,21 +1801,21 @@ yyreduce:
     break;
 
   case 35:
-#line 337 "kant.y" /* yacc.c:1646  */
+#line 337 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1808 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 340 "kant.y" /* yacc.c:1646  */
+#line 340 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1815 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 343 "kant.y" /* yacc.c:1646  */
+#line 343 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("`;' missing after definition");
 }
@@ -1823,14 +1823,14 @@ yyreduce:
     break;
 
   case 38:
-#line 347 "kant.y" /* yacc.c:1646  */
+#line 347 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1830 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 361 "kant.y" /* yacc.c:1646  */
+#line 361 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     if((yyvsp[-2]))
     {
@@ -1846,7 +1846,7 @@ yyreduce:
     break;
 
   case 41:
-#line 378 "kant.y" /* yacc.c:1646  */
+#line 378 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypePtr returnType = std::dynamic_pointer_cast<Type>((yyvsp[-1]));
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
@@ -1874,7 +1874,7 @@ yyreduce:
     break;
 
   case 43:
-#line 408 "kant.y" /* yacc.c:1646  */
+#line 408 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = 0;
 }
@@ -1882,14 +1882,14 @@ yyreduce:
     break;
 
   case 44:
-#line 418 "kant.y" /* yacc.c:1646  */
+#line 418 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 1889 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 421 "kant.y" /* yacc.c:1646  */
+#line 421 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypeIdPtr  tsp         = std::dynamic_pointer_cast<TypeId>((yyvsp[0]));
 
@@ -1904,7 +1904,7 @@ yyreduce:
     break;
 
   case 46:
-#line 432 "kant.y" /* yacc.c:1646  */
+#line 432 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypeIdPtr  tsp         = std::dynamic_pointer_cast<TypeId>((yyvsp[0]));
 
@@ -1919,7 +1919,7 @@ yyreduce:
     break;
 
   case 47:
-#line 443 "kant.y" /* yacc.c:1646  */
+#line 443 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     BoolGrammarPtr isOutParam  = std::dynamic_pointer_cast<BoolGrammar>((yyvsp[-1]));
     TypeIdPtr  tsp         = std::dynamic_pointer_cast<TypeId>((yyvsp[0]));
@@ -1935,7 +1935,7 @@ yyreduce:
     break;
 
   case 48:
-#line 455 "kant.y" /* yacc.c:1646  */
+#line 455 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     BoolGrammarPtr isOutParam  = std::dynamic_pointer_cast<BoolGrammar>((yyvsp[-1]));
     TypeIdPtr  tsp         = std::dynamic_pointer_cast<TypeId>((yyvsp[0]));
@@ -1951,7 +1951,7 @@ yyreduce:
     break;
 
   case 49:
-#line 467 "kant.y" /* yacc.c:1646  */
+#line 467 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     BoolGrammarPtr isRouteKeyParam  = std::dynamic_pointer_cast<BoolGrammar>((yyvsp[-1]));
     TypeIdPtr  tsp              = std::dynamic_pointer_cast<TypeId>((yyvsp[0]));
@@ -1967,7 +1967,7 @@ yyreduce:
     break;
 
   case 50:
-#line 479 "kant.y" /* yacc.c:1646  */
+#line 479 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     BoolGrammarPtr isRouteKeyParam = std::dynamic_pointer_cast<BoolGrammar>((yyvsp[-1]));
     TypeIdPtr  tsp             = std::dynamic_pointer_cast<TypeId>((yyvsp[0]));
@@ -1983,7 +1983,7 @@ yyreduce:
     break;
 
   case 51:
-#line 491 "kant.y" /* yacc.c:1646  */
+#line 491 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("'out' must be defined with a type");
 }
@@ -1991,7 +1991,7 @@ yyreduce:
     break;
 
   case 52:
-#line 495 "kant.y" /* yacc.c:1646  */
+#line 495 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("'routekey' must be defined with a type");
 }
@@ -1999,7 +1999,7 @@ yyreduce:
     break;
 
   case 53:
-#line 504 "kant.y" /* yacc.c:1646  */
+#line 504 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     BoolGrammarPtr routekey = std::make_shared<BoolGrammar>();
     routekey->v = true;
@@ -2009,7 +2009,7 @@ yyreduce:
     break;
 
   case 54:
-#line 515 "kant.y" /* yacc.c:1646  */
+#line 515 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     BoolGrammarPtr out = std::make_shared<BoolGrammar>();
     out->v = true;
@@ -2019,7 +2019,7 @@ yyreduce:
     break;
 
   case 55:
-#line 526 "kant.y" /* yacc.c:1646  */
+#line 526 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     NamespacePtr np = std::dynamic_pointer_cast<Namespace>(g_parse->currentContainer());
@@ -2045,7 +2045,7 @@ yyreduce:
     break;
 
   case 56:
-#line 548 "kant.y" /* yacc.c:1646  */
+#line 548 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     if((yyvsp[-3]))
     {
@@ -2064,7 +2064,7 @@ yyreduce:
     break;
 
   case 57:
-#line 568 "kant.y" /* yacc.c:1646  */
+#line 568 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = (yyvsp[0]);
 }
@@ -2072,7 +2072,7 @@ yyreduce:
     break;
 
   case 58:
-#line 572 "kant.y" /* yacc.c:1646  */
+#line 572 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
 
@@ -2082,7 +2082,7 @@ yyreduce:
     break;
 
   case 59:
-#line 578 "kant.y" /* yacc.c:1646  */
+#line 578 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("abstract declarator '<anonymous struct>' used as declaration");
 }
@@ -2090,7 +2090,7 @@ yyreduce:
     break;
 
   case 60:
-#line 587 "kant.y" /* yacc.c:1646  */
+#line 587 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 
 }
@@ -2098,7 +2098,7 @@ yyreduce:
     break;
 
   case 61:
-#line 591 "kant.y" /* yacc.c:1646  */
+#line 591 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    g_parse->error("';' missing after definition");
 }
@@ -2106,14 +2106,14 @@ yyreduce:
     break;
 
   case 62:
-#line 595 "kant.y" /* yacc.c:1646  */
+#line 595 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2113 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 605 "kant.y" /* yacc.c:1646  */
+#line 605 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = std::dynamic_pointer_cast<GrammarBase>((yyvsp[0]));
 }
@@ -2121,7 +2121,7 @@ yyreduce:
     break;
 
   case 64:
-#line 614 "kant.y" /* yacc.c:1646  */
+#line 614 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StructPtr np = std::dynamic_pointer_cast<Struct>(g_parse->currentContainer());
     if(np)
@@ -2143,7 +2143,7 @@ yyreduce:
     break;
 
   case 65:
-#line 632 "kant.y" /* yacc.c:1646  */
+#line 632 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StructPtr np = std::dynamic_pointer_cast<Struct>(g_parse->currentContainer());
     if(np)
@@ -2169,7 +2169,7 @@ yyreduce:
     break;
 
   case 66:
-#line 654 "kant.y" /* yacc.c:1646  */
+#line 654 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StructPtr np = std::dynamic_pointer_cast<Struct>(g_parse->currentContainer());
     if(np)
@@ -2195,7 +2195,7 @@ yyreduce:
     break;
 
   case 67:
-#line 676 "kant.y" /* yacc.c:1646  */
+#line 676 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StructPtr np = std::dynamic_pointer_cast<Struct>(g_parse->currentContainer());
     if(np)
@@ -2216,7 +2216,7 @@ yyreduce:
     break;
 
   case 68:
-#line 693 "kant.y" /* yacc.c:1646  */
+#line 693 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("struct member need 'tag'");
 }
@@ -2224,7 +2224,7 @@ yyreduce:
     break;
 
   case 69:
-#line 697 "kant.y" /* yacc.c:1646  */
+#line 697 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("struct member need 'tag'");
 }
@@ -2232,7 +2232,7 @@ yyreduce:
     break;
 
   case 70:
-#line 701 "kant.y" /* yacc.c:1646  */
+#line 701 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("struct member need 'require' or 'optional'");
 }
@@ -2240,7 +2240,7 @@ yyreduce:
     break;
 
   case 71:
-#line 705 "kant.y" /* yacc.c:1646  */
+#line 705 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("struct member need 'tag' or 'require' or 'optional'");
 }
@@ -2248,7 +2248,7 @@ yyreduce:
     break;
 
   case 72:
-#line 714 "kant.y" /* yacc.c:1646  */
+#line 714 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     IntergerGrammarPtr intVal = std::dynamic_pointer_cast<IntergerGrammar>((yyvsp[0]));
     ostringstream sstr;
@@ -2262,7 +2262,7 @@ yyreduce:
     break;
 
   case 73:
-#line 724 "kant.y" /* yacc.c:1646  */
+#line 724 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     FloatGrammarPtr floatVal = std::dynamic_pointer_cast<FloatGrammar>((yyvsp[0]));
     ostringstream sstr;
@@ -2276,7 +2276,7 @@ yyreduce:
     break;
 
   case 74:
-#line 734 "kant.y" /* yacc.c:1646  */
+#line 734 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     ConstGrammarPtr c = std::make_shared<ConstGrammar>();
@@ -2288,7 +2288,7 @@ yyreduce:
     break;
 
   case 75:
-#line 742 "kant.y" /* yacc.c:1646  */
+#line 742 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     ConstGrammarPtr c = std::make_shared<ConstGrammar>();
@@ -2300,7 +2300,7 @@ yyreduce:
     break;
 
   case 76:
-#line 750 "kant.y" /* yacc.c:1646  */
+#line 750 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     ConstGrammarPtr c = std::make_shared<ConstGrammar>();
@@ -2312,7 +2312,7 @@ yyreduce:
     break;
 
   case 77:
-#line 758 "kant.y" /* yacc.c:1646  */
+#line 758 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
 
@@ -2329,7 +2329,7 @@ yyreduce:
     break;
 
   case 78:
-#line 771 "kant.y" /* yacc.c:1646  */
+#line 771 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 
     StringGrammarPtr scoped = std::dynamic_pointer_cast<StringGrammar>((yyvsp[-2]));
@@ -2348,7 +2348,7 @@ yyreduce:
     break;
 
   case 79:
-#line 791 "kant.y" /* yacc.c:1646  */
+#line 791 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     NamespacePtr np = std::dynamic_pointer_cast<Namespace>(g_parse->currentContainer());
     if(!np)
@@ -2365,7 +2365,7 @@ yyreduce:
     break;
 
   case 80:
-#line 809 "kant.y" /* yacc.c:1646  */
+#line 809 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypePtr type = std::dynamic_pointer_cast<Type>((yyvsp[-1]));
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
@@ -2378,7 +2378,7 @@ yyreduce:
     break;
 
   case 81:
-#line 818 "kant.y" /* yacc.c:1646  */
+#line 818 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypePtr type = g_parse->createVector(std::dynamic_pointer_cast<Type>((yyvsp[-4])));
     IntergerGrammarPtr iPtrSize = std::dynamic_pointer_cast<IntergerGrammar>((yyvsp[-1]));
@@ -2392,7 +2392,7 @@ yyreduce:
     break;
 
   case 82:
-#line 828 "kant.y" /* yacc.c:1646  */
+#line 828 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypePtr type = g_parse->createVector(std::dynamic_pointer_cast<Type>((yyvsp[-2])));
     //IntergerGrammarPtr iPtrSize = std::dynamic_pointer_cast<IntergerGrammar>($4);
@@ -2406,7 +2406,7 @@ yyreduce:
     break;
 
   case 83:
-#line 838 "kant.y" /* yacc.c:1646  */
+#line 838 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     TypePtr type = std::dynamic_pointer_cast<Type>((yyvsp[-3]));
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[-2]));
@@ -2419,7 +2419,7 @@ yyreduce:
     break;
 
   case 84:
-#line 847 "kant.y" /* yacc.c:1646  */
+#line 847 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     g_parse->error("keyword `" + ident->v + "' cannot be used as data member name");
@@ -2428,7 +2428,7 @@ yyreduce:
     break;
 
   case 85:
-#line 852 "kant.y" /* yacc.c:1646  */
+#line 852 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("missing data member name");
 }
@@ -2436,7 +2436,7 @@ yyreduce:
     break;
 
   case 86:
-#line 856 "kant.y" /* yacc.c:1646  */
+#line 856 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     g_parse->error("unkown type");
 }
@@ -2444,7 +2444,7 @@ yyreduce:
     break;
 
   case 87:
-#line 865 "kant.y" /* yacc.c:1646  */
+#line 865 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 
     TypePtr type = std::dynamic_pointer_cast<Type>((yyvsp[-2]));
@@ -2457,7 +2457,7 @@ yyreduce:
     break;
 
   case 88:
-#line 874 "kant.y" /* yacc.c:1646  */
+#line 874 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = (yyvsp[0]);
 }
@@ -2465,7 +2465,7 @@ yyreduce:
     break;
 
   case 89:
-#line 878 "kant.y" /* yacc.c:1646  */
+#line 878 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    g_parse->error("array missing size");
 }
@@ -2473,7 +2473,7 @@ yyreduce:
     break;
 
   case 90:
-#line 887 "kant.y" /* yacc.c:1646  */
+#line 887 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindBool);
 }
@@ -2481,7 +2481,7 @@ yyreduce:
     break;
 
   case 91:
-#line 891 "kant.y" /* yacc.c:1646  */
+#line 891 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindByte);
 }
@@ -2489,7 +2489,7 @@ yyreduce:
     break;
 
   case 92:
-#line 895 "kant.y" /* yacc.c:1646  */
+#line 895 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindShort,true);
 }
@@ -2497,7 +2497,7 @@ yyreduce:
     break;
 
   case 93:
-#line 899 "kant.y" /* yacc.c:1646  */
+#line 899 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindShort);
 }
@@ -2505,7 +2505,7 @@ yyreduce:
     break;
 
   case 94:
-#line 903 "kant.y" /* yacc.c:1646  */
+#line 903 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindInt,true);
 }
@@ -2513,7 +2513,7 @@ yyreduce:
     break;
 
   case 95:
-#line 907 "kant.y" /* yacc.c:1646  */
+#line 907 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindInt);
 }
@@ -2521,7 +2521,7 @@ yyreduce:
     break;
 
   case 96:
-#line 911 "kant.y" /* yacc.c:1646  */
+#line 911 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindLong,true);
 }
@@ -2529,7 +2529,7 @@ yyreduce:
     break;
 
   case 97:
-#line 915 "kant.y" /* yacc.c:1646  */
+#line 915 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindLong);
 }
@@ -2537,7 +2537,7 @@ yyreduce:
     break;
 
   case 98:
-#line 919 "kant.y" /* yacc.c:1646  */
+#line 919 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindFloat);
 }
@@ -2545,7 +2545,7 @@ yyreduce:
     break;
 
   case 99:
-#line 923 "kant.y" /* yacc.c:1646  */
+#line 923 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindDouble);
 }
@@ -2553,7 +2553,7 @@ yyreduce:
     break;
 
   case 100:
-#line 927 "kant.y" /* yacc.c:1646  */
+#line 927 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     (yyval) = g_parse->createBuiltin(Builtin::KindString);
 }
@@ -2561,7 +2561,7 @@ yyreduce:
     break;
 
   case 101:
-#line 931 "kant.y" /* yacc.c:1646  */
+#line 931 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    (yyval) = std::dynamic_pointer_cast<GrammarBase>((yyvsp[0]));
 }
@@ -2569,7 +2569,7 @@ yyreduce:
     break;
 
   case 102:
-#line 935 "kant.y" /* yacc.c:1646  */
+#line 935 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    (yyval) = std::dynamic_pointer_cast<GrammarBase>((yyvsp[0]));
 }
@@ -2577,7 +2577,7 @@ yyreduce:
     break;
 
   case 103:
-#line 939 "kant.y" /* yacc.c:1646  */
+#line 939 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     TypePtr sp = g_parse->findUserType(ident->v);
@@ -2594,7 +2594,7 @@ yyreduce:
     break;
 
   case 104:
-#line 957 "kant.y" /* yacc.c:1646  */
+#line 957 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    (yyval) = std::dynamic_pointer_cast<GrammarBase>(g_parse->createVector(std::dynamic_pointer_cast<Type>((yyvsp[-1]))));
 }
@@ -2602,7 +2602,7 @@ yyreduce:
     break;
 
   case 105:
-#line 961 "kant.y" /* yacc.c:1646  */
+#line 961 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    g_parse->error("vector error");
 }
@@ -2610,7 +2610,7 @@ yyreduce:
     break;
 
   case 106:
-#line 965 "kant.y" /* yacc.c:1646  */
+#line 965 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    g_parse->error("vector missing '>'");
 }
@@ -2618,7 +2618,7 @@ yyreduce:
     break;
 
   case 107:
-#line 969 "kant.y" /* yacc.c:1646  */
+#line 969 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    g_parse->error("vector missing type");
 }
@@ -2626,7 +2626,7 @@ yyreduce:
     break;
 
   case 108:
-#line 978 "kant.y" /* yacc.c:1646  */
+#line 978 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    (yyval) = std::dynamic_pointer_cast<GrammarBase>(g_parse->createMap(std::dynamic_pointer_cast<Type>((yyvsp[-3])), std::dynamic_pointer_cast<Type>((yyvsp[-1]))));
 }
@@ -2634,7 +2634,7 @@ yyreduce:
     break;
 
   case 109:
-#line 982 "kant.y" /* yacc.c:1646  */
+#line 982 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
    g_parse->error("map error");
 }
@@ -2642,14 +2642,14 @@ yyreduce:
     break;
 
   case 110:
-#line 991 "kant.y" /* yacc.c:1646  */
+#line 991 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2649 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 994 "kant.y" /* yacc.c:1646  */
+#line 994 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr ident = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
     ident->v = "::" + ident->v;
@@ -2659,7 +2659,7 @@ yyreduce:
     break;
 
   case 112:
-#line 1000 "kant.y" /* yacc.c:1646  */
+#line 1000 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
     StringGrammarPtr scoped = std::dynamic_pointer_cast<StringGrammar>((yyvsp[-2]));
     StringGrammarPtr ident  = std::dynamic_pointer_cast<StringGrammar>((yyvsp[0]));
@@ -2671,175 +2671,175 @@ yyreduce:
     break;
 
   case 113:
-#line 1013 "kant.y" /* yacc.c:1646  */
+#line 1013 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2678 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 1016 "kant.y" /* yacc.c:1646  */
+#line 1016 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2685 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 1019 "kant.y" /* yacc.c:1646  */
+#line 1019 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2692 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 1022 "kant.y" /* yacc.c:1646  */
+#line 1022 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2699 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 1025 "kant.y" /* yacc.c:1646  */
+#line 1025 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2706 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 1028 "kant.y" /* yacc.c:1646  */
+#line 1028 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2713 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 1031 "kant.y" /* yacc.c:1646  */
+#line 1031 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2720 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 1034 "kant.y" /* yacc.c:1646  */
+#line 1034 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2727 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 1037 "kant.y" /* yacc.c:1646  */
+#line 1037 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2734 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 1040 "kant.y" /* yacc.c:1646  */
+#line 1040 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2741 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 1043 "kant.y" /* yacc.c:1646  */
+#line 1043 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2748 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 1046 "kant.y" /* yacc.c:1646  */
+#line 1046 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2755 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 1049 "kant.y" /* yacc.c:1646  */
+#line 1049 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2762 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 1052 "kant.y" /* yacc.c:1646  */
+#line 1052 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2769 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 1055 "kant.y" /* yacc.c:1646  */
+#line 1055 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2776 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 1058 "kant.y" /* yacc.c:1646  */
+#line 1058 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2783 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 1061 "kant.y" /* yacc.c:1646  */
+#line 1061 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2790 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 1064 "kant.y" /* yacc.c:1646  */
+#line 1064 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2797 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 1067 "kant.y" /* yacc.c:1646  */
+#line 1067 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2804 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 1070 "kant.y" /* yacc.c:1646  */
+#line 1070 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2811 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 133:
-#line 1073 "kant.y" /* yacc.c:1646  */
+#line 1073 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2818 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 134:
-#line 1076 "kant.y" /* yacc.c:1646  */
+#line 1076 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2825 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 135:
-#line 1079 "kant.y" /* yacc.c:1646  */
+#line 1079 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2832 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 136:
-#line 1082 "kant.y" /* yacc.c:1646  */
+#line 1082 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2839 "kant.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 137:
-#line 1085 "kant.y" /* yacc.c:1646  */
+#line 1085 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1646  */
     {
 }
 #line 2846 "kant.tab.cpp" /* yacc.c:1646  */
@@ -3074,7 +3074,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 1089 "kant.y" /* yacc.c:1906  */
+#line 1089 "/home/xuchen/github/kant-ros/KantFramework/kantcpp/tools/kantgrammar/kant.y" /* yacc.c:1906  */
 
 
 

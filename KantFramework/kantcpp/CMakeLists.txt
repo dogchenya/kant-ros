@@ -43,8 +43,8 @@ install(SCRIPT ${CLEAR_INCLUDE})
 message("PROJECT_SOURCE_DIR:              ${PROJECT_SOURCE_DIR}")
 include_directories(${PROJECT_SOURCE_DIR}/util/include)
 
-#include_directories(${PROJECT_SOURCE_DIR}/servant)
-#include_directories(${PROJECT_SOURCE_DIR}/servant/protocol)
+include_directories(${PROJECT_SOURCE_DIR}/servant)
+include_directories(${PROJECT_SOURCE_DIR}/servant/protocol)
 
 IF(WIN32)
 include_directories(${PROJECT_SOURCE_DIR}/util/src/epoll_windows)

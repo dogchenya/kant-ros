@@ -9,7 +9,7 @@ set(KANT_CPP_COMMON "1")
 
 include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/Common.cmake")
 
-#include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/Buildkantcpp.cmake")
+include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/BuildKantCpp.cmake")
 
 include("${PROJECT_SOURCE_DIR}/kantcpp/cmake/Thirdparty.cmake")
 

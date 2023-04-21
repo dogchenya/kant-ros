@@ -14,7 +14,7 @@ if("${KANT_CPP_COMMON}" STREQUAL "")
 
     include("${PROJECT_SOURCE_DIR}/cmake/Common.cmake")
 
-    #include("${PROJECT_SOURCE_DIR}/cmake/BuildTarsCpp.cmake")
+    include("${PROJECT_SOURCE_DIR}/cmake/BuildKantCpp.cmake")
 
     include("${PROJECT_SOURCE_DIR}/cmake/Thirdparty.cmake")
 

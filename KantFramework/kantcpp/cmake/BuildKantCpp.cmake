@@ -7,41 +7,41 @@ include_directories(./)
 
 FILE(GLOB_RECURSE DIR_SRCS "*.cpp")
 
-FILE(GLOB_RECURSE TARS_LIST "${CMAKE_CURRENT_SOURCE_DIR}/*.tars")
+FILE(GLOB_RECURSE KANT_LIST "${CMAKE_CURRENT_SOURCE_DIR}/*.kant")
 FILE(GLOB_RECURSE PB_LIST "${CMAKE_CURRENT_SOURCE_DIR}/*.proto")
 
-set(TARS_LIST_DEPENDS)
+set(KANT_LIST_DEPENDS)
 set(PB_LIST_DEPENDS)
-if (TARS_LIST)
+if (KANT_LIST)
     set(CLEAN_LIST)
 
-    foreach (TARS_SRC ${TARS_LIST})
-        get_filename_component(NAME_WE ${TARS_SRC} NAME_WE)
-        get_filename_component(PATH ${TARS_SRC} PATH)
+    foreach (KANT_SRC ${KANT_LIST})
+        get_filename_component(NAME_WE ${KANT_SRC} NAME_WE)
+        get_filename_component(PATH ${KANT_SRC} PATH)
 
-        set(TARS_H ${NAME_WE}.h)
+        set(KANT_H ${NAME_WE}.h)
 
-        set(CUR_TARS_GEN ${PATH}/${TARS_H})
-        LIST(APPEND TARS_LIST_DEPENDS ${CUR_TARS_GEN})
+        set(CUR_KANT_GEN ${PATH}/${KANT_H})
+        LIST(APPEND KANT_LIST_DEPENDS ${CUR_KANT_GEN})
         
-        add_custom_command(OUTPUT ${CUR_TARS_GEN}
+        add_custom_command(OUTPUT ${CUR_KANT_GEN}
                 WORKING_DIRECTORY ${PATH}
-                DEPENDS ${TARS2CPP} ${TARS_SRC}
-                COMMAND ${TARS2CPP} ${TARS_SRC}
-                COMMENT "${TARS2CPP} ${TARS_SRC}")
+                DEPENDS ${KANT2CPP} ${KANT_SRC}
+                COMMAND ${KANT2CPP} ${KANT_SRC}
+                COMMENT "${KANT2CPP} ${KANT_SRC}")
 
-        list(APPEND CLEAN_LIST ${PATH}/${TARS_H})
+        list(APPEND CLEAN_LIST ${PATH}/${KANT_H})
 
     endforeach ()
 
     set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${CLEAN_LIST}")
 
-    set(TARS_TARGET "TARS_${MODULE}")  
-    add_custom_target(${TARS_TARGET} ALL DEPENDS ${TARS_LIST_DEPENDS} tars2cpp)
+    set(KANT_TARGET "KANT_${MODULE}")  
+    add_custom_target(${KANT_TARGET} ALL DEPENDS ${KANT_LIST_DEPENDS} kant2cpp)
 
     add_executable(${MODULE} ${DIR_SRCS})
 
-    add_dependencies(${MODULE} ${TARS_TARGET})
+    add_dependencies(${MODULE} ${KANT_TARGET})
     
 elseif(PB_LIST)
     set(CLEAN_LIST)
@@ -59,7 +59,7 @@ elseif(PB_LIST)
 
         add_custom_command(OUTPUT ${CUR_PB_GEN}
                 WORKING_DIRECTORY ${PATH}
-                DEPENDS ${PROTO2TARS} ${_PROTOBUF_PROTOC}
+                DEPENDS ${PROTO2KANT} ${_PROTOBUF_PROTOC}
                 COMMAND ${_PROTOBUF_PROTOC} -I "${PATH}"
                             "${PB_SRC}" --cpp_out "${PATH}"
                 COMMENT "${_PROTOBUF_PROTOC} ${PB_SRC} ${PATH} ${CUR_PB_GEN}")
@@ -69,38 +69,38 @@ elseif(PB_LIST)
 
     set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${CLEAN_LIST}")
 
-    set(TARS_TARGET "TARS_${MODULE}")  
-    add_custom_target(${TARS_TARGET} ALL DEPENDS ${PB_LIST_DEPENDS})
+    set(KANT_TARGET "KANT_${MODULE}")  
+    add_custom_target(${KANT_TARGET} ALL DEPENDS ${PB_LIST_DEPENDS})
     add_executable(${MODULE} ${CLEAN_LIST} ${DIR_SRCS})
-    add_dependencies(${MODULE} ${TARS_TARGET})
+    add_dependencies(${MODULE} ${KANT_TARGET})
 else()
     add_executable(${MODULE} ${DIR_SRCS})
 endif()
 
 if("${DEPS}" STREQUAL "")
-    add_dependencies(${MODULE} tarsservant tarsutil)
+    add_dependencies(${MODULE} kantservant kantutil)
 else()
     string(REPLACE " " ";" DEP_LIST ${DEPS})
-    add_dependencies(${MODULE} ${DEP_LIST} tarsservant tarsutil)
+    add_dependencies(${MODULE} ${DEP_LIST} kantservant kantutil)
 endif()
 
-target_link_libraries(${MODULE} tarsservant tarsutil)
+target_link_libraries(${MODULE} kantservant kantutil)
 
-if(TARS_SSL)
-    target_link_libraries(${MODULE} tarsservant tarsutil ${LIB_SSL} ${LIB_CRYPTO})
+if(KANT_SSL)
+    target_link_libraries(${MODULE} kantservant kantutil ${LIB_SSL} ${LIB_CRYPTO})
 
     if(WIN32)
         target_link_libraries(${MODULE} Crypt32)
     endif()
 endif()
 
-if(TARS_HTTP2)
+if(KANT_HTTP2)
     target_link_libraries(${MODULE} ${LIB_HTTP2} ${LIB_PROTOBUF})
 endif()
 
-if(TARS_GPERF)
+if(KANT_GPERF)
     target_link_libraries(${MODULE} ${LIB_GPERF})
-endif(TARS_GPERF)
+endif(KANT_GPERF)
 
 SET(MODULE-TGZ "${CMAKE_BINARY_DIR}/${MODULE}.tgz")
 SET(RUN_DEPLOY_COMMAND_FILE "${PROJECT_BINARY_DIR}/run-deploy-${MODULE}.cmake")

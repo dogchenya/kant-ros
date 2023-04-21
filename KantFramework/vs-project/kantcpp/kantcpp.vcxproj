@@ -232,6 +232,10 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_xml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\kantcpp\cmake\BuildKantCpp.cmake" />
+    <None Include="..\..\kantcpp\cmake\Common.cmake" />
+    <None Include="..\..\kantcpp\cmake\ParseAsm.cmake" />
+    <None Include="..\..\kantcpp\cmake\Thirdparty.cmake" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServant.kant" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\config.conf" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.kant" />

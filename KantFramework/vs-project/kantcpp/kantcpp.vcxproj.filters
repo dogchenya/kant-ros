@@ -86,6 +86,9 @@
     <Filter Include="examples\CoroutineDemo\testParallelCoro">
       <UniqueIdentifier>{4d07cb27-0e4b-4a77-8b4f-88438f5ba841}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cmake">
+      <UniqueIdentifier>{cf0c5b39-33aa-4068-8f52-88a95d022111}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -979,6 +982,18 @@
     </None>
     <None Include="..\..\kantcpp\examples\CoroutineDemo\README.md">
       <Filter>examples\CoroutineDemo</Filter>
+    </None>
+    <None Include="..\..\kantcpp\cmake\Common.cmake">
+      <Filter>cmake</Filter>
+    </None>
+    <None Include="..\..\kantcpp\cmake\ParseAsm.cmake">
+      <Filter>cmake</Filter>
+    </None>
+    <None Include="..\..\kantcpp\cmake\Thirdparty.cmake">
+      <Filter>cmake</Filter>
+    </None>
+    <None Include="..\..\kantcpp\cmake\BuildKantCpp.cmake">
+      <Filter>cmake</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

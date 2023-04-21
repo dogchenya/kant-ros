@@ -236,6 +236,7 @@
     <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\config.conf" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.kant" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\config.conf" />
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\README.md" />
     <None Include="..\..\kantcpp\servant\protocol\servant\AdminF.kant" />
     <None Include="..\..\kantcpp\servant\protocol\servant\AuthF.kant" />
     <None Include="..\..\kantcpp\servant\protocol\servant\BaseF.kant" />
@@ -465,9 +466,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\examples\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\AServer\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\BServer\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\client\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\CMakeLists.txt" />

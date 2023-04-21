@@ -54,8 +54,9 @@ add_subdirectory(util)
 add_subdirectory(tools)
 add_subdirectory(servant)
 
+add_subdirectory(examples)
 IF (NOT ${ONLY_LIB})
-# add_subdirectory(examples)
+
 # add_subdirectory(unit-test)
 ENDIF()
 

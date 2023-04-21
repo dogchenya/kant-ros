@@ -977,6 +977,9 @@
     <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.kant">
       <Filter>examples\CoroutineDemo\BServer</Filter>
     </None>
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\README.md">
+      <Filter>examples\CoroutineDemo</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
@@ -1027,6 +1030,12 @@
     </Text>
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\CMakeLists.txt">
       <Filter>examples\CoroutineDemo\testParallelCoro</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\CMakeLists.txt">
+      <Filter>examples</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\CMakeLists.txt">
+      <Filter>examples\CoroutineDemo</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

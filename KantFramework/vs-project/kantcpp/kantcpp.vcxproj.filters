@@ -65,6 +65,27 @@
     <Filter Include="servant\promise">
       <UniqueIdentifier>{e7c9f816-c0f5-4009-9073-c0948ec0ccbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="examples">
+      <UniqueIdentifier>{3e9dd969-25b1-4052-a1c4-01051e8392fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\CoroutineDemo">
+      <UniqueIdentifier>{aec75c4e-41ef-4c7d-8cdc-7e0da8e0abe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\CoroutineDemo\AServer">
+      <UniqueIdentifier>{694c048d-1006-43d2-925c-60347824c6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\CoroutineDemo\BServer">
+      <UniqueIdentifier>{9a6d3bdb-3eec-49d8-833d-51a26226c295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\CoroutineDemo\client">
+      <UniqueIdentifier>{e76744e2-8195-4c32-8d06-873992627bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\CoroutineDemo\testCoro">
+      <UniqueIdentifier>{e61bef4b-12a4-4535-a154-0aaa65a8581e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\CoroutineDemo\testParallelCoro">
+      <UniqueIdentifier>{4d07cb27-0e4b-4a77-8b4f-88438f5ba841}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -439,6 +460,18 @@
     <ClInclude Include="..\..\kantcpp\servant\servant\QueryF.h">
       <Filter>servant\servant</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServantImp.h">
+      <Filter>examples\CoroutineDemo\AServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.h">
+      <Filter>examples\CoroutineDemo\AServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServantImp.h">
+      <Filter>examples\CoroutineDemo\BServer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServer.h">
+      <Filter>examples\CoroutineDemo\BServer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
@@ -662,6 +695,27 @@
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\servant\libservant\ServantProxy.cpp">
       <Filter>servant\libservant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServantImp.cpp">
+      <Filter>examples\CoroutineDemo\AServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.cpp">
+      <Filter>examples\CoroutineDemo\AServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServantImp.cpp">
+      <Filter>examples\CoroutineDemo\BServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServer.cpp">
+      <Filter>examples\CoroutineDemo\BServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\client\main.cpp">
+      <Filter>examples\CoroutineDemo\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\main.cpp">
+      <Filter>examples\CoroutineDemo\testCoro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\main.cpp">
+      <Filter>examples\CoroutineDemo\testParallelCoro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -911,6 +965,18 @@
     <None Include="..\..\kantcpp\servant\protocol\servant\LogF.kant">
       <Filter>servant\protocol\servant</Filter>
     </None>
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\config.conf">
+      <Filter>examples\CoroutineDemo\AServer</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\config.conf">
+      <Filter>examples\CoroutineDemo\BServer</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServant.kant">
+      <Filter>examples\CoroutineDemo\AServer</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.kant">
+      <Filter>examples\CoroutineDemo\BServer</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
@@ -946,6 +1012,21 @@
     </Text>
     <Text Include="..\..\kantcpp\servant\libservant\CMakeLists.txt">
       <Filter>servant\libservant</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\AServer\CMakeLists.txt">
+      <Filter>examples\CoroutineDemo\AServer</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\BServer\CMakeLists.txt">
+      <Filter>examples\CoroutineDemo\BServer</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\client\CMakeLists.txt">
+      <Filter>examples\CoroutineDemo\client</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\CMakeLists.txt">
+      <Filter>examples\CoroutineDemo\testCoro</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\CMakeLists.txt">
+      <Filter>examples\CoroutineDemo\testParallelCoro</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

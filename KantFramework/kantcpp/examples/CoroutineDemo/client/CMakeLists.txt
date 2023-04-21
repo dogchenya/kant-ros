@@ -1,0 +1,1 @@
+﻿build_kant_server("CoroutineDemoClient" "CoroutineDemoAServer CoroutineDemoBServer")

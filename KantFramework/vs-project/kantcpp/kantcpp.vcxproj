@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServantImp.h" />
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.h" />
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServantImp.h" />
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServer.h" />
     <ClInclude Include="..\..\kantcpp\servant\promise\bind.h" />
     <ClInclude Include="..\..\kantcpp\servant\promise\bind_internal.h" />
     <ClInclude Include="..\..\kantcpp\servant\promise\callback.h" />
@@ -145,6 +149,13 @@
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\sys\epoll.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServantImp.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServantImp.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServer.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\client\main.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\main.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\main.cpp" />
     <ClCompile Include="..\..\kantcpp\servant\libservant\AdapterProxy.cpp" />
     <ClCompile Include="..\..\kantcpp\servant\libservant\AdminServant.cpp" />
     <ClCompile Include="..\..\kantcpp\servant\libservant\AppCache.cpp" />
@@ -221,6 +232,10 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_xml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServant.kant" />
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\config.conf" />
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.kant" />
+    <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\config.conf" />
     <None Include="..\..\kantcpp\servant\protocol\servant\AdminF.kant" />
     <None Include="..\..\kantcpp\servant\protocol\servant\AuthF.kant" />
     <None Include="..\..\kantcpp\servant\protocol\servant\BaseF.kant" />
@@ -450,6 +465,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\AServer\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\BServer\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\client\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\libservant\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\protocol\servant\CMakeLists.txt" />

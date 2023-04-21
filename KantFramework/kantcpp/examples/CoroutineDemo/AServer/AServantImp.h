@@ -28,11 +28,11 @@ class AServantImp : public Test::AServant {
   /**
 	 *
 	 */
-  virtual int test(tars::KantCurrentPtr current);
+  virtual int test(kant::KantCurrentPtr current);
 
-  tars::Int32 testInt(tars::Int32 iIn, tars::Int32 &iOut, tars::KantCurrentPtr current);
+  kant::Int32 testInt(kant::Int32 iIn, kant::Int32 &iOut, kant::KantCurrentPtr current);
 
-  tars::Int32 testStr(const std::string &sIn, std::string &sOut, tars::KantCurrentPtr current);
+  kant::Int32 testStr(const std::string &sIn, std::string &sOut, kant::KantCurrentPtr current);
 
  private:
 };

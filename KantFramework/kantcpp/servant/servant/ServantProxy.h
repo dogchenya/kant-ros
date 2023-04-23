@@ -660,7 +660,7 @@ class HttpServantProxyCallback : virtual public ServantProxyCallback {
  */
 class EndpointManagerThread;
 
-class ServantProxy : public KT_ThreadMutex, std::enable_shared_from_this<ServantProxy> {
+class ServantProxy : public KT_ThreadMutex, public std::enable_shared_from_this<ServantProxy> {
  public:
   /**
      * 通过status传递数据时用到的缺省字符串

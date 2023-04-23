@@ -19,8 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServant.h" />
     <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServantImp.h" />
     <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.h" />
+    <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.h" />
     <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServantImp.h" />
     <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServer.h" />
     <ClInclude Include="..\..\kantcpp\servant\promise\bind.h" />
@@ -150,12 +152,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServantImp.cpp" />
-    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServantImp.cpp" />
-    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServer.cpp" />
-    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\client\main.cpp" />
-    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\main.cpp" />
-    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\main.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\client\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\kantcpp\servant\libservant\AdapterProxy.cpp" />
     <ClCompile Include="..\..\kantcpp\servant\libservant\AdminServant.cpp" />
     <ClCompile Include="..\..\kantcpp\servant\libservant\AppCache.cpp" />
@@ -184,7 +196,9 @@
     <ClCompile Include="..\..\kantcpp\servant\libservant\ServantProxy.cpp" />
     <ClCompile Include="..\..\kantcpp\servant\libservant\ServantProxyFactory.cpp" />
     <ClCompile Include="..\..\kantcpp\servant\libservant\StatReport.cpp" />
-    <ClCompile Include="..\..\kantcpp\tools\kant2cpp\main.cpp" />
+    <ClCompile Include="..\..\kantcpp\tools\kant2cpp\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\kantcpp\tools\kant2cpp\kant2cpp.cpp" />
     <ClCompile Include="..\..\kantcpp\tools\kantparse\element.cpp" />
     <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.lex.cpp" />
@@ -590,7 +604,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;$(ProjectDir)\..\..\kantcpp\servant\servant;$(ProjectDir)\..\..\kantcpp\servant\tup;$(ProjectDir)\..\..\kantcpp\tools\kantparse;$(ProjectDir)\..\..\kantcpp\servant;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;$(ProjectDir)\..\..\kantcpp\servant\servant;$(ProjectDir)\..\..\kantcpp\servant\tup;$(ProjectDir)\..\..\kantcpp\tools\kantparse;$(ProjectDir)\..\..\kantcpp\servant;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\BServer;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\AServer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

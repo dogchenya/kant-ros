@@ -98,6 +98,9 @@
     <Filter Include="examples\AuthDemo\Server">
       <UniqueIdentifier>{d697f1ec-7545-4773-b4be-5f068f712cdf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="examples\scripts">
+      <UniqueIdentifier>{06df6a1d-1751-43dd-82f7-05e04f397e07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -1033,6 +1036,66 @@
     </None>
     <None Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.tars">
       <Filter>examples\AuthDemo\Server</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-auth.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-auth.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-co.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-co.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-custom.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-custom.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-http.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-http.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-http2.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-http2.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-kill.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-kill.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-push.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-push.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-quick-start.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-quick-start.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-ssl.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-ssl.sh">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-udp.bat">
+      <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\scripts\run-udp.sh">
+      <Filter>examples\scripts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

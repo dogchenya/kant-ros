@@ -10,7 +10,7 @@ add_subdirectory(CoroutineDemo)
 #endif()
 #
 #add_subdirectory(CustomDemo)
-#add_subdirectory(AuthDemo)
+add_subdirectory(AuthDemo)
 #
 #if(TARS_SSL)
 #add_subdirectory(SSLDemo)

@@ -311,7 +311,9 @@ string KT_NetWorkBuffer::getBuffersString() const {
   string buffer;
   buffer.resize(_length);
 
-  getBuffers(&buffer[0], _length);
+  if (_length != 0) {
+    getBuffers(&buffer[0], _length);
+  }
 
   return buffer;
 }
@@ -321,7 +323,9 @@ vector<char> KT_NetWorkBuffer::getBuffers() const {
 
   buffer.resize(_length);
 
-  getBuffers(&buffer[0], _length);
+  if (_length != 0) {
+    getBuffers(&buffer[0], _length);
+  }
 
   return buffer;
 }
@@ -345,7 +349,9 @@ bool KT_NetWorkBuffer::getHeader(size_t len, std::string &buffer) const {
 
   buffer.resize(len);
 
-  getBuffers(&buffer[0], len);
+  if (len != 0) {
+    getBuffers(&buffer[0], len);
+  }
 
   return true;
 }
@@ -361,7 +367,9 @@ bool KT_NetWorkBuffer::getHeader(size_t len, std::vector<char> &buffer) const {
 
   buffer.resize(len);
 
-  getBuffers(&buffer[0], len);
+  if (len != 0) {
+    getBuffers(&buffer[0], len);
+  }
 
   return true;
 }

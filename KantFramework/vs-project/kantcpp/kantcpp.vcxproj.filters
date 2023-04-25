@@ -89,6 +89,15 @@
     <Filter Include="cmake">
       <UniqueIdentifier>{cf0c5b39-33aa-4068-8f52-88a95d022111}</UniqueIdentifier>
     </Filter>
+    <Filter Include="examples\AuthDemo">
+      <UniqueIdentifier>{54fc1507-1aad-4ec2-9cd1-c18220a3c676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\AuthDemo\Client">
+      <UniqueIdentifier>{be82e54d-f1cf-4e4d-b218-0fc5457a1eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="examples\AuthDemo\Server">
+      <UniqueIdentifier>{d697f1ec-7545-4773-b4be-5f068f712cdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -481,6 +490,12 @@
     <ClInclude Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.h">
       <Filter>examples\CoroutineDemo\BServer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\examples\AuthDemo\Server\HelloImp.h">
+      <Filter>examples\AuthDemo\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\examples\AuthDemo\Server\HelloServer.h">
+      <Filter>examples\AuthDemo\Server</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
@@ -725,6 +740,15 @@
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\testCoro\main.cpp">
       <Filter>examples\CoroutineDemo\testCoro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Client\main.cpp">
+      <Filter>examples\AuthDemo\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Server\HelloImp.cpp">
+      <Filter>examples\AuthDemo\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Server\HelloServer.cpp">
+      <Filter>examples\AuthDemo\Server</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1001,6 +1025,15 @@
     <None Include="..\..\kantcpp\cmake\BuildKantCpp.cmake">
       <Filter>cmake</Filter>
     </None>
+    <None Include="..\..\kantcpp\examples\AuthDemo\Client\config.conf">
+      <Filter>examples\AuthDemo\Client</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\AuthDemo\Server\config.conf">
+      <Filter>examples\AuthDemo\Server</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.tars">
+      <Filter>examples\AuthDemo\Server</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
@@ -1057,6 +1090,15 @@
     </Text>
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\CMakeLists.txt">
       <Filter>examples\CoroutineDemo</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\AuthDemo\CMakeLists.txt">
+      <Filter>examples\AuthDemo</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\AuthDemo\Client\CMakeLists.txt">
+      <Filter>examples\AuthDemo\Client</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\examples\AuthDemo\Server\CMakeLists.txt">
+      <Filter>examples\AuthDemo\Server</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

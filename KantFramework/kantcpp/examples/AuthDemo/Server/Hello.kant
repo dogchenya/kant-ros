@@ -1,4 +1,4 @@
-﻿module TestApp
+module TestApp
 {
 
 interface Hello
@@ -8,3 +8,4 @@ interface Hello
 };
 
 }; 
+

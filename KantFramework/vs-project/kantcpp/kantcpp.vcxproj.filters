@@ -1034,9 +1034,6 @@
     <None Include="..\..\kantcpp\examples\AuthDemo\Server\config.conf">
       <Filter>examples\AuthDemo\Server</Filter>
     </None>
-    <None Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.tars">
-      <Filter>examples\AuthDemo\Server</Filter>
-    </None>
     <None Include="..\..\kantcpp\examples\scripts\run-auth.bat">
       <Filter>examples\scripts</Filter>
     </None>
@@ -1096,6 +1093,9 @@
     </None>
     <None Include="..\..\kantcpp\examples\scripts\run-udp.sh">
       <Filter>examples\scripts</Filter>
+    </None>
+    <None Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.kant">
+      <Filter>examples\AuthDemo\Server</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

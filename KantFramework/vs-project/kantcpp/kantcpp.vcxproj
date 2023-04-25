@@ -257,7 +257,7 @@
     <None Include="..\..\kantcpp\cmake\Thirdparty.cmake" />
     <None Include="..\..\kantcpp\examples\AuthDemo\Client\config.conf" />
     <None Include="..\..\kantcpp\examples\AuthDemo\Server\config.conf" />
-    <None Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.tars" />
+    <None Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.kant" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServant.kant" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\AServer\config.conf" />
     <None Include="..\..\kantcpp\examples\CoroutineDemo\BServer\BServant.kant" />

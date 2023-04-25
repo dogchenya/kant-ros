@@ -499,6 +499,9 @@
     <ClInclude Include="..\..\kantcpp\examples\AuthDemo\Server\HelloServer.h">
       <Filter>examples\AuthDemo\Server</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.h">
+      <Filter>examples\AuthDemo\Server</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">

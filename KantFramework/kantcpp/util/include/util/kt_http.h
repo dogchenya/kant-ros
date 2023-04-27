@@ -31,8 +31,8 @@ namespace kant {
  * 通过KT_HttpRequest::checkRequest判断http请求是否收完；
  * Via KT_HttpRequest:: checkRequest determines whether an HTTP request has been received or not;
  *  
- * 与TC_ClientSocket配合，支持同步发送http请求，且支持http的chunk编码；
- * And TC_ClientSocket supports synchronous sending of HTTP requests and chunk encoding of http.
+ * 与KT_ClientSocket配合，支持同步发送http请求，且支持http的chunk编码；
+ * And KT_ClientSocket supports synchronous sending of HTTP requests and chunk encoding of http.
  *  
  * 发送http请求时，非线程安全
  * Non-thread-safe when sending HTTP requests
@@ -70,9 +70,9 @@ struct KT_Http_Exception : public KT_Exception {
  * @brief  http应答协议解析异常类
  * @brief  Http Answer Protocol Resolution Exception Class
  */
-struct TC_HttpResponse_Exception : public KT_Http_Exception {
-  TC_HttpResponse_Exception(const string &sBuffer) : KT_Http_Exception(sBuffer){};
-  ~TC_HttpResponse_Exception(){};
+struct KT_HttpResponse_Exception : public KT_Http_Exception {
+  KT_HttpResponse_Exception(const string &sBuffer) : KT_Http_Exception(sBuffer){};
+  ~KT_HttpResponse_Exception(){};
 };
 
 /**
@@ -136,7 +136,7 @@ class KT_URL {
      * @brief  解析URL, url必须是绝对路径.
      * @brief  Resolve URL, URL must be absolute path.
      *  
-     * @throws       TC_URL_Exception
+     * @throws       KT_URL_Exception
      * @param sURL  具体的URL串
      * @param sURL  Specific URL string
      * @return      解析成功返回true，否则返回false
@@ -964,8 +964,8 @@ class KT_HttpResponse : public KT_Http {
      * (The buffers received by the network are added directly to the sBuffer and then incrementally resolved)
      * (The resolvable data KT_HttpResponse is automatically eliminated from the sBuffer until the network has received it or the resolving returns true)
      * @param buffer
-     * @throws TC_HttpResponse_Exception, 不支持的http协议, 抛出异常
-     * @throws TC_HttpResponse_Exception, unsupported http protocol, throwing exception
+     * @throws KT_HttpResponse_Exception, 不支持的http协议, 抛出异常
+     * @throws KT_HttpResponse_Exception, unsupported http protocol, throwing exception
      * @return true:解析出一个完整的buffer
      *        false:还需要继续解析，如果服务器主动关闭连接的模式下
      *        , 也可能不需要再解析了
@@ -985,8 +985,8 @@ class KT_HttpResponse : public KT_Http {
 	 * (The buffers received by the network are added directly to the sBuffer and then incrementally resolved)
 	 * (The resolvable data KT_HttpResponse is automatically eliminated from the sBuffer until the network has received it or the resolving returns true)
 	 * @param buffer
-	 * @throws TC_HttpResponse_Exception, 不支持的http协议, 抛出异常
-	 * @throws TC_HttpResponse_Exception, unsupported http protocol, throwing exception
+	 * @throws KT_HttpResponse_Exception, 不支持的http协议, 抛出异常
+	 * @throws KT_HttpResponse_Exception, unsupported http protocol, throwing exception
 	 * @return true:解析出一个完整的buffer
 	 *        false:还需要继续解析，如果服务器主动关闭连接的模式下
 	 *        , 也可能不需要再解析了
@@ -1194,20 +1194,20 @@ class KT_HttpResponse : public KT_Http {
   //		auto f1 = std::search(beginIt, headerIt, sep.c_str(), sep.c_str() + sep.size());
   //		if(f1 == headerIt)
   //		{
-  //			throw TC_HttpResponse_Exception("[TC_HttpResponse_Exception::parseResponeHeader] http response parse version format error : " + string(beginIt, it));
+  //			throw KT_HttpResponse_Exception("[KT_HttpResponse_Exception::parseResponeHeader] http response parse version format error : " + string(beginIt, it));
   //		}
   //
   //		auto f2 = std::search(f1 + 1, headerIt, sep.c_str(), sep.c_str() + sep.size());
   //		if(f1 == headerIt)
   //		{
-  //			throw TC_HttpResponse_Exception("[TC_HttpResponse_Exception::parseResponeHeader] http response parse status format error : " + string(beginIt, it));
+  //			throw KT_HttpResponse_Exception("[KT_HttpResponse_Exception::parseResponeHeader] http response parse status format error : " + string(beginIt, it));
   //		}
   //
   //		_headerLine = string(beginIt, it);
   //
-  //		if(TC_Port::strncasecmp(_headerLine.c_str(), "HTTP/", 5) != 0)
+  //		if(KT_Port::strncasecmp(_headerLine.c_str(), "HTTP/", 5) != 0)
   //		{
-  //			throw TC_HttpResponse_Exception("[TC_HttpResponse_Exception::parseResponeHeader] http response version is not start with 'HTTP/' : " + _headerLine);
+  //			throw KT_HttpResponse_Exception("[KT_HttpResponse_Exception::parseResponeHeader] http response version is not start with 'HTTP/' : " + _headerLine);
   //		}
   //
   //		_version    = string(beginIt, f1);
@@ -1529,9 +1529,9 @@ class KT_HttpRequest : public KT_Http {
      * @param iTimeout 毫秒
      * @param iTimeout Millisecond
      * @return        0 成功；
-     *               <0失败, 具体值参见TC_ClientSocket声明
+     *               <0失败, 具体值参见KT_ClientSocket声明
      * @return        0 success；
-     *               <0 failed, see TC_ClientSocket statement for value
+     *               <0 failed, see KT_ClientSocket statement for value
      */
   int doRequest(KT_HttpResponse &stHttpRep, int iTimeout = 3000);
 

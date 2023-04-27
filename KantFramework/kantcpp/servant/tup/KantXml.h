@@ -398,7 +398,7 @@ class XmlInput {
   template <typename T>
   static void readXml(
     T& v, const XmlValuePtr& p, bool isRequire = true,
-    typename detail::disable_if<detail::is_convertible<T*, TarsStructBase*>, void***>::type dummy = 0) {
+    typename detail::disable_if<detail::is_convertible<T*, KantStructBase*>, void***>::type dummy = 0) {
     Int32 n = 0;
     readXml(n, p, isRequire);
     v = (T)n;
@@ -408,7 +408,7 @@ class XmlInput {
   template <typename T>
   static void readXml(
     T& v, const XmlValuePtr& p, bool isRequire = true,
-    typename detail::enable_if<detail::is_convertible<T*, TarsStructBase*>, void***>::type dummy = 0) {
+    typename detail::enable_if<detail::is_convertible<T*, KantStructBase*>, void***>::type dummy = 0) {
     if (NULL != p.get() && p->getType() == eXmlTypeObj) {
       XmlValueObjPtr pObj = std::dynamic_pointer_cast<XmlValueObj>(p);
       v.readFromXml(pObj);
@@ -601,13 +601,13 @@ class XmlOutput {
 
   template <typename T>
   static XmlValueStringPtr writeXml(
-    const T& v, typename detail::disable_if<detail::is_convertible<T*, TarsStructBase*>, void***>::type dummy = 0) {
+    const T& v, typename detail::disable_if<detail::is_convertible<T*, KantStructBase*>, void***>::type dummy = 0) {
     return writeXml((Int32)v);
   }
 
   template <typename T>
   static XmlValueObjPtr writeXml(
-    const T& v, typename detail::enable_if<detail::is_convertible<T*, TarsStructBase*>, void***>::type dummy = 0) {
+    const T& v, typename detail::enable_if<detail::is_convertible<T*, KantStructBase*>, void***>::type dummy = 0) {
     return v.writeToXml();
   }
 };

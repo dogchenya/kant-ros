@@ -103,8 +103,8 @@ class KT_Exception : public exception {
   string _buffer;
 };
 
-//为了避免windows平台GetLastError()获取不对的问题, 因为抛异常, throw TC_Exception("xxxx", TC_Exception::getSystemCode())时
-//In order to avoid getting the wrong getlasterror() on Windows platform, throw TC_ Exception("xxxx", TC_ Exception:: getsystemcode())
+//为了避免windows平台GetLastError()获取不对的问题, 因为抛异常, throw KT_Exception("xxxx", KT_Exception::getSystemCode())时
+//In order to avoid getting the wrong getlasterror() on Windows platform, throw KT_ Exception("xxxx", KT_ Exception:: getsystemcode())
 //回调用系统函数分配内存, 导致错误码被改写, 因此专门定义宏来抛出异常
 //Callback uses system function to allocate memory, which causes error code to be rewritten, so it specially defines macro to throw exception
 //先获取到错误码, 再throw

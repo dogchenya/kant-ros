@@ -33,8 +33,8 @@ KT_EpollServer::Handle* Servant::getHandle() { return _handle; }
 int Servant::dispatch(CurrentPtr current, vector<char>& buffer) {
   int ret = KANTSERVERUNKNOWNERR;
 
-  if (current->getFuncName() == "tars_ping") {
-    TLOGKANT("[Servant::dispatch] tars_ping ok from [" << current->getIp() << ":" << current->getPort() << "]" << endl);
+  if (current->getFuncName() == "kant_ping") {
+    TLOGKANT("[Servant::dispatch] kant_ping ok from [" << current->getIp() << ":" << current->getPort() << "]" << endl);
 
     ret = KANTSERVERSUCCESS;
   } else if (!current->getBindAdapter()->isKantProtocol()) {

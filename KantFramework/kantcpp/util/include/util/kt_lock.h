@@ -1,5 +1,5 @@
-﻿#ifndef _TC_LOCK_H
-#define _TC_LOCK_H
+﻿#ifndef _KT_LOCK_H
+#define _KT_LOCK_H
 
 #include <string>
 #include <stdexcept>

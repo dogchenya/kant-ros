@@ -37,7 +37,7 @@
 // #include "zipkin/ip_address.h"
 // #endif
 //
-const static string CONFIG_ROOT_PATH = string("/tars/application/client");
+const static string CONFIG_ROOT_PATH = string("/kant/application/client");
 
 /**
  * 设计核心:
@@ -318,7 +318,7 @@ class SVT_DLL_API Communicator : public KT_ThreadRecMutex {
   int64_t getMinTimeout() { return _minTimeout; }
 
   /*
-     * tars_ping间隔，0：不启用
+     * kant_ping间隔，0：不启用
      */
   int64_t getKeepAliveInterval() { return _keepAliveInterval; }
 
@@ -524,7 +524,7 @@ class SVT_DLL_API Communicator : public KT_ThreadRecMutex {
   int64_t _minTimeout;
 
   /*
-     * tars_ping间隔，0：不启用
+     * kant_ping间隔，0：不启用
      */
   int64_t _keepAliveInterval;
 

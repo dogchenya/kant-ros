@@ -898,23 +898,23 @@ size_t KT_HttpResponse::parseResponseHeaderString(const char *beginIt, const cha
 
   auto f1 = KT_Port::strnstr(beginIt, " ", it - beginIt);
   if (f1 == NULL) {
-    throw TC_HttpResponse_Exception(
-      "[TC_HttpResponse_Exception::parseResponeHeader] http response parse version format error : " +
+    throw KT_HttpResponse_Exception(
+      "[KT_HttpResponse_Exception::parseResponeHeader] http response parse version format error : " +
       string(beginIt, headerIt - beginIt));
   }
 
   auto f2 = KT_Port::strnstr(f1 + 1, " ", it - (f1 + 1));
   if (f1 == NULL) {
-    throw TC_HttpResponse_Exception(
-      "[TC_HttpResponse_Exception::parseResponeHeader] http response parse status format error : " +
+    throw KT_HttpResponse_Exception(
+      "[KT_HttpResponse_Exception::parseResponeHeader] http response parse status format error : " +
       string(beginIt, headerIt - beginIt));
   }
 
   _headerLine = string(beginIt, it - beginIt);
 
   if (KT_Port::strncasecmp(_headerLine.c_str(), "HTTP/", 5) != 0) {
-    throw TC_HttpResponse_Exception(
-      "[TC_HttpResponse_Exception::parseResponeHeader] http response version is not start with 'HTTP/' : " +
+    throw KT_HttpResponse_Exception(
+      "[KT_HttpResponse_Exception::parseResponeHeader] http response version is not start with 'HTTP/' : " +
       _headerLine);
   }
 

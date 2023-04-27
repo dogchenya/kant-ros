@@ -13,9 +13,9 @@ typedef struct bio_st BIO;
 struct ssl_ctx_st;
 typedef struct ssl_ctx_st SSL_CTX;
 
-#define TARS_SSL 0
+#define KANT_SSL 0
 namespace kant {
-#if TARS_SSL
+#if KANT_SSL
 /////////////////////////////////////////////////
 /** 
  *@file   kt_openssl.h
@@ -65,8 +65,8 @@ class KT_OpenSSL {
 	 */
   static shared_ptr<KT_OpenSSL> newSSL(const std::shared_ptr<KT_OpenSSL::CTX>& ctx);
 
-  static void getMemData(BIO* bio, TC_NetWorkBuffer& buf);
-  static int doSSLRead(SSL* ssl, TC_NetWorkBuffer& out);
+  static void getMemData(BIO* bio, KT_NetWorkBuffer& buf);
+  static int doSSLRead(SSL* ssl, KT_NetWorkBuffer& out);
 
  protected:
   /**
@@ -107,13 +107,13 @@ class KT_OpenSSL {
   /**
      * @brief  get recv buffer
      */
-  TC_NetWorkBuffer* recvBuffer() { return &_plainBuf; }
+  KT_NetWorkBuffer* recvBuffer() { return &_plainBuf; }
 
   /** 
      * @brief handshake
      * @return 0: succ, !=0: fail
      */
-  int doHandshake(TC_NetWorkBuffer& out, const void* data = NULL, size_t size = 0);
+  int doHandshake(KT_NetWorkBuffer& out, const void* data = NULL, size_t size = 0);
 
   /** 
      * @brief encode data before send
@@ -122,7 +122,7 @@ class KT_OpenSSL {
      * @param out, out buffer
      * @return 0: succ, !=0: fail
      */
-  int write(const char* data, size_t size, TC_NetWorkBuffer& out);
+  int write(const char* data, size_t size, KT_NetWorkBuffer& out);
 
   /** 
      * @brief decode data before parse protocol
@@ -131,7 +131,7 @@ class KT_OpenSSL {
      * @param out   out buffer
      * @return 0: succ, !=0: fail
      */
-  int read(const void* data, size_t size, TC_NetWorkBuffer& out);
+  int read(const void* data, size_t size, KT_NetWorkBuffer& out);
 
   /**
      * set read buffer size
@@ -145,7 +145,7 @@ class KT_OpenSSL {
 	 */
   void setWriteBufferSize(size_t size);
 
-  friend class TC_SSLManager;
+  friend class KT_SSLManager;
 
  private:
   /**
@@ -171,7 +171,7 @@ class KT_OpenSSL {
   /**
      * recv buff
      */
-  TC_NetWorkBuffer _plainBuf;
+  KT_NetWorkBuffer _plainBuf;
 };
 #else
 //未开启openssl得时候，定义一个空得对象保留指针占位符

@@ -629,7 +629,7 @@ int KT_UDPClient::checkSocket() {
       {
         _socket.connect(_ip, _port);
       }
-    } catch (TC_SocketConnect_Exception &ex) {
+    } catch (KT_SocketConnect_Exception &ex) {
       _socket.close();
       return EM_CONNECT;
     } catch (KT_Socket_Exception &ex) {

@@ -14,60 +14,52 @@
  * specific language governing permissions and limitations under the License.
  */
 
-#ifndef __TARS_COOKIE_H__
-#define __TARS_COOKIE_H__
+#ifndef __KANT_COOKIE_H__
+#define __KANT_COOKIE_H__
 
 #include "servant/ServantProxy.h"
 
 /**
  * cookie操作类
  */
-class CookieOp
-{
-public:
-    /**
+class CookieOp {
+ public:
+  /**
      * 构造函数
      */
-    CookieOp()
-    {
-    }
+  CookieOp() {}
 
-    /**
+  /**
      * 析构函数，清理掉已设置的cookie
      */
-    ~CookieOp()
-    {
-        ServantProxyThreadData * td = ServantProxyThreadData::getData();
-        assert(NULL != td);
-        if (td)
-        {
-            td->_data._cookie.clear();
-        }
+  ~CookieOp() {
+    ServantProxyThreadData *td = ServantProxyThreadData::getData();
+    assert(NULL != td);
+    if (td) {
+      td->_data._cookie.clear();
     }
+  }
 
-    /**
+  /**
      * 获取cookie
      */
-    static map<string, string> & getCookie()
-    {
-        ServantProxyThreadData * td = ServantProxyThreadData::getData();
-        assert(NULL != td);
+  static map<string, string> &getCookie() {
+    ServantProxyThreadData *td = ServantProxyThreadData::getData();
+    assert(NULL != td);
 
-        return td->_data._cookie;
-    }
+    return td->_data._cookie;
+  }
 
-    /**
+  /**
      * 设置cookie
      */
-    void setCookie(const map<string, string> &cookie)
-    {
-        ServantProxyThreadData * td = ServantProxyThreadData::getData();
-        assert(NULL != td);
-        if(td)
-        {
-            td->_data._cookie = cookie;
-        }
+  void setCookie(const map<string, string> &cookie) {
+    ServantProxyThreadData *td = ServantProxyThreadData::getData();
+    assert(NULL != td);
+    if (td) {
+      td->_data._cookie = cookie;
     }
+  }
 };
 
 #endif

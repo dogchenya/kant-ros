@@ -446,7 +446,7 @@ void TimeWriteT::writeError(const vector<string> &buffer) {
   // string sInfo = _app + "." + _server + "|";
   // sInfo += ServerConfig::LocalIp + "|sync log to remote kantlog error";
   // FDLOG("kanterror") << sInfo <<endl;
-  //TARS_NOTIFY_ERROR(sInfo);
+  //KANT_NOTIFY_ERROR(sInfo);
 }
 
 void TimeWriteT::writeError(const deque<pair<size_t, string>> &buffer) {
@@ -462,7 +462,7 @@ void TimeWriteT::writeError(const deque<pair<size_t, string>> &buffer) {
   // string sInfo = _app + "." + _server + "|";
   // sInfo += ServerConfig::LocalIp + "|sync log to remote kantlog error(buffer.size>500000)";
   // FDLOG("kanterror") << sInfo <<endl;
-  //TARS_NOTIFY_ERROR(sInfo);
+  //KANT_NOTIFY_ERROR(sInfo);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////

@@ -35,7 +35,7 @@ class KT_TimeoutQueue {
 
   typedef list<NodeInfo> time_type;
 
-  //    typedef TC_Functor<void, TL::TYPELIST_1(T&)> data_functor;
+  //    typedef KT_Functor<void, TL::TYPELIST_1(T&)> data_functor;
   typedef std::function<void(T &)> data_functor;
 
   struct PtrInfo {
@@ -288,7 +288,7 @@ bool KT_TimeoutQueue<T>::push(const T &ptr, uint32_t uniqId) {
 template <typename T>
 void KT_TimeoutQueue<T>::timeout() {
   //    struct timeval tv;
-  //    TC_TimeProvider::getInstance()->getNow(&tv);
+  //    KT_TimeProvider::getInstance()->getNow(&tv);
 
   auto ms = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count();
 
@@ -313,7 +313,7 @@ void KT_TimeoutQueue<T>::timeout() {
 template <typename T>
 void KT_TimeoutQueue<T>::timeout(data_functor &df) {
   //    struct timeval tv;
-  //    TC_TimeProvider::getInstance()->getNow(&tv);
+  //    KT_TimeProvider::getInstance()->getNow(&tv);
   //
   auto ms = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count();
 

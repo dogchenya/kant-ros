@@ -124,7 +124,7 @@ void KT_Socket::bind(const char *sPathName) {
 void KT_Socket::connect(const char *sPathName) {
   int ret = connectNoThrow(sPathName);
   if (ret < 0) {
-    THROW_EXCEPTION_SYSCODE(TC_SocketConnect_Exception, "[KT_Socket::connect] connect error");
+    THROW_EXCEPTION_SYSCODE(KT_SocketConnect_Exception, "[KT_Socket::connect] connect error");
   }
 }
 
@@ -436,7 +436,7 @@ void KT_Socket::connect(const string &sServerAddr, uint16_t port) {
   int ret = connectNoThrow(sServerAddr, port);
 
   if (ret < 0) {
-    THROW_EXCEPTION_SYSCODE(TC_SocketConnect_Exception, "[KT_Socket::connect] connect error");
+    THROW_EXCEPTION_SYSCODE(KT_SocketConnect_Exception, "[KT_Socket::connect] connect error");
   }
 }
 

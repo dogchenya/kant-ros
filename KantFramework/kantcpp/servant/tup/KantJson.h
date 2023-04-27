@@ -1,5 +1,5 @@
-﻿#ifndef __TARS_JSON_H__
-#define __TARS_JSON_H__
+﻿#ifndef __KANT_JSON_H__
+#define __KANT_JSON_H__
 
 #include <iostream>
 #include <cassert>

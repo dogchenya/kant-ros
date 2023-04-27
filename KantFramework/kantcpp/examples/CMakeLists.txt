@@ -3,8 +3,8 @@
 #add_subdirectory(ClientDemo)
 add_subdirectory(CoroutineDemo)
 #add_subdirectory(HttpDemo)
-#if(TARS_PROTOBUF)
-#if(TARS_HTTP2)
+#if(KANT_PROTOBUF)
+#if(KANT_HTTP2)
 #add_subdirectory(GrpcDemo)
 #endif()
 #endif()
@@ -12,7 +12,7 @@ add_subdirectory(CoroutineDemo)
 #add_subdirectory(CustomDemo)
 add_subdirectory(AuthDemo)
 #
-#if(TARS_SSL)
+#if(KANT_SSL)
 #add_subdirectory(SSLDemo)
 #endif()
 #
@@ -53,7 +53,7 @@ if(WIN32)
             COMMAND ../examples/scripts/run-udp.bat ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ${WORKING_DIRECTORY}
             COMMENT "call run udp")
 
-    if(TARS_HTTP2)
+    if(KANT_HTTP2)
         add_custom_target(run-http2
                 WORKING_DIRECTORY ${WORKING_DIRECTORY}
                 DEPENDS Http2Server Http2Client
@@ -62,7 +62,7 @@ if(WIN32)
                 COMMENT "call run http2")
     endif()
 
-    if(TARS_SSL)
+    if(KANT_SSL)
         add_custom_target(run-ssl
                 WORKING_DIRECTORY ${WORKING_DIRECTORY}
                 DEPENDS SSLServer SSLClient
@@ -92,7 +92,7 @@ if(WIN32)
             COMMAND ../examples/scripts/run-push.bat ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ${WORKING_DIRECTORY}
             COMMENT "call run push")
 
-    if(TARS_SSL)
+    if(KANT_SSL)
         add_custom_target(run-all
                 WORKING_DIRECTORY ${WORKING_DIRECTORY}
                 DEPENDS QuickStartDemo QuickStartDemoClient HttpServer HttpClient AuthServer AuthClient  SSLServer SSLClient CoroutineDemoAServer CoroutineDemoBServer CoroutineDemoClient testCoro testParallelCoro PushServer PushClient
@@ -149,7 +149,7 @@ else(WIN32)
             COMMAND sh ../examples/scripts/run-auth.sh ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ${WORKING_DIRECTORY}
             COMMENT "call run auth")
 
-    if(TARS_HTTP2)
+    if(KANT_HTTP2)
     add_custom_target(run-http2
         WORKING_DIRECTORY ${WORKING_DIRECTORY}
         DEPENDS Http2Server Http2Client
@@ -157,7 +157,7 @@ else(WIN32)
         COMMENT "call run http2")
     endif()
 
-    if(TARS_SSL)
+    if(KANT_SSL)
     add_custom_target(run-ssl
         WORKING_DIRECTORY ${WORKING_DIRECTORY}
         DEPENDS SSLServer SSLClient
@@ -183,7 +183,7 @@ else(WIN32)
         COMMAND sh ../examples/scripts/run-push.sh ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ${WORKING_DIRECTORY}
         COMMENT "call run push")
 
-    if(TARS_SSL)
+    if(KANT_SSL)
     add_custom_target(run-all
         WORKING_DIRECTORY ${WORKING_DIRECTORY}
         DEPENDS QuickStartDemo QuickStartDemoClient HttpServer HttpClient AuthServer AuthClient  SSLServer SSLClient CoroutineDemoAServer CoroutineDemoBServer CoroutineDemoClient testCoro testParallelCoro PushServer PushClient

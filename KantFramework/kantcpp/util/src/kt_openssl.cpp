@@ -1,4 +1,4 @@
-﻿#if TARS_SSL
+﻿#if KANT_SSL
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
@@ -59,7 +59,7 @@ void KT_OpenSSL::setWriteBufferSize(size_t size) { BIO_set_write_buffer_size(SSL
 
 bool KT_OpenSSL::isHandshaked() const { return _bHandshaked; }
 
-int KT_OpenSSL::doHandshake(TC_NetWorkBuffer& out, const void* data, size_t size) {
+int KT_OpenSSL::doHandshake(KT_NetWorkBuffer& out, const void* data, size_t size) {
   assert(!_bHandshaked);
   assert(_ssl);
 
@@ -90,7 +90,7 @@ int KT_OpenSSL::doHandshake(TC_NetWorkBuffer& out, const void* data, size_t size
   return 0;
 }
 
-int KT_OpenSSL::write(const char* data, size_t size, TC_NetWorkBuffer& out) {
+int KT_OpenSSL::write(const char* data, size_t size, KT_NetWorkBuffer& out) {
   if (!_bHandshaked) {
     //握手数据不用加密
     out.addBuffer(data, size);
@@ -110,7 +110,7 @@ int KT_OpenSSL::write(const char* data, size_t size, TC_NetWorkBuffer& out) {
   return _err;
 }
 
-int KT_OpenSSL::read(const void* data, size_t size, TC_NetWorkBuffer& out) {
+int KT_OpenSSL::read(const void* data, size_t size, KT_NetWorkBuffer& out) {
   bool usedData = false;
   if (!_bHandshaked) {
     usedData = true;
@@ -139,7 +139,7 @@ int KT_OpenSSL::read(const void* data, size_t size, TC_NetWorkBuffer& out) {
   return 0;
 }
 
-void KT_OpenSSL::getMemData(BIO* bio, TC_NetWorkBuffer& buf) {
+void KT_OpenSSL::getMemData(BIO* bio, KT_NetWorkBuffer& buf) {
   while (true) {
     auto data = buf.getOrCreateBuffer(2 * 1024, 8 * 1024);
 
@@ -158,7 +158,7 @@ void KT_OpenSSL::getMemData(BIO* bio, TC_NetWorkBuffer& buf) {
   }
 }
 
-int KT_OpenSSL::doSSLRead(SSL* ssl, TC_NetWorkBuffer& out) {
+int KT_OpenSSL::doSSLRead(SSL* ssl, KT_NetWorkBuffer& out) {
   while (true) {
     auto plainBuf = out.getOrCreateBuffer(8 * 1024, 32 * 1024);
     //		char plainBuf[32 * 1024];

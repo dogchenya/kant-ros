@@ -154,10 +154,12 @@
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\sys\epoll.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Client\main.cpp" />
+    <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Client\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Server\HelloImp.cpp" />
     <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Server\HelloServer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServantImp.cpp" />
     <ClCompile Include="..\..\kantcpp\examples\CoroutineDemo\AServer\AServer.cpp">
@@ -639,7 +641,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;$(ProjectDir)\..\..\kantcpp\servant\servant;$(ProjectDir)\..\..\kantcpp\servant\tup;$(ProjectDir)\..\..\kantcpp\tools\kantparse;$(ProjectDir)\..\..\kantcpp\servant;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\BServer;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\AServer;$(ProjectDir)\..\..\kantcpp\examples\AuthDemo\Server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -11,7 +11,7 @@ namespace kant {
 /////////////////////////////////////////////////
 /**
  * @file tc_thread_cond.h 
- * @brief 线程锁以及条件变量类(兼容TARS4.x版本, 底层直接封装了c++11, 从而跨平台兼容)
+ * @brief 线程锁以及条件变量类(兼容KANT4.x版本, 底层直接封装了c++11, 从而跨平台兼容)
  *  
  * @author  jarodruan@upchina.com
  */
@@ -23,7 +23,7 @@ class KT_ThreadMutex;
  *  
  *  和KT_ThreadMutex、KT_ThreadRecMutex配合使用,
  *  
- *  通常不直接使用，而是使用TC_ThreadLock/TC_ThreadRecLock;
+ *  通常不直接使用，而是使用KT_ThreadLock/KT_ThreadRecLock;
  */
 class KT_ThreadCond {
  public:

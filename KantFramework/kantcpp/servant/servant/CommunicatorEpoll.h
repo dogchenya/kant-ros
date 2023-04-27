@@ -278,7 +278,7 @@ class CommunicatorEpoll : public KT_Thread, public enable_shared_from_this<Commu
   void doTimeout();
 
   /**
-     * 处理tars_ping
+     * 处理kant_ping
      * @param pi
      */
   void doKeepAlive();

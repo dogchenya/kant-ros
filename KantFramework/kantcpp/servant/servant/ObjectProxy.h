@@ -98,7 +98,7 @@ class ObjectProxy : public KT_ThreadMutex {
   void doTimeout();
 
   /**
-     * 发起tars_ping请求
+     * 发起kant_ping请求
      */
   void doKeepAlive();
 

@@ -14,89 +14,83 @@
  * specific language governing permissions and limitations under the License.
  */
 
-#ifndef __TARS_OBJECT_PROXY_FACTORY_H_
-#define __TARS_OBJECT_PROXY_FACTORY_H_
+#ifndef _KANT_OBJECT_PROXY_FACTORY_H_
+#define _KANT_OBJECT_PROXY_FACTORY_H_
 
 #include "servant/Communicator.h"
 #include "servant/ObjectProxy.h"
 #include <vector>
 
-namespace tars
-{
+namespace kant {
 /////////////////////////////////////////////////////////////////////////////////////////
 /**
  * 获取ObjectProxy对象
  * 每个objectname在每个客户端网络线程中有唯一一个objectproxy
  *
  */
-class ObjectProxyFactory : public TC_HandleBase, public TC_ThreadRecMutex
-{
-public:
-    /**
+class ObjectProxyFactory : public KT_ThreadRecMutex {
+ public:
+  /**
      * 构造函数
      * @param pCommunicatorEpoll
      */
-    ObjectProxyFactory(CommunicatorEpoll * pCommunicatorEpoll);
+  ObjectProxyFactory(CommunicatorEpoll* pCommunicatorEpoll);
 
-    /**
+  /**
      * 获取对象代理
      * @param sObjectProxyName
      * @param setName 指定set调用的setid
      *
      * @return ObjectPrx
      */
-    ObjectProxy * getObjectProxy(const string& sObjectProxyName,const string& setName = "");
+  ObjectProxy* getObjectProxy(const string& sObjectProxyName, const string& setName = "");
 
-    /**
+  /**
      * 析构函数
      */
-    ~ObjectProxyFactory();
+  ~ObjectProxyFactory();
 
-    /**
+  /**
      * 所有对象代理加载locator信息
      */
-    int loadObjectLocator();
+  int loadObjectLocator();
 
-    /**
+  /**
      * 获取所有对象的个数，为了不加锁不用map
      */
-    inline size_t getObjNum()
-    {
-        return _objNum;
-    }
+  inline size_t getObjNum() { return _objNum; }
 
-    /**
+  /**
      * 根据序号 获取所有obj对象，为了不加锁不用map
      */
-    inline ObjectProxy * getObjectProxy(size_t iNum)
-    {
-        assert(iNum < _objNum);
-        return _vObjectProxys[iNum];
-    }
+  inline ObjectProxy* getObjectProxy(size_t iNum) {
+    assert(iNum < _objNum);
+    return _vObjectProxys[iNum];
+  }
 
-private:
-    /**
+ private:
+  /**
      * 客户端网络线程
      */
-    CommunicatorEpoll *         _communicatorEpoll;
+  CommunicatorEpoll* _communicatorEpoll;
 
-    /**
+  /**
      * 保存已创建的objectproxy
      */
-    map<string,ObjectProxy*>    _objectProxys;
+  map<string, ObjectProxy*> _objectProxys;
 
-    /**
+  /**
      * 保存已经创建的obj 取的时候可以不用加锁
      */
-    vector<ObjectProxy *>       _vObjectProxys;
+  vector<ObjectProxy*> _vObjectProxys;
 
-    /*
+  /*
      *保存已经创建obj的数量
      */
-    size_t                      _objNum;
+  size_t _objNum;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-}
+}  // namespace kant
 #endif

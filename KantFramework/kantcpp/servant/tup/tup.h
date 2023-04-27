@@ -509,7 +509,7 @@ struct UniPacket : protected RequestPacket, public UniAttribute<TWriter, TReader
 };
 
 /////////////////////////////////////////////////////////////////////////////////
-// 调用TARS的服务时使用的类
+// 调用KANT的服务时使用的类
 
 template <typename TWriter = BufferWriter, typename TReader = BufferReader,
           template <typename> class Alloc = std::allocator>

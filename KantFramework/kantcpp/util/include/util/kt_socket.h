@@ -54,10 +54,10 @@ struct KT_Socket_Exception : public KT_Exception {
 /**
  * @brief 建立链接异常
  */
-struct TC_SocketConnect_Exception : public KT_Socket_Exception {
-  TC_SocketConnect_Exception(const string &buffer) : KT_Socket_Exception(buffer){};
-  TC_SocketConnect_Exception(const string &buffer, int err) : KT_Socket_Exception(buffer, err){};
-  ~TC_SocketConnect_Exception() throw(){};
+struct KT_SocketConnect_Exception : public KT_Socket_Exception {
+  KT_SocketConnect_Exception(const string &buffer) : KT_Socket_Exception(buffer){};
+  KT_SocketConnect_Exception(const string &buffer, int err) : KT_Socket_Exception(buffer, err){};
+  ~KT_SocketConnect_Exception() throw(){};
 };
 
 #if TARGET_PLATFORM_LINUX || TARGET_PLATFORM_IOS

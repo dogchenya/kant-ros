@@ -408,7 +408,7 @@ void KT_Config::parseFile(const string &sFileName) {
   ff.open(sFileName.c_str());
   if (!ff) {
     THROW_EXCEPTION_SYSCODE(KT_Config_Exception, "[KT_Config::parseFile]:fopen fail: " + sFileName);
-    // throw KT_Config_Exception("[KT_Config::parseFile]:fopen fail: " + sFileName, TC_Exception::getSystemCode());
+    // throw KT_Config_Exception("[KT_Config::parseFile]:fopen fail: " + sFileName, KT_Exception::getSystemCode());
   }
 
   parse(ff);

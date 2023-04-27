@@ -1149,7 +1149,7 @@ class KantInputStream : public ReaderT {
         case KantHeadeString4: {
           KantReadTypeBuf(*this, strLength, uint32_t);
           strLength = ntohl(strLength);
-          if (kant_unlikely(strLength > TARS_MAX_STRING_LENGTH)) {
+          if (kant_unlikely(strLength > KANT_MAX_STRING_LENGTH)) {
             char s[128];
             snprintf(s, sizeof(s), "invalid string size, tag: %d, size: %d, headTag: %d", tag, strLength, headTag);
             throw KantDecodeInvalidValue(s);
@@ -1796,7 +1796,7 @@ class KantOutputStream : public WriterT {
 
   void write(const std::string& s, uint8_t tag) {
     if (kant_unlikely(s.size() > 255)) {
-      if (kant_unlikely(s.size() > TARS_MAX_STRING_LENGTH)) {
+      if (kant_unlikely(s.size() > KANT_MAX_STRING_LENGTH)) {
         char ss[128];
         snprintf(ss, sizeof(ss), "invalid string size, tag: %d, size: %u", tag, (uint32_t)s.size());
         throw KantDecodeInvalidValue(ss);

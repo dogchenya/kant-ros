@@ -14,8 +14,8 @@
  * specific language governing permissions and limitations under the License.
  */
 
-#ifndef __TARS_ASYNC_PROC_THREAD_H_
-#define __TARS_ASYNC_PROC_THREAD_H_
+#ifndef __KANT_ASYNC_PROC_THREAD_H_
+#define __KANT_ASYNC_PROC_THREAD_H_
 
 #include "servant/Message.h"
 #include "servant/Global.h"

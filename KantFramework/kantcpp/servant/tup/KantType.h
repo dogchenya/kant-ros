@@ -39,8 +39,8 @@ typedef long Int64;
 typedef long long Int64;
 #endif
 
-#ifndef TARS_MAX_STRING_LENGTH
-#define TARS_MAX_STRING_LENGTH (100 * 1024 * 1024)
+#ifndef KANT_MAX_STRING_LENGTH
+#define KANT_MAX_STRING_LENGTH (100 * 1024 * 1024)
 #endif
 /*
 #define kant__bswap_constant_32(x) \

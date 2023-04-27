@@ -30,7 +30,7 @@ void KT_LoggerRoll::setupThread(KT_LoggerThreadGroup *pThreadGroup) {
 
   _pThreadGroup = pThreadGroup;
 
-  TC_LoggerRollPtr self = shared_from_this();
+  KT_LoggerRollPtr self = shared_from_this();
 
   _pThreadGroup->registerLogger(self);
 }
@@ -41,7 +41,7 @@ void KT_LoggerRoll::unSetupThread() {
   if (_pThreadGroup != NULL) {
     _pThreadGroup->flush();
 
-    TC_LoggerRollPtr self = shared_from_this();
+    KT_LoggerRollPtr self = shared_from_this();
 
     _pThreadGroup->unRegisterLogger(self);
 
@@ -111,13 +111,13 @@ void KT_LoggerThreadGroup::start(size_t iThreadNum) {
   }
 }
 
-void KT_LoggerThreadGroup::registerLogger(TC_LoggerRollPtr &l) {
+void KT_LoggerThreadGroup::registerLogger(KT_LoggerRollPtr &l) {
   std::lock_guard<std::mutex> lock(_mutex);
 
   _logger.insert(l);
 }
 
-void KT_LoggerThreadGroup::unRegisterLogger(TC_LoggerRollPtr &l) {
+void KT_LoggerThreadGroup::unRegisterLogger(KT_LoggerRollPtr &l) {
   std::lock_guard<std::mutex> lock(_mutex);
 
   _logger.erase(l);
@@ -177,7 +177,7 @@ void KT_LoggerThreadGroup::run() {
 
 LoggerBuffer::LoggerBuffer() : _buffer(NULL), _buffer_len(0) {}
 
-LoggerBuffer::LoggerBuffer(TC_LoggerRollPtr roll, size_t buffer_len)
+LoggerBuffer::LoggerBuffer(KT_LoggerRollPtr roll, size_t buffer_len)
   : _roll(roll), _buffer(NULL), _buffer_len(buffer_len) {
   //设置get buffer, 无效, 不适用
   setg(NULL, NULL, NULL);

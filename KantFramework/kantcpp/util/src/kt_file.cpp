@@ -152,7 +152,7 @@ string KT_File::getExePath() {
 
   if (count < 0) {
     THROW_EXCEPTION_SYSCODE(KT_File_Exception, "[KT_File::getExePath] could not get exe path error");
-    // throw KT_File_Exception("[KT_File::getExePath] could not get exe path error", TC_Exception::getSystemCode());
+    // throw KT_File_Exception("[KT_File::getExePath] could not get exe path error", KT_Exception::getSystemCode());
   }
 
   count = (count >= bufsize) ? (bufsize - 1) : count;

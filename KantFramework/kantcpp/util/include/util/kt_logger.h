@@ -239,7 +239,7 @@ class UTIL_DLL_API KT_LoggerRoll : public std::enable_shared_from_this<KT_Logger
   static unordered_map<size_t, string> _mapThreadID;
 };
 
-typedef std::shared_ptr<KT_LoggerRoll> TC_LoggerRollPtr;
+typedef std::shared_ptr<KT_LoggerRoll> KT_LoggerRollPtr;
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -276,19 +276,19 @@ class KT_LoggerThreadGroup {
 		 * @brief 注册logger对象.
 		 * @brief Register logger object.
 		 *
-		 * @param l TC_LoggerRollPtr对象
-		 * @param l TC_LoggerRollPtr Object
+		 * @param l KT_LoggerRollPtr对象
+		 * @param l KT_LoggerRollPtr Object
 		 */
-  void registerLogger(TC_LoggerRollPtr &l);
+  void registerLogger(KT_LoggerRollPtr &l);
 
   /**
 		 * @brief 卸载logger对象.
 		 * @brief Unload logger object.
 		 *
-		 * @param l TC_LoggerRollPtr对象
-		 * @param l TC_LoggerRollPtr Object
+		 * @param l KT_LoggerRollPtr对象
+		 * @param l KT_LoggerRollPtr Object
 		 */
-  void unRegisterLogger(TC_LoggerRollPtr &l);
+  void unRegisterLogger(KT_LoggerRollPtr &l);
 
   /**
 		 * @brief 刷新所有的数据
@@ -310,10 +310,10 @@ class KT_LoggerThreadGroup {
 		 * @brief Pointer comparison
 		 */
   struct KeyComp {
-    bool operator()(const TC_LoggerRollPtr &p1, const TC_LoggerRollPtr &p2) const { return p1.get() < p2.get(); }
+    bool operator()(const KT_LoggerRollPtr &p1, const KT_LoggerRollPtr &p2) const { return p1.get() < p2.get(); }
   };
 
-  typedef set<TC_LoggerRollPtr, KeyComp> logger_set;
+  typedef set<KT_LoggerRollPtr, KeyComp> logger_set;
 
  protected:
   /**
@@ -365,12 +365,12 @@ class LoggerBuffer : public std::basic_streambuf<char> {
 		 * @brief 构造函数.
 		 * @brief Constructor.
 		 *
-		 * @param roll        TC_LoggerRollPtr对象
-		 * @param roll        TC_LoggerRollPtr object
+		 * @param roll        KT_LoggerRollPtr对象
+		 * @param roll        KT_LoggerRollPtr object
 		 * @param buffer_len  buffer大小
 		 * @param buffer_len  buffer size
 		 */
-  LoggerBuffer(TC_LoggerRollPtr roll, size_t buffer_len);
+  LoggerBuffer(KT_LoggerRollPtr roll, size_t buffer_len);
 
   /**
 		 * @brief 析构函数
@@ -432,7 +432,7 @@ class LoggerBuffer : public std::basic_streambuf<char> {
 		 * @brief 写日志
 		 * @brief Write a journal
 		 */
-  TC_LoggerRollPtr _roll;
+  KT_LoggerRollPtr _roll;
 
   /**
 		 * 缓冲区
@@ -608,7 +608,7 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
 
   /**
 		* @brief 枚举类型,定义日志的四种等级 . 此处级别被修改了，与kant标准不一样
-		* @brief Enumeration type, defines four levels of logs. This level has been modified and is different from the TARS standard
+		* @brief Enumeration type, defines four levels of logs. This level has been modified and is different from the KANT standard
 		*/
   enum {
     //所有的log都不写
@@ -626,9 +626,9 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
     //写错误,警告,调试log
     //Write error, warning, debug log
     DEBUG_LOG_LEVEL = 5,
-    //给TARS框架打日志用
-    //Logging TARS Framework
-    TARS_LOG_LEVEL = 6,
+    //给KANT框架打日志用
+    //Logging KANT Framework
+    KANT_LOG_LEVEL = 6,
   };
 
   /**
@@ -639,7 +639,7 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
     : _flag(HAS_TIME),
       _level(DEBUG_LOG_LEVEL),
       _buffer(std::dynamic_pointer_cast<KT_LoggerRoll>(this->_roll), 1024),
-      //_buffer(TC_LoggerRollPtr::dynamicCast(this->_roll), 1024),
+      //_buffer(KT_LoggerRollPtr::dynamicCast(this->_roll), 1024),
       _stream(&_buffer),
       _ebuffer(NULL, 0),
       _estream(&_ebuffer),
@@ -728,8 +728,8 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
       return setLogLevel(NONE_LOG_LEVEL);
     } else if (level == "INFO") {
       return setLogLevel(INFO_LOG_LEVEL);
-    } else if (level == "TARS") {
-      return setLogLevel(TARS_LOG_LEVEL);
+    } else if (level == "KANT") {
+      return setLogLevel(KANT_LOG_LEVEL);
     }
     return -1;
   }
@@ -745,8 +745,8 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
       return isNeedLog(NONE_LOG_LEVEL);
     } else if (level == "INFO") {
       return isNeedLog(INFO_LOG_LEVEL);
-    } else if (level == "TARS") {
-      return isNeedLog(TARS_LOG_LEVEL);
+    } else if (level == "KANT") {
+      return isNeedLog(KANT_LOG_LEVEL);
     } else {
       return true;
     }
@@ -767,10 +767,10 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
   void enableSqareWrapper(bool bEnable) { _bHasSquareBracket = bEnable; }
 
   /**
-		* @brief TARS记日志
-		* @brief TARS Log
+		* @brief KANT记日志
+		* @brief KANT Log
 		*/
-  LoggerStream kant() { return stream(TARS_LOG_LEVEL); }
+  LoggerStream kant() { return stream(KANT_LOG_LEVEL); }
 
   /**
 		* @brief DEBUG记日志
@@ -780,7 +780,7 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
 
   /**
 		* @brief DEBUG记日志
-		* @brief TARS Log
+		* @brief KANT Log
 		*/
   LoggerStream debug() { return stream(DEBUG_LOG_LEVEL); }
 
@@ -886,7 +886,7 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
       case WARN_LOG_LEVEL:
       case DEBUG_LOG_LEVEL:
       case INFO_LOG_LEVEL:
-      case TARS_LOG_LEVEL:
+      case KANT_LOG_LEVEL:
         return true;
         break;
     }
@@ -951,7 +951,7 @@ class KT_Logger : public RollPolicy<WriteT>::RollWrapperI {
 
 template <typename WriteT, template <class> class RollPolicy>
 //const string KT_Logger<WriteT, RollPolicy>::LN[6] = { "ANY", "NONE_LOG", "ERROR", "WARN", "DEBUG", "INFO" };
-const string KT_Logger<WriteT, RollPolicy>::LN[] = {"ANY", "NONE_LOG", "ERROR", "WARN", "INFO", "DEBUG", "TARS"};
+const string KT_Logger<WriteT, RollPolicy>::LN[] = {"ANY", "NONE_LOG", "ERROR", "WARN", "INFO", "DEBUG", "KANT"};
 ////////////////////////////////////////////////////////////////////////////////
 
 class RollWrapperInterface {
@@ -959,8 +959,8 @@ class RollWrapperInterface {
   virtual ~RollWrapperInterface() {}
 
   /**
-		* @brief TARS记日志
-		* @brief TARS Log
+		* @brief KANT记日志
+		* @brief KANT Log
 		*/
   virtual LoggerStream kant() = 0;
 

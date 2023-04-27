@@ -1,5 +1,5 @@
-﻿#ifndef _KT_CPP_TC_NETWORKBUFFER_H_
-#define _KT_CPP_TC_NETWORKBUFFER_H_
+﻿#ifndef _KT_CPP_KT_NETWORKBUFFER_H_
+#define _KT_CPP_KT_NETWORKBUFFER_H_
 
 #include <list>
 #include <vector>

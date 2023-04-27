@@ -46,22 +46,22 @@ namespace kant {
 /**
  * 以下定义配置框架支持的命令
  */
-#define KANT_CMD_LOAD_CONFIG "tars.loadconfig"  //从配置中心, 拉取配置下来: tars.loadconfig filename
-#define KANT_CMD_SET_LOG_LEVEL "tars.setloglevel"  //设置滚动日志的等级: tars.setloglevel [NONE, ERROR, WARN, DEBUG]
-#define KANT_CMD_VIEW_STATUS "tars.viewstatus"      //查看服务状态
-#define KANT_CMD_VIEW_VERSION "tars.viewversion"    //查看服务采用KANT的版本
-#define KANT_CMD_CONNECTIONS "tars.connection"      //查看当前链接情况
-#define KANT_CMD_LOAD_PROPERTY "tars.loadproperty"  //使配置文件的property信息生效
-#define KANT_CMD_VIEW_ADMIN_COMMANDS "tars.help"    //帮助查看服务支持的管理命令
-#define KANT_CMD_SET_DYEING "tars.setdyeing"        //设置染色信息: tars.setdyeing key servant [interface]
+#define KANT_CMD_LOAD_CONFIG "kant.loadconfig"  //从配置中心, 拉取配置下来: kant.loadconfig filename
+#define KANT_CMD_SET_LOG_LEVEL "kant.setloglevel"  //设置滚动日志的等级: kant.setloglevel [NONE, ERROR, WARN, DEBUG]
+#define KANT_CMD_VIEW_STATUS "kant.viewstatus"      //查看服务状态
+#define KANT_CMD_VIEW_VERSION "kant.viewversion"    //查看服务采用KANT的版本
+#define KANT_CMD_CONNECTIONS "kant.connection"      //查看当前链接情况
+#define KANT_CMD_LOAD_PROPERTY "kant.loadproperty"  //使配置文件的property信息生效
+#define KANT_CMD_VIEW_ADMIN_COMMANDS "kant.help"    //帮助查看服务支持的管理命令
+#define KANT_CMD_SET_DYEING "kant.setdyeing"        //设置染色信息: kant.setdyeing key servant [interface]
 #define KANT_CMD_CLOSE_COUT \
-  "tars.closecout"  //设置是否启关闭cout\cin\cerr: tars.openthreadcontext yes/NO 服务重启才生效
+  "kant.closecout"  //设置是否启关闭cout\cin\cerr: kant.openthreadcontext yes/NO 服务重启才生效
 #define KANT_CMD_SET_DAYLOG_LEVEL \
-  "tars.enabledaylog"  //设置按天日志是否输出: tars.enabledaylog [remote|local]|[logname]|[true|false]
-#define KANT_CMD_CLOSE_CORE "tars.closecore"          //设置服务的core limit:  tars.setlimit [yes|no]
-#define KANT_CMD_RELOAD_LOCATOR "tars.reloadlocator"  //重新加载locator的配置信息
-#define KANT_CMD_RESOURCE "tars.resource"             //get resource
-#define KANT_CMD_VIEW_BID "tars.bid"                  //查看服务编译时间,build id
+  "kant.enabledaylog"  //设置按天日志是否输出: kant.enabledaylog [remote|local]|[logname]|[true|false]
+#define KANT_CMD_CLOSE_CORE "kant.closecore"          //设置服务的core limit:  kant.setlimit [yes|no]
+#define KANT_CMD_RELOAD_LOCATOR "kant.reloadlocator"  //重新加载locator的配置信息
+#define KANT_CMD_RESOURCE "kant.resource"             //get resource
+#define KANT_CMD_VIEW_BID "kant.bid"                  //查看服务编译时间,build id
 //////////////////////////////////////////////////////////////////////
 /**
  * 通知信息给notify服务, 展示在页面上
@@ -135,7 +135,7 @@ struct SVT_DLL_API ServerConfig {
   static std::string Notify;       //信息通知中心
   static std::string ConfigFile;   //框架配置文件路径
   static bool CloseCout;
-  static int ReportFlow;  //是否服务端上报所有接口stat流量 0不上报 1上报(用于非tars协议服务流量统计)
+  static int ReportFlow;  //是否服务端上报所有接口stat流量 0不上报 1上报(用于非kant协议服务流量统计)
   static int IsCheckSet;               //是否对按照set规则调用进行合法性检查 0,不检查，1检查
   static int OpenCoroutine;            //是否启用协程处理方式(0~3)
   static size_t CoroutineMemSize;      //协程占用内存空间的最大大小
@@ -285,7 +285,7 @@ class Application : public BaseNotify {
   shared_ptr<NotifyObserver> &getNotifyObserver() { return _notifyObserver; }
 
   /**
-     * 非tars协议server，设置Servant的协议解析器
+     * 非kant协议server，设置Servant的协议解析器
      * @param protocol
      * @param servant
      */

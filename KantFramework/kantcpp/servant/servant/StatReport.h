@@ -215,12 +215,12 @@ class StatReport : public KT_Thread, public KT_ThreadLock {
   static string trimAndLimitStr(const string& str, uint32_t limitlen);
 
   /*
-    * func: tars.s.1 =>> MTT s  1
+    * func: kant.s.1 =>> MTT s  1
     */
   static bool divison2SetInfo(const string& str, vector<string>& vtSetInfo);
 
   /*
-    * func: tars.xxxServer =>> xxxServer
+    * func: kant.xxxServer =>> xxxServer
     */
   static string getServerName(string sModuleName);
 

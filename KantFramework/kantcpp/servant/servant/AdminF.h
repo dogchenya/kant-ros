@@ -350,6 +350,9 @@ namespace kant
     {
     public:
         typedef map<string, string> KANT_CONTEXT;
+        AdminFProxy(Communicator* pCommunicator, const string& name, const string& setName)
+                : ServantProxy(pCommunicator, name, setName) {}
+
         std::string notify(const std::string & command,const map<string, string> &context = KANT_CONTEXT(),map<string, string> * pResponseContext = NULL)
         {
             kant::KantOutputStream<kant::BufferWriterVector> _os;

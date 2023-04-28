@@ -1558,6 +1558,9 @@ namespace kant
     {
     public:
         typedef map<string, string> KANT_CONTEXT;
+        ConfigProxy(Communicator* pCommunicator, const string& name, const string& setName)
+                : ServantProxy(pCommunicator, name, setName) {}
+
         kant::Int32 ListAllConfigByInfo(const kant::GetConfigListInfo & configInfo,vector<std::string> &vf,const map<string, string> &context = KANT_CONTEXT(),map<string, string> * pResponseContext = NULL)
         {
             kant::KantOutputStream<kant::BufferWriterVector> _os;

@@ -198,9 +198,8 @@ class SVT_DLL_API Communicator : public KT_ThreadRecMutex {
     */
   template <class T>
   void stringToProxy(const string& objectName, T& proxy, const string& setName = "") {
-    ServantProxy* pServantProxy = getServantProxy(objectName, setName, true);
-    std::shared_ptr<ServantProxy> ptr(pServantProxy);
-    proxy = std::static_pointer_cast<typename T::element_type>(ptr);
+    ServantPrx pServantProxy = getServantProxy<typename T::element_type>(objectName, setName, true);
+    proxy = std::dynamic_pointer_cast<typename T::element_type>(pServantProxy);
   }
 
   /**
@@ -365,9 +364,8 @@ class SVT_DLL_API Communicator : public KT_ThreadRecMutex {
 	 */
   template <class T>
   void stringToProxy(const string& objectName, T& proxy, const string& setName, bool rootServant) {
-    ServantProxy* pServantProxy = getServantProxy(objectName, setName, rootServant);
-    std::shared_ptr<ServantProxy> ptr(pServantProxy);
-    proxy = std::static_pointer_cast<typename T::element_type>(ptr);
+    ServantPrx pServantProxy = getServantProxy<typename T::element_type>(objectName, setName, rootServant);
+    proxy = std::static_pointer_cast<typename T::element_type>(pServantProxy);
   }
 
   /**
@@ -382,7 +380,12 @@ class SVT_DLL_API Communicator : public KT_ThreadRecMutex {
      * @param setName 指定set调用的setid
      * @return ServantPrx
      */
-  ServantProxy* getServantProxy(const string& objectName, const string& setName, bool rootServant);
+  template <class T>
+  ServantPrx getServantProxy(const string& objectName, const string& setName, bool rootServant) {
+    Communicator::initialize();
+
+    return _servantProxyFactory->getServantProxy<T>(objectName, setName, rootServant);
+  }
 
   /**
      * 数据加入到异步线程队列里面

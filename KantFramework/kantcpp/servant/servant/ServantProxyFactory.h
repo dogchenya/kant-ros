@@ -18,7 +18,6 @@
 #define __KANT_SERVANT_PROXY_FACTORY_H_
 
 #include "servant/Global.h"
-#include "servant/Communicator.h"
 #include "servant/ServantProxy.h"
 
 namespace kant {
@@ -45,7 +44,20 @@ class ServantProxyFactory : public KT_ThreadRecMutex {
      * @param setName 指定set调用的setid
      * @return ServantPrx
      */
-  ServantPrx::element_type* getServantProxy(const string& name, const string& setName, bool rootServant);
+  template <class T>
+  ServantPrx getServantProxy(const string& name, const string& setName, bool rootServant) {
+    KT_LockT<KT_ThreadRecMutex> lock(*this);
+
+    string tmpObjName = name + ":" + setName;
+
+    map<string, ServantPrx>::iterator it = _servantProxy.find(tmpObjName);
+    if (it != _servantProxy.end()) return it->second;
+
+    ServantPrx sp = std::make_shared<T>(_comm, name, setName);
+    return initServantProxy(sp, tmpObjName, rootServant);
+  }
+
+  ServantPrx initServantProxy(ServantPrx sp, const std::string& tmpObjName, bool rootServant);
 
  private:
   /**

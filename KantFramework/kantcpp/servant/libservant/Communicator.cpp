@@ -516,12 +516,12 @@ int Communicator::reloadProperty(string& sResult) {
 }
 
 vector<KT_Endpoint> Communicator::getEndpoint(const string& objName) {
-  ServantProxy* pServantProxy = getServantProxy(objName, "", true);
+  ServantPrx pServantProxy = getServantProxy<ServantProxy>(objName, "", true);
   return pServantProxy->getEndpoint();
 }
 
 vector<KT_Endpoint> Communicator::getEndpoint4All(const string& objName) {
-  ServantProxy* pServantProxy = getServantProxy(objName, "", true);
+  ServantPrx pServantProxy = getServantProxy<ServantProxy>(objName, "", true);
   return pServantProxy->getEndpoint4All();
 }
 
@@ -640,12 +640,6 @@ void Communicator::doStat() {
     }
     _reportAsyncQueue->report((int)n);
   }
-}
-
-ServantProxy* Communicator::getServantProxy(const string& objectName, const string& setName, bool rootServant) {
-  Communicator::initialize();
-
-  return _servantProxyFactory->getServantProxy(objectName, setName, rootServant);
 }
 
 StatReport* Communicator::getStatReport() {

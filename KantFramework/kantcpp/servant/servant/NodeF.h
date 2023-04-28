@@ -788,6 +788,9 @@ namespace kant
     {
     public:
         typedef map<string, string> KANT_CONTEXT;
+        ServerFProxy(Communicator* pCommunicator, const string& name, const string& setName)
+                : ServantProxy(pCommunicator, name, setName) {}
+
         kant::UInt32 getLatestKeepAliveTime(const map<string, string> &context = KANT_CONTEXT(),map<string, string> * pResponseContext = NULL)
         {
             kant::KantOutputStream<kant::BufferWriterVector> _os;

@@ -1185,6 +1185,9 @@ namespace kant
     {
     public:
         typedef map<string, string> KANT_CONTEXT;
+        NotifyProxy(Communicator* pCommunicator, const string& name, const string& setName)
+                : ServantProxy(pCommunicator, name, setName) {}
+
         kant::Int32 getNotifyInfo(const kant::NotifyKey & stKey,kant::NotifyInfo &stInfo,const map<string, string> &context = KANT_CONTEXT(),map<string, string> * pResponseContext = NULL)
         {
             kant::KantOutputStream<kant::BufferWriterVector> _os;

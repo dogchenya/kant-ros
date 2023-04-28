@@ -2733,6 +2733,9 @@ string Kant2Cpp::generateH(const InterfacePtr& pPtr, const NamespacePtr& nPtr) c
   s << TAB << "public:" << endl;
   INC_TAB;
   s << TAB << "typedef map<string, string> KANT_CONTEXT;" << endl;
+  s << TAB << pPtr->getId() << "Proxy(Communicator* pCommunicator, const string& name, const string& setName)" << endl;
+  s << TAB << TAB << ": ServantProxy(pCommunicator, name, setName) {}" << endl;
+  s << endl;
 
   for (size_t i = 0; i < vOperation.size(); i++) {
     s << generateH(vOperation[i], false, pPtr->getId());  // << endl;

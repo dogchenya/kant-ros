@@ -566,6 +566,9 @@ namespace kant
     {
     public:
         typedef map<string, string> KANT_CONTEXT;
+        LogProxy(Communicator* pCommunicator, const string& name, const string& setName)
+                : ServantProxy(pCommunicator, name, setName) {}
+
         void logger(const std::string & app,const std::string & server,const std::string & file,const std::string & format,const vector<std::string> & buffer,const map<string, string> &context = KANT_CONTEXT(),map<string, string> * pResponseContext = NULL)
         {
             kant::KantOutputStream<kant::BufferWriterVector> _os;

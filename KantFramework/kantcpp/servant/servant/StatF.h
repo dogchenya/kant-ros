@@ -990,6 +990,9 @@ namespace kant
     {
     public:
         typedef map<string, string> KANT_CONTEXT;
+        StatFProxy(Communicator* pCommunicator, const string& name, const string& setName)
+                : ServantProxy(pCommunicator, name, setName) {}
+
         kant::Int32 reportMicMsg(const map<kant::StatMicMsgHead, kant::StatMicMsgBody> & msg,kant::Bool bFromClient,const map<string, string> &context = KANT_CONTEXT(),map<string, string> * pResponseContext = NULL)
         {
             kant::KantOutputStream<kant::BufferWriterVector> _os;

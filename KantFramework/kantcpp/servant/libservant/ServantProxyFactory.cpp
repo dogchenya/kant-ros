@@ -15,6 +15,7 @@
  */
 
 #include "servant/ServantProxyFactory.h"
+#include "servant/Communicator.h"
 #include "servant/RemoteLogger.h"
 
 namespace kant {
@@ -23,17 +24,7 @@ ServantProxyFactory::ServantProxyFactory(Communicator* cm) : _comm(cm) {}
 
 ServantProxyFactory::~ServantProxyFactory() {}
 
-ServantPrx::element_type* ServantProxyFactory::getServantProxy(const string& name, const string& setName,
-                                                               bool rootServant) {
-  KT_LockT<KT_ThreadRecMutex> lock(*this);
-
-  string tmpObjName = name + ":" + setName;
-
-  map<string, ServantPrx>::iterator it = _servantProxy.find(tmpObjName);
-  if (it != _servantProxy.end()) return it->second.get();
-
-  ServantPrx sp = std::make_shared<ServantProxy>(_comm, name, setName);
-
+ServantPrx ServantProxyFactory::initServantProxy(ServantPrx sp, const std::string& tmpObjName, bool rootServant) {
   //需要主动初始化一次
   sp->kant_initialize(rootServant);
 
@@ -47,7 +38,8 @@ ServantPrx::element_type* ServantProxyFactory::getServantProxy(const string& nam
 
   _servantProxy[tmpObjName] = sp;
 
-  return sp.get();
+  return sp;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 }  // namespace kant

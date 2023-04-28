@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>--config=D:\proj\Code\kant-ros\KantFramework\kantcpp\examples\AuthDemo\Server\config.conf </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>--config=D:\proj\Code\kant-ros\KantFramework\kantcpp\examples\AuthDemo\Client\config.conf --count=10000 --thread=2 --call=sync  --buffersize=1000 --netthread=1</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

@@ -1,15 +1,16 @@
-该工程是Kant基础框架。
+# KantFramework - Kant基础框架
 
+kant是一款开源的、跨平台、跨语言、高性能的RPC框架，支持多种网路线程模型，支持docker，易部署、易调用
 目录名称 |功能
 ----------------------|----------------
 kantcpp               |Kant 框架C++语言的源代实现
 vs-project            |vs工程配置
 KantNode              |节点用例
 
-kantcpp
-特点：跨平台
-util
-注释
+# kantcpp
+- kantcpp下包含util与servant模块
+## util
+- 基础组件模块
 ```
 KT_Exception：异常基类
 KT_File：文件处理类
@@ -18,7 +19,8 @@ KT_ThreadQueue：线程队列类
 KT_TimeProvider：时间提供类
 KT_Coroutine：协程类
 ```
-servant
+## servant
+- 实体通信模块
 ```mermaid
 flowchart TD;
      A-->B;
@@ -27,7 +29,7 @@ flowchart TD;
      C-->D;
 ```
 
-Compile and install
+# Compile and install
 ```
 ros编译: 
 catkin_make --source ./src

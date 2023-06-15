@@ -98,8 +98,10 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_consistent_hash.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_consistent_hash_new.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_coroutine.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_coroutine_queue.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_cron.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_des.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_encoder.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_epoller.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_epoll_server.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h" />
@@ -111,6 +113,7 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_hash_fun.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_http.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_http2.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_http_async.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_json.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_lock.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_logger.h" />
@@ -155,7 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Client\main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Server\HelloImp.cpp" />
     <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Server\HelloServer.cpp">
@@ -214,6 +217,19 @@
     <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.lex.cpp" />
     <ClCompile Include="..\..\kantcpp\tools\kantparse\kant.tab.cpp" />
     <ClCompile Include="..\..\kantcpp\tools\kantparse\parse.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\main.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_cas.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_clientsocket.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_coroutine.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_encoder.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_epoller.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_file.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_http.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_logger.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_network_buffer.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_port.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_thread_pool.cpp" />
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_timer.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\epoll_windows\src\epoll.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\epoll_windows\test\test.c" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_base64.cpp" />
@@ -224,6 +240,7 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_coroutine.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_cron.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_des.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_encoder.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_epoller.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_epoll_server.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp" />
@@ -231,6 +248,7 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_grpc.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_http.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_http2.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_http_async.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_json.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_logger.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_md5.cpp" />
@@ -535,6 +553,7 @@
     <Text Include="..\..\kantcpp\tools\kant2cpp\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\tools\kantgrammar\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\tools\kantparse\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\unit-test\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\util\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\util\include\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\util\src\CMakeLists.txt" />
@@ -640,12 +659,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;$(ProjectDir)\..\..\kantcpp\servant\servant;$(ProjectDir)\..\..\kantcpp\servant\tup;$(ProjectDir)\..\..\kantcpp\tools\kantparse;$(ProjectDir)\..\..\kantcpp\servant;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\BServer;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\AServer;$(ProjectDir)\..\..\kantcpp\examples\AuthDemo\Server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;$(ProjectDir)\..\..\kantcpp\servant\servant;$(ProjectDir)\..\..\kantcpp\servant\tup;$(ProjectDir)\..\..\kantcpp\tools\kantparse;$(ProjectDir)\..\..\kantcpp\servant;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\BServer;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\AServer;$(ProjectDir)\..\..\kantcpp\examples\AuthDemo\Server;$(ProjectDir)\..\3rd_party\getst\gtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>gtest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\3rd_party\getst\gtest\lib\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

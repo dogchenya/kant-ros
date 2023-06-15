@@ -17,7 +17,7 @@ namespace kant {
 /////////////////////////////////////////////////
 /**
  * @file kt_timeout_queue.h
- * @brief 超时队列(模板元素只能是智能指针, 且继承KT_HandleBase).
+ * @brief 超时队列(模板元素只能是智能指针).
  *
  * @author
  */

@@ -101,6 +101,12 @@
     <Filter Include="examples\scripts">
       <UniqueIdentifier>{06df6a1d-1751-43dd-82f7-05e04f397e07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="unit-test">
+      <UniqueIdentifier>{dc7323e6-2f92-4e38-883e-19c8704d953e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit-test\util">
+      <UniqueIdentifier>{ba098cfe-8037-49df-9161-74c19707d830}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -502,6 +508,15 @@
     <ClInclude Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.h">
       <Filter>examples\AuthDemo\Server</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_coroutine_queue.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_encoder.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_http_async.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
@@ -755,6 +770,51 @@
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\examples\AuthDemo\Server\HelloServer.cpp">
       <Filter>examples\AuthDemo\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\main.cpp">
+      <Filter>unit-test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_cas.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_clientsocket.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_coroutine.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_encoder.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_epoller.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_file.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_http.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_logger.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_network_buffer.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_port.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_thread_pool.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\unit-test\util\test_kt_timer.cpp">
+      <Filter>unit-test\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_encoder.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_http_async.cpp">
+      <Filter>util\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1165,6 +1225,9 @@
     </Text>
     <Text Include="..\..\kantcpp\examples\AuthDemo\Server\CMakeLists.txt">
       <Filter>examples\AuthDemo\Server</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\unit-test\CMakeLists.txt">
+      <Filter>unit-test</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

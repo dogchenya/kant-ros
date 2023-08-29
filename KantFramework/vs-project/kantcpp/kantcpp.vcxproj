@@ -101,6 +101,7 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_coroutine_queue.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_cron.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_des.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_docker.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_encoder.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_epoller.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_epoll_server.h" />
@@ -127,6 +128,7 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_network_buffer.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_openssl.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_option.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_parsepara.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_platform.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_port.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_proxy_info.h" />
@@ -152,6 +154,7 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_transceiver.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_uuid_generator.h" />
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_xml.h" />
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_mysql.h" />
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\src\msafd.h" />
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\src\ntapi.h" />
     <ClInclude Include="..\..\kantcpp\util\src\epoll_windows\sys\epoll.h" />
@@ -240,6 +243,7 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_coroutine.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_cron.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_des.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_docker.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_encoder.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_epoller.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_epoll_server.cpp" />
@@ -255,6 +259,7 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_network_buffer.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_openssl.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_option.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_parsepara.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_port.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_proxy_info.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_sha.cpp" />
@@ -272,6 +277,7 @@
     <ClCompile Include="..\..\kantcpp\util\src\kt_timer.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_transceiver.cpp" />
     <ClCompile Include="..\..\kantcpp\util\src\kt_xml.cpp" />
+    <ClCompile Include="..\..\kantcpp\util\src\kt_mysql.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\kantcpp\cmake\BuildKantCpp.cmake" />
@@ -306,6 +312,13 @@
     <None Include="..\..\kantcpp\examples\scripts\run-ssl.sh" />
     <None Include="..\..\kantcpp\examples\scripts\run-udp.bat" />
     <None Include="..\..\kantcpp\examples\scripts\run-udp.sh" />
+    <None Include="..\..\kantcpp\servant\protocol\framework\AdminReg.kant" />
+    <None Include="..\..\kantcpp\servant\protocol\framework\MonitorQuery.kant" />
+    <None Include="..\..\kantcpp\servant\protocol\framework\Node.kant" />
+    <None Include="..\..\kantcpp\servant\protocol\framework\NodeDescriptor.kant" />
+    <None Include="..\..\kantcpp\servant\protocol\framework\Patch.kant" />
+    <None Include="..\..\kantcpp\servant\protocol\framework\Registry.kant" />
+    <None Include="..\..\kantcpp\servant\protocol\framework\RegistryDescriptor.kant" />
     <None Include="..\..\kantcpp\servant\protocol\servant\AdminF.kant" />
     <None Include="..\..\kantcpp\servant\protocol\servant\AuthF.kant" />
     <None Include="..\..\kantcpp\servant\protocol\servant\BaseF.kant" />
@@ -547,6 +560,7 @@
     <Text Include="..\..\kantcpp\examples\CoroutineDemo\testParallelCoro\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\libservant\CMakeLists.txt" />
+    <Text Include="..\..\kantcpp\servant\protocol\framework\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\protocol\servant\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\servant\tup\CMakeLists.txt" />
     <Text Include="..\..\kantcpp\tools\CMakeLists.txt" />
@@ -657,10 +671,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_UNICODE;UNICODE;KANT_MYSQL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\..\kantcpp\util\include;$(ProjectDir)\..\..\kantcpp\util\src\epoll_windows;$(ProjectDir)\..\..\kantcpp\servant\servant;$(ProjectDir)\..\..\kantcpp\servant\tup;$(ProjectDir)\..\..\kantcpp\tools\kantparse;$(ProjectDir)\..\..\kantcpp\servant;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\BServer;$(ProjectDir)\..\..\kantcpp\examples\CoroutineDemo\AServer;$(ProjectDir)\..\..\kantcpp\examples\AuthDemo\Server;$(ProjectDir)\..\3rd_party\getst\gtest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -7,6 +7,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "kantcpp", "kantcpp\kantcpp.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "kantnode", "kantnode\kantnode.vcxproj", "{16266126-10CA-40A1-A0A2-84B358608662}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdminRegistryServer", "AdminRegistryServer\AdminRegistryServer.vcxproj", "{35FDA361-B5B3-4AC3-899B-58E1F93B9657}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{10A1D4FE-B09C-40D4-BF33-A1DDF87BB0D3}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.sh = ..\build.sh
+		..\CMakeLists.txt = ..\CMakeLists.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +39,14 @@ Global
 		{16266126-10CA-40A1-A0A2-84B358608662}.Release|x64.Build.0 = Release|x64
 		{16266126-10CA-40A1-A0A2-84B358608662}.Release|x86.ActiveCfg = Release|Win32
 		{16266126-10CA-40A1-A0A2-84B358608662}.Release|x86.Build.0 = Release|Win32
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Debug|x64.ActiveCfg = Debug|x64
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Debug|x64.Build.0 = Debug|x64
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Debug|x86.ActiveCfg = Debug|Win32
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Debug|x86.Build.0 = Debug|Win32
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Release|x64.ActiveCfg = Release|x64
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Release|x64.Build.0 = Release|x64
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Release|x86.ActiveCfg = Release|Win32
+		{35FDA361-B5B3-4AC3-899B-58E1F93B9657}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

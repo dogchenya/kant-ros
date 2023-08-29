@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+﻿cmake_minimum_required(VERSION 3.14)
 
 project(framework)
 
@@ -33,7 +33,7 @@ include_directories(${servant_SOURCE_DIR})
 set(BUILD_NODE node)
 
 if(WIN32)
-    set(KANT_INSTALL_PATH c:\\tars-install)
+    set(KANT_INSTALL_PATH c:\\kant-install)
 else(WIN32)
     set(KANT_INSTALL_PATH /usr/local/app)
 endif(WIN32)
@@ -49,21 +49,22 @@ macro(complice_module MODULE)
         set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/${BUILD_NODE}/${MODULE}/bin)
     endforeach()   
 
-    #include_directories(${PROJECT_SOURCE_DIR}/kantcpp/servant/protocol/framework)
+    include_directories(${PROJECT_SOURCE_DIR}/kantcpp/servant/protocol/framework)
+    include_directories(${PROJECT_SOURCE_DIR}/kantcpp/servant/protocol/servant)
     include_directories(${PROJECT_SOURCE_DIR}/kantcpp/util/include)
     if(WIN32)
         #include_directories(${PROJECT_SOURCE_DIR}/kantcpp/util/src/epoll_windows)
     endif()
 
-    #include_directories(${servant_SOURCE_DIR}/servant)
+    include_directories(${servant_SOURCE_DIR}/servant)
 
     aux_source_directory(. DIR_SRCS)
 
     add_executable(${MODULE} ${DIR_SRCS})
-    # add_dependencies(${MODULE} FRAMEWORK-PROTOCOL)
-    # add_dependencies(${MODULE} kant2cpp)
+    add_dependencies(${MODULE} FRAMEWORK-PROTOCOL)
+    add_dependencies(${MODULE} kant2cpp)
 
-    target_link_libraries(${MODULE} kantutil)
+    target_link_libraries(${MODULE} kantservant kantutil ${LIB_MYSQL})
 
     if(KANT_SSL)
         target_link_libraries(${MODULE} ${LIB_SSL} ${LIB_CRYPTO})
@@ -83,7 +84,7 @@ endmacro()
 add_subdirectory(KantNode)
 # add_subdirectory(NotifyServer)
 # add_subdirectory(PatchServer)
-# add_subdirectory(AdminRegistryServer)
+add_subdirectory(AdminRegistryServer)
 # add_subdirectory(RegistryServer)
 # add_subdirectory(PropertyServer)
 # add_subdirectory(LogServer)

@@ -1,25 +1,25 @@
-set(OUT_DEPENDS_LIST)
+﻿set(OUT_DEPENDS_LIST)
 
 set(SERVANT_PROTOCOL "${servant_SOURCE_DIR}/protocol/servant")
 
-complice_tars(OUT_DEPENDS_LIST "" ${SERVANT_PROTOCOL})
+complice_kant(OUT_DEPENDS_LIST "" ${SERVANT_PROTOCOL})
 
-add_custom_target(FRAMEWORK-PROTOCOL ALL DEPENDS ${OUT_DEPENDS_LIST} COPY-SERVENT-TARS)
+add_custom_target(FRAMEWORK-PROTOCOL ALL DEPENDS ${OUT_DEPENDS_LIST} COPY-SERVENT-KANT)
 
 set(FRAMEWORKPROTOCOLS
-        AdminReg.tars
+        AdminReg.kant
         AdminReg.h
-        MonitorQuery.tars
+        MonitorQuery.kant
         MonitorQuery.h
-        Node.tars
+        Node.kant
         Node.h
-        NodeDescriptor.tars
+        NodeDescriptor.kant
         NodeDescriptor.h
-        Patch.tars
+        Patch.kant
         Patch.h
-        Registry.tars
+        Registry.kant
         Registry.h
-        RegistryDescriptor.tars
+        RegistryDescriptor.kant
         RegistryDescriptor.h)
 
 INSTALL(FILES ${FRAMEWORKPROTOCOLS} DESTINATION  include/framework)

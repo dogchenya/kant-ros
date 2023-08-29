@@ -62,7 +62,7 @@ macro(complice_kant OUT_DEPENDS_LIST HEADER INCLUDE)
 endmacro()
 
 add_subdirectory(protocol/servant)
-#add_subdirectory(protocol/framework)
+add_subdirectory(protocol/framework)
 add_subdirectory(tup)
 add_subdirectory(libservant)
 

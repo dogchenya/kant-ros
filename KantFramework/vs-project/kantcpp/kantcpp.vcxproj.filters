@@ -107,6 +107,9 @@
     <Filter Include="unit-test\util">
       <UniqueIdentifier>{ba098cfe-8037-49df-9161-74c19707d830}</UniqueIdentifier>
     </Filter>
+    <Filter Include="servant\protocol\framework">
+      <UniqueIdentifier>{3daad845-d80b-44cb-86d2-9cd9e3e1041a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_ex.h">
@@ -517,6 +520,15 @@
     <ClInclude Include="..\..\kantcpp\util\include\util\kt_http_async.h">
       <Filter>util\include\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_mysql.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_docker.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kantcpp\util\include\util\kt_parsepara.h">
+      <Filter>util\include\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\kantcpp\util\src\kt_ex.cpp">
@@ -814,6 +826,15 @@
       <Filter>util\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\kantcpp\util\src\kt_http_async.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_mysql.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_docker.cpp">
+      <Filter>util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kantcpp\util\src\kt_parsepara.cpp">
       <Filter>util\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1160,6 +1181,27 @@
     <None Include="..\..\kantcpp\examples\AuthDemo\Server\Hello.kant">
       <Filter>examples\AuthDemo\Server</Filter>
     </None>
+    <None Include="..\..\kantcpp\servant\protocol\framework\AdminReg.kant">
+      <Filter>servant\protocol\framework</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\framework\MonitorQuery.kant">
+      <Filter>servant\protocol\framework</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\framework\Node.kant">
+      <Filter>servant\protocol\framework</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\framework\NodeDescriptor.kant">
+      <Filter>servant\protocol\framework</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\framework\Patch.kant">
+      <Filter>servant\protocol\framework</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\framework\Registry.kant">
+      <Filter>servant\protocol\framework</Filter>
+    </None>
+    <None Include="..\..\kantcpp\servant\protocol\framework\RegistryDescriptor.kant">
+      <Filter>servant\protocol\framework</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\kantcpp\CMakeLists.txt" />
@@ -1228,6 +1270,9 @@
     </Text>
     <Text Include="..\..\kantcpp\unit-test\CMakeLists.txt">
       <Filter>unit-test</Filter>
+    </Text>
+    <Text Include="..\..\kantcpp\servant\protocol\framework\CMakeLists.txt">
+      <Filter>servant\protocol\framework</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
